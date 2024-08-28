@@ -1,4 +1,4 @@
-package com.informationocean.model;
+package com.io.model;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.informationocean.service;
+package com.io.service;
 
 import java.util.List;
 

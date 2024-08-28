@@ -1,4 +1,4 @@
-package com.informationocean.mapper;
+package com.io.mapper;
 
 
 public interface BoardMapper {

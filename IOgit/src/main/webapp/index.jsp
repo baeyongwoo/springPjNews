@@ -8,5 +8,6 @@
 	</head>
 	<body>
 		index.jsp
+		<a href="/board/list">게시판가기</a>
 	</body>
 </html>
