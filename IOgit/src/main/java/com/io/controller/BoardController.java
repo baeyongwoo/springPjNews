@@ -20,6 +20,7 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public void test() {
+		
 		log.info("test!!" +  service.testCheck());
 	}
 	
