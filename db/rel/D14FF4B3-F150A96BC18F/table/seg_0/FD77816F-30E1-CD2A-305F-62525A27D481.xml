@@ -1,0 +1,46 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FD77816F-30E1-CD2A-305F-62525A27D481" name="bfile">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-28 05:10:41 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<ordsAlias>table_10</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="bno" id="8A08CED4-7EB0-DD16-CEB6-D1F9CB56256B">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-28 05:11:06 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="bfname" id="F9F2FE24-016E-6E7B-D220-A46E54D9DE63">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-28 05:11:29 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2F903422-E320-7BB7-8122-3E37302661BB" name="bfile_PK">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-28 05:11:06 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8A08CED4-7EB0-DD16-CEB6-D1F9CB56256B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

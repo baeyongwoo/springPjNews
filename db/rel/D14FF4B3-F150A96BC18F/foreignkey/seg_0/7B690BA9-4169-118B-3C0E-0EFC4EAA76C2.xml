@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="7B690BA9-4169-118B-3C0E-0EFC4EAA76C2" containerWithKeyObject="5D41E288-CAA0-3C78-6440-683B361CBE8E" localFKIndex="3AB1914E-487E-157E-EDC9-D02AD274418D" name="tempBorad_tfile_FK">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 07:39:55 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<referredTableLongName>tfile</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>6954DC97-0CED-8071-55D9-3FF4C59F4DD1</referredTableID>
+<keyObject>27EB6181-166D-B86E-B653-8D710984E0F2</keyObject>
+<referredKeyID>27EB6181-166D-B86E-B653-8D710984E0F2</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>tno</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
