@@ -5,14 +5,14 @@ import com.io.model.ReplyPageDTO;
 import com.io.model.ReplyVO;
 
 public interface ReplyService {
-	//등록
+	//댓글등록
 	public int register(ReplyVO vo);
-	//목록
+	//댓글목록
 	public ReplyPageDTO getListPage(Criteria cri, Long bno);
 	//댓글상세
 	public ReplyVO get(Long rno);
-	//수정
+	//댓글수정
 	public int edit(ReplyVO vo);
-	//삭제
+	//댓글삭제
 	public int remove(Long rno);
 }

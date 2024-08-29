@@ -8,16 +8,16 @@ import com.io.model.Criteria;
 import com.io.model.ReplyVO;
 
 public interface ReplyMapper {
-	//댓글 등록
+	//댓글등록
 	public int insert(ReplyVO vo);
-	//댓글 목록
+	//댓글목록
 	public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("bno") Long bno);
-	//댓글 갯수
+	//댓글갯수
 	public int getCountByBno(Long bno);
-	//댓글 상세
+	//댓글상세
 	public ReplyVO read(Long rno);
-	//수정
+	//댓글수정
 	public int edit(ReplyVO reply);
-	//삭제
+	//댓글삭제
 	public int delete(Long rno);
 }
