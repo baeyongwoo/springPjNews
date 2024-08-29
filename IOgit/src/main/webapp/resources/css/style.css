@@ -1,26 +1,39 @@
-@charset "EUC-KR";
 *{
     margin: 0;
     padding: 0;
 }
 #logo,.btn,button,.list-group-item,img,textarea,input,.form-select{
+    color: white;
     border: solid red 0.5px;
 }
 body{
     background-color: rgb(48, 48, 48);
-    box-shadow: 0px 100px 100px rgba(0, 0, 0, 0);
+    color: white;
+}
+.fi-rr-list{
+    position: absolute;
+    right: 10px;
+    font-size: 30px;
     color: white;
 }
 .nav-link{
+    width: 100%;
     color: white;
+}
+.nav-link:hover{
+    color: red;
 }
 .navbar{
     margin-bottom: 50px;
+    background-color: #000000;
+    border: 1px solid rgb(0, 0, 0);
 }
+/*로고*/
 #logo{
     width: 100px;
     border-radius: 20%;
 }
+/*footer*/
 footer{
     margin-top: 100px;
     background-color: black;
@@ -31,7 +44,6 @@ footer{
     width: 31%;
     height: 300px;
     box-sizing: border-box;
-    text-align: center;
     background-image: url(/img/IOLogo.png);
     background-size: cover;
     position: relative;
@@ -48,7 +60,7 @@ footer{
     top: 250px;
     height: 300px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255,0.4);
     text-align: center;
 }
 .box-content>div {
@@ -72,15 +84,72 @@ button{
     border: 0.5px solid red;
     background-color: rgb(25, 25, 25);
 }
-.navbar{
-    border: 1px solid rgb(0, 0, 0);
-}
 button{
     border-radius: 5%;
     padding-left: 10px;
     padding-right: 10px;
 }
+input,textarea{
+    padding: 10px;
+}
 .list-group>.list-group-item, button,textarea,input,.form-select{
     background-color: rgb(33, 33, 33);
     color: white;
 }
+/*사이드바*/
+.side-bar > ul ul {
+    display: none;
+}
+
+:root {
+--side-bar-width: 280px;
+--side-bar-height: 5vh;
+}
+
+.side-bar {
+    position: fixed;
+    z-index: 1;
+    background-color: black;
+    width: var(--side-bar-width); 
+}
+
+.side-bar ul > li > a {
+    display: block;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+}
+.side-bar > ul > li {
+     position: relative;
+     width: 75%;
+}
+
+
+.side-bar ul > li:hover > a {
+    background-color: #555;
+    border-bottom: 1px solid #999;
+    color: black;
+}
+.side-bar > ul > li:hover > ul {
+    display: block;
+    position: absolute;
+    background-color: #888;
+    top: 0; 
+    left: 100%; 
+    width: 100%;   
+}
+.side-bar {
+    border-radius: 20px;
+    transform: translate(calc(var(--side-bar-width) * -0.8), 0);
+    transition: .5s;
+  }
+  
+  .side-bar:hover {
+    transform: translate(-20px, 0);
+  }
+  .side-bar:hover .fi-rr-list{
+    display: none;
+  }

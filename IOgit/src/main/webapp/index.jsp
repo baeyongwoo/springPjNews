@@ -52,7 +52,6 @@
       <div class="shado">
         <a type="button">
           <h1 class="animate__animated animate__flipInX">Information Ocsean
-            <img src="img/IOLogo.png" style="height: 60px;" id="Logo">
           </h1>
         </a>
       </div>

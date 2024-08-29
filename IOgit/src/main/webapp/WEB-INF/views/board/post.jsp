@@ -35,13 +35,13 @@
             </div>
         </nav>
         <div class="row">
-            <div class="container-fluid" style="display: flex; background-color: gray; border: 0.5px solid red;">
+            <div class="container-fluid">
                 <div class="container mt-3">
                     <ol class="list-group">
                       <li class="list-group-item">
-                        <input type="text" placeholder="제목" style="width: 100%;">
+                        <input type="text" placeholder="제목" style="width: 100%; height: 40px;">
                         <div class="form-floating mb-3 mt-3">
-                            <select class="form-select" aria-label="Default select example" onchange="getNationList(event)" style="width: auto;">
+                            <select class="form-select" style="width: auto; height: 50px;">
                                 <option value="no">카테고리을 입력하시오</option>
                                 <option value="it">보안/해킹</option>
                                 <option value="ingea">인터넷/SNS</option>
@@ -49,8 +49,8 @@
                         </div>
                       </li>
                       <li class="list-group-item" style="height: 600px;">
-                          <input type="file">
                           <textarea type="text" style="width: 100%;" rows="20 ,auto" cols="60" placeholder="내용"></textarea>
+                          <input type="file" style="text-align: left;">
                         </li>
                     </ol>
                 </div>
