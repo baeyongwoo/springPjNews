@@ -12,6 +12,63 @@
 		order by b.regdate desc
 	
 	</select>
+	
+	 <select id="selectAllTempBoard" resultType="com.io.model.TboardDTO">
+        select b.*, ui.uname, d.did, d.dname 
+        from userinfo ui 
+        join dept d on ui.did = d.did
+        join tboard b on b.uemail = ui.uemail
+        <where>
+            <if test="code != null">
+                and b.code = #{code}
+            </if>
+        </where>
+        order by b.tmpregdate desc
+    </select>
+    
+    
+<insert id="insertBoards" parameterType="java.util.List">
+    INSERT INTO board (bno, title, bcontent, uemail, regdate, caid)
+    SELECT board_seq.nextval, A.title, A.tmpcontent, A.uemail, A.systimestamp, A.caid
+    FROM (
+        <foreach collection="list" item="item" separator=" UNION ALL ">
+            SELECT 
+                #{item.tmptitle} as title, 
+                #{item.tmpcontent} as tmpcontent,
+                #{item.uemail} as uemail,
+                current_timestamp as systimestamp,
+                #{item.caid} as caid 
+            FROM DUAL
+        </foreach>
+    ) A
+</insert>
+
+
+
+
+
+
+
+
+	
+	<update id="updateBoardCode" parameterType="com.io.model.TboardDTO">
+		update tboard set code= #{code} where tno= #{tno}
+	
+	</update>
+	
+	
+	<insert id="updatePermitToComplete" parameterType="java.util.List">
+      	update tboard set code = 'complete' where code = 'permit'
+	</insert>
+	
+	
+
+
+
+    
+	
+	
+  
   
   
 </mapper>

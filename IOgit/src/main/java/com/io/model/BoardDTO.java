@@ -1,6 +1,7 @@
 package com.io.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -10,7 +11,7 @@ public class BoardDTO {
 	private Long bno;
 	private String title;
 	private String bcontent;
-	private Date regdate;
+	private Timestamp regdate;
 	private String uemail;
 	private String caid;
 	private String uname;
