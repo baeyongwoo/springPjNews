@@ -1,0 +1,86 @@
+@charset "EUC-KR";
+*{
+    margin: 0;
+    padding: 0;
+}
+#logo,.btn,button,.list-group-item,img,textarea,input,.form-select{
+    border: solid red 0.5px;
+}
+body{
+    background-color: rgb(48, 48, 48);
+    box-shadow: 0px 100px 100px rgba(0, 0, 0, 0);
+    color: white;
+}
+.nav-link{
+    color: white;
+}
+.navbar{
+    margin-bottom: 50px;
+}
+#logo{
+    width: 100px;
+    border-radius: 20%;
+}
+footer{
+    margin-top: 100px;
+    background-color: black;
+    height: 50px;
+}
+.box {
+    margin: 20px;
+    width: 31%;
+    height: 300px;
+    box-sizing: border-box;
+    text-align: center;
+    background-image: url(/img/IOLogo.png);
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    border: solid red 1px;
+    border-radius: 5%;
+}
+.container_fluid {
+    display: flex;
+    flex-direction: row;
+}
+.box-content {
+    position: absolute;
+    top: 250px;
+    height: 300px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+}
+.box-content>div {
+    color: white;
+}
+.hidden-content {
+    bottom: 10px;
+    position: absolute;
+}
+.btn{
+    background-color: rgb(32, 32, 32);
+    border: 0.5px solid red;
+}
+button{
+    margin-top: 10px;
+    border: 0.5px solid red;
+}
+.was-validated{
+    padding: 40px;
+    border-radius: 5%;
+    border: 0.5px solid red;
+    background-color: rgb(25, 25, 25);
+}
+.navbar{
+    border: 1px solid rgb(0, 0, 0);
+}
+button{
+    border-radius: 5%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.list-group>.list-group-item, button,textarea,input,.form-select{
+    background-color: rgb(33, 33, 33);
+    color: white;
+}
