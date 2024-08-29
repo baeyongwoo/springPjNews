@@ -4,8 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.io.mapper.BoardMapper">
 
-	<select id="test" resultType="String">
-		SELECT sysdate FROM dual
+	<select id="selectAllBoard" resultType="com.io.model.BoardDTO">
+		select  b.*, ui.uname, d.did, d.dname 
+		from userinfo ui join dept d 
+		on ui.did = d.did
+		join board b on b.uemail = ui.uemail
+		order by b.regdate desc
 	
 	</select>
   

@@ -2,6 +2,7 @@ package com.io.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,12 +17,13 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class BoardController {
 	
-	private BoardService service;
+	private BoardService bs;
 	
 	@GetMapping("/list")
-	public void test() {
+	public void list(Model model ) {
 		
-		log.info("test!!" +  service.testCheck());
+		log.info("view쪽으로 보낼 데이터 " + bs.listGetBoard());
+		model.addAttribute("board",  bs.listGetBoard());
 	}
 	
 	
