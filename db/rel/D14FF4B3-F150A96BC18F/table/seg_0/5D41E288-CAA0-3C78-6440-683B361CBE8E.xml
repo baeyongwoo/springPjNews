@@ -1,0 +1,140 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5D41E288-CAA0-3C78-6440-683B361CBE8E" name="tempBorad">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:26:03 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<ordsAlias>table_4</ordsAlias>
+<abbreviation>tboard</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="tno" id="8C7EDCBF-C411-2101-42B8-56252EDBFDB6">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:27:46 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7B690BA9-4169-118B-3C0E-0EFC4EAA76C2" referredColumn="91E23530-BE58-9933-ADF6-92C9123EDCDC"/>
+</associations>
+</Column>
+<Column name="title" id="79B19956-FBA8-1F83-349A-E4A5883D3EC7">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:30:24 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="content" id="C19B8A25-95B5-5AB2-FB1F-D7C9F91D3A5D">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:30:42 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3000</dataTypeSize>
+<ownDataTypeParameters>3000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="email" id="545089E0-41A8-7529-5876-4C67E032C8D7">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:29:23 UTC</createdTime>
+<notes>writer 작성자</notes>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="375858C1-1E3F-4D6F-D37E-FB0B9F0F08B1" referredColumn="9F7F3448-5D3F-2111-1EC0-5A969B7056D3"/>
+</associations>
+</Column>
+<Column name="regdate" id="161BACB7-63DC-B7C2-29CD-B601560662F9">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:29:49 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="caid" id="CEA65C24-40DF-1732-5DCE-1D4EE7204248">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:33:30 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2C07FC08-03C9-D3BE-D473-B66798EA619D" referredColumn="80952924-3626-EA53-3904-85A6B9BB4871"/>
+</associations>
+</Column>
+<Column name="code" id="ABFF973A-7935-1619-FDB8-5147C8D1B0D7">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:33:48 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="DA70BE82-C0B8-FB44-8069-68736998DC60" name="tempBorad_PK">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:28:12 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8C7EDCBF-C411-2101-42B8-56252EDBFDB6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CB995D6A-E1F5-5065-262B-D1044EC76938" name="tempBorad_category_FK">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:42:03 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CEA65C24-40DF-1732-5DCE-1D4EE7204248"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1EE7B89F-50DA-E452-8563-E7A1BD5AC4D9" name="tempBorad_user_FK">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:42:40 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="545089E0-41A8-7529-5876-4C67E032C8D7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3AB1914E-487E-157E-EDC9-D02AD274418D" name="tempBorad_tfile_FK">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 07:39:55 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8C7EDCBF-C411-2101-42B8-56252EDBFDB6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A7A8C691-3A6E-95FD-03F5-390F7BC3AF10" name="category">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:35:08 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<ordsAlias>table_5</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="caid" id="80952924-3626-EA53-3904-85A6B9BB4871">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:35:47 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="caregory" id="28C1A6CF-FB2E-DFED-DBED-AAEAC9DF1BA6">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:41:38 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="EAC6B539-4E1B-939F-AA7E-709A26E4E52B" name="category_PK">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:35:47 UTC</createdTime>
+<ownerDesignName>db</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="80952924-3626-EA53-3904-85A6B9BB4871"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
