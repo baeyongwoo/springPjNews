@@ -13,6 +13,7 @@ public class BoardDTO {
 	private Date regdate;
 	private String uemail;
 	private String caid;
+	private String uname;
 	
 	/* file */
 	private String buuid;

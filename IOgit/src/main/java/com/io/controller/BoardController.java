@@ -23,7 +23,7 @@ public class BoardController {
 	public void list(Model model ) {
 		
 		log.info("view쪽으로 보낼 데이터 " + bs.listGetBoard());
-		model.addAttribute("board",  bs.listGetBoard());
+		model.addAttribute("boards",  bs.listGetBoard());
 	}
 	
 	
