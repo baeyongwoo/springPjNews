@@ -1,140 +1,106 @@
-/* USER TABLE */
-CREATE TABLE "user" (
-    email   VARCHAR2(50) NOT NULL,
-    pwd     VARCHAR2(30) NOT NULL,
-    coid    VARCHAR2(30) NOT NULL,
-    name    VARCHAR2(20)
+/* 0827 io db 계정생성
+주의: 시작시 로컬디스크 c에 io파일 생성해야함 */
+-- 데이터베이스 생성
+create tablespace io datafile
+'C:\io\io.dbf' size 100M
+autoextend on next 5M;
+-- User 생성
+create user io_user identified by io1234
+default tablespace io
+temporary tablespace temp;
+-- 권한설정
+grant dba to io_user;
+
+
+/* 테이블 생성 */
+-- USER TABLE
+CREATE TABLE userinfo (
+    uemail   VARCHAR2(50) NOT NULL,
+    upwd     VARCHAR2(30) NOT NULL,
+    uname    VARCHAR2(20),
+    did      VARCHAR2(30) NOT NULL
 );
-
-ALTER TABLE "user" ADD CONSTRAINT user_pk PRIMARY KEY ( email );
-
-ALTER TABLE "user"
-    ADD CONSTRAINT user_company_fk FOREIGN KEY ( coid )
-        REFERENCES company ( coid );
-
-
-/* COMPANY TABLE */
-CREATE TABLE company (
-    coid    VARCHAR2(30) NOT NULL,
-    cname   VARCHAR2(20) NOT NULL
+-- DEPT(COMPANY) TABLE
+CREATE TABLE dept (
+    did     VARCHAR2(30) NOT NULL,
+    dname   VARCHAR2(20) NOT NULL
 );
-
-ALTER TABLE company ADD CONSTRAINT company_pk PRIMARY KEY ( coid );
-
-
-/* TEMP BOARD TABlE */
-CREATE TABLE tempborad (
-    tno       NUMBER NOT NULL,
-    title     VARCHAR2(100) NOT NULL,
-    content   VARCHAR2(3000) NOT NULL,
-    email     VARCHAR2(50) NOT NULL,
-    regdate   DATE NOT NULL,
-    caid      VARCHAR2(20) NOT NULL,
-    code      NUMBER NOT NULL
+-- TEMP BOARD TABlE
+CREATE TABLE tborad (
+    tno          NUMBER NOT NULL,
+    tmptitle     VARCHAR2(100) NOT NULL,
+    tmpcontent   VARCHAR2(2000) NOT NULL,
+    tmpregdate   DATE NOT NULL,
+    uemail       VARCHAR2(50) NOT NULL,
+    caid         VARCHAR2(20) NOT NULL,
+    code         NUMBER NOT NULL
 );
-
-ALTER TABLE tempborad ADD CONSTRAINT tempborad_pk PRIMARY KEY ( tno );
-
-ALTER TABLE tempborad
-    ADD CONSTRAINT tempborad_category_fk FOREIGN KEY ( caid )
-        REFERENCES category ( caid );
-
-ALTER TABLE tempborad
-    ADD CONSTRAINT tempborad_tfile_fk FOREIGN KEY ( tno )
-        REFERENCES tfile ( tno );
-
-ALTER TABLE tempborad
-    ADD CONSTRAINT tempborad_user_fk FOREIGN KEY ( email )
-        REFERENCES "user" ( email );
-
-
-/* TEMP FILE TABLE */
+-- TEMP FILE TABLE
 CREATE TABLE tfile (
     tno      NUMBER NOT NULL,
     tfname   VARCHAR2(20) NOT NULL
 );
-
-ALTER TABLE tfile ADD CONSTRAINT tfile_pk PRIMARY KEY ( tno );
-
-
-/* BOARD TABLE */
+-- BOARD TABLE
 CREATE TABLE board (
-    bno       NUMBER NOT NULL,
-    title     VARCHAR2(100) NOT NULL,
-    content   VARCHAR2(30000) NOT NULL,
-    email     VARCHAR2(50) NOT NULL,
-    regdate   DATE NOT NULL,
-    caid      VARCHAR2(20) NOT NULL
+    bno        NUMBER NOT NULL,
+    title      VARCHAR2(100) NOT NULL,
+    bcontent   VARCHAR2(2000) NOT NULL,
+    uemail     VARCHAR2(50) NOT NULL,
+    regdate    DATE NOT NULL,
+    caid       VARCHAR2(20) NOT NULL
 );
-
-ALTER TABLE board ADD CONSTRAINT board_pk PRIMARY KEY ( bno );
-
-ALTER TABLE board
-    ADD CONSTRAINT board_bfile_fk FOREIGN KEY ( bno )
-        REFERENCES bfile ( bno );
-
-ALTER TABLE board
-    ADD CONSTRAINT board_category_fk FOREIGN KEY ( caid )
-        REFERENCES category ( caid );
-
-ALTER TABLE board
-    ADD CONSTRAINT board_user_fk FOREIGN KEY ( email )
-        REFERENCES "user" ( email );
-
-
-/* BOARD FILE TABLE */
-CREATE TABLE bfile (
+-- BOARD FILE TABLE
+CREATE TABLE bdfile (
     bno      NUMBER NOT NULL,
     bfname   VARCHAR2(20) NOT NULL
 );
-
-ALTER TABLE bfile ADD CONSTRAINT bfile_pk PRIMARY KEY ( bno );
-
-
-/* CATEGORY TABLE */
-CREATE TABLE category (
+-- CATEGORY TABLE
+CREATE TABLE cate (
     caid       VARCHAR2(20) NOT NULL,
     caregory   VARCHAR2(30) NOT NULL
 );
-
-ALTER TABLE category ADD CONSTRAINT category_pk PRIMARY KEY ( caid );
-
-
-/* REPLY TABLE */
+-- REPLY TABLE
 CREATE TABLE reply (
-    rno        NUMBER NOT NULL,
-    "rename"   VARCHAR2(20) NOT NULL,
-    repwd      VARCHAR2(30) NOT NULL,
-    recon      VARCHAR2(1000) NOT NULL,
-    bno        NUMBER NOT NULL
+    rno     NUMBER NOT NULL,
+    rname   VARCHAR2(20) NOT NULL,
+    rpwd    VARCHAR2(30) NOT NULL,
+    rcon    VARCHAR2(1000) NOT NULL,
+    bno     NUMBER NOT NULL
 );
 
+
+/* primary key */
+-- USER TABLE
+ALTER TABLE userinfo ADD CONSTRAINT userinfo_pk PRIMARY KEY ( uemail );
+-- DEPT(COMPANY) TABLE
+ALTER TABLE dept ADD CONSTRAINT dept_pk PRIMARY KEY ( did );
+-- TEMP BOARD TABlE
+ALTER TABLE tborad ADD CONSTRAINT tborad_pk PRIMARY KEY ( tno );
+-- TEMP FILE TABLE
+ALTER TABLE tfile ADD CONSTRAINT tfile_pk PRIMARY KEY ( tno );
+-- BOARD TABLE
+ALTER TABLE board ADD CONSTRAINT board_pk PRIMARY KEY ( bno );
+-- BOARD FILE TABLE
+ALTER TABLE bdfile ADD CONSTRAINT bdfile_pk PRIMARY KEY ( bno );
+-- CATEGORY TABLE
+ALTER TABLE cate ADD CONSTRAINT cate_pk PRIMARY KEY ( caid );
+-- REPLY TABLE
 ALTER TABLE reply ADD CONSTRAINT reply_pk PRIMARY KEY ( rno );
 
-ALTER TABLE reply
-    ADD CONSTRAINT reply_board_fk FOREIGN KEY ( bno )
-        REFERENCES board ( bno );
 
-
-
-
-/*
-select
-from       join
-and
-where     ;
-*/
-
-
-
-
-
-
-
-
-
-
-
+/* foreign key */
+-- USER TABLE
+ALTER TABLE userinfo ADD CONSTRAINT userinfo_dept_fk FOREIGN KEY ( did ) REFERENCES dept ( did );
+-- TEMP BOARD TABlE
+ALTER TABLE tborad ADD CONSTRAINT tborad_cate_fk FOREIGN KEY ( caid ) REFERENCES cate ( caid );
+ALTER TABLE tborad ADD CONSTRAINT tborad_tfile_fk FOREIGN KEY ( tno ) REFERENCES tfile ( tno );
+ALTER TABLE tborad ADD CONSTRAINT tborad_userinfo_fk FOREIGN KEY ( uemail ) REFERENCES userinfo ( uemail );
+-- BOARD TABLE
+ALTER TABLE board ADD CONSTRAINT board_bfile_fk FOREIGN KEY ( bno ) REFERENCES bdfile ( bno );
+ALTER TABLE board ADD CONSTRAINT board_cate_fk FOREIGN KEY ( caid ) REFERENCES cate ( caid );
+ALTER TABLE board ADD CONSTRAINT board_userinfo_fk FOREIGN KEY ( uemail ) REFERENCES userinfo ( uemail );
+-- REPLY TABLE
+ALTER TABLE reply ADD CONSTRAINT reply_board_fk FOREIGN KEY ( bno ) REFERENCES board ( bno );
 
 
 

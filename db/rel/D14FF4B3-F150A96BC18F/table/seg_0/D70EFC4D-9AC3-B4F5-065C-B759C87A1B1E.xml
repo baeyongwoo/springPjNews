@@ -1,15 +1,15 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D70EFC4D-9AC3-B4F5-065C-B759C87A1B1E" name="company">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D70EFC4D-9AC3-B4F5-065C-B759C87A1B1E" name="dept">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:22:04 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
 <ordsAlias>table_3</ordsAlias>
-<abbreviation>co</abbreviation>
+<abbreviation>dept</abbreviation>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="coid" id="1181B478-CD03-F5D6-AB41-6E42BD8A613A">
+<Column name="did" id="1181B478-CD03-F5D6-AB41-6E42BD8A613A">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:23:26 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -20,7 +20,7 @@
 <ownDataTypeParameters>30,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="cname" id="DB71D88F-E1B3-DE97-68FC-AF691458D135">
+<Column name="dname" id="DB71D88F-E1B3-DE97-68FC-AF691458D135">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:23:42 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -33,7 +33,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="93E677DA-5189-A300-3329-B60C097CDD74" name="company_PK">
+<ind_PK_UK id="93E677DA-5189-A300-3329-B60C097CDD74" name="dept_PK">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:23:26 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>

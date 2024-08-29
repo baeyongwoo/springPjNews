@@ -18,7 +18,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="rename" id="16EE383E-5317-C091-2E45-759821DA7E92">
+<Column name="rname" id="16EE383E-5317-C091-2E45-759821DA7E92">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 08:06:47 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -29,7 +29,7 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="repwd" id="207B77DC-C9A5-AF86-2600-3928A3AD11A7">
+<Column name="rpwd" id="207B77DC-C9A5-AF86-2600-3928A3AD11A7">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 08:07:56 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -40,7 +40,7 @@
 <ownDataTypeParameters>30,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="recon" id="F5B4AFB4-C076-07A1-17BC-9CC39D8A1C8E">
+<Column name="rcon" id="F5B4AFB4-C076-07A1-17BC-9CC39D8A1C8E">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 08:07:56 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -54,6 +54,7 @@
 <Column name="bno" id="806931D3-37B6-4AB0-55BB-25604B419A7F">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 08:43:15 UTC</createdTime>
+<notes>bno를 foreign key로 해서 board 테이블에 연결</notes>
 <ownerDesignName>db</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
