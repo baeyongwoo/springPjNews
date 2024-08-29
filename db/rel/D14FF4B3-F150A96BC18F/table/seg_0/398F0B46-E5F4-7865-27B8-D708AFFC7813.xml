@@ -11,6 +11,7 @@
 <Column name="bno" id="5CEB61F5-4B5D-EBED-9B80-60A643139174">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:44:45 UTC</createdTime>
+<notes>primary key&lt;br/&gt;bfile과 foreign key로 연결</notes>
 <ownerDesignName>db</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -32,20 +33,21 @@
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="content" id="CB7287D6-1490-8FA0-7DAA-E7C3CA766F49">
+<Column name="bcontent" id="CB7287D6-1490-8FA0-7DAA-E7C3CA766F49">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 08:41:52 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>30000</dataTypeSize>
-<ownDataTypeParameters>30000,,</ownDataTypeParameters>
+<dataTypeSize>2000</dataTypeSize>
+<ownDataTypeParameters>2000,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="email" id="D0B5207B-5A72-FF2B-88B4-B64E15661C57">
+<Column name="uemail" id="D0B5207B-5A72-FF2B-88B4-B64E15661C57">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 04:38:22 UTC</createdTime>
+<notes>writer 작성자&lt;br/&gt;users email과 foreign key 연결</notes>
 <ownerDesignName>db</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -70,6 +72,7 @@
 <Column name="caid" id="6BBC9BB5-AC2D-28A1-F68E-17396A8E5AF6">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 04:39:44 UTC</createdTime>
+<notes>category foreign key 카테고리 id 연결</notes>
 <ownerDesignName>db</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -94,7 +97,7 @@
 <colUsage columnID="5CEB61F5-4B5D-EBED-9B80-60A643139174"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="E4C73F8D-1B1D-1274-03A8-F54C153079FE" name="board_category_FK">
+<ind_PK_UK id="E4C73F8D-1B1D-1274-03A8-F54C153079FE" name="board_cate_FK">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 04:44:11 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -114,7 +117,7 @@
 <colUsage columnID="5CEB61F5-4B5D-EBED-9B80-60A643139174"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="45CA44AB-7868-9FDE-25CB-42FC48FEA8F4" name="board_user_FK">
+<ind_PK_UK id="45CA44AB-7868-9FDE-25CB-42FC48FEA8F4" name="board_userinfo_FK">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 07:01:04 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>

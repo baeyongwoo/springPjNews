@@ -80,12 +80,12 @@
 <point x="273" y="251"/>
 </points>
 </Connector>
-<Connector class="oracle.dbtools.crest.swingui.relational.TVFKRelation" oid="726B92DA-CEBF-6883-01F0-791B70F526C0" otype="FKIndexAssociation" vid_source="7E4BA0DB-B819-2F23-FFD3-EAF804D6FD59" vid_target="2AE88E5D-70AE-02EC-5D61-EFC8AAB065DA">
+<Connector class="oracle.dbtools.crest.swingui.relational.TVFKRelation" oid="479E3D36-F122-FFA8-D36D-77FB5A6EA2EE" otype="FKIndexAssociation" vid_source="7E4BA0DB-B819-2F23-FFD3-EAF804D6FD59" vid_target="2AE88E5D-70AE-02EC-5D61-EFC8AAB065DA">
 <hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
 <lineWidth>1</lineWidth>
 <points>
-<point x="543" y="79"/>
-<point x="467" y="79"/>
+<point x="543" y="89"/>
+<point x="467" y="89"/>
 </points>
 </Connector>
 <Connector class="oracle.dbtools.crest.swingui.relational.TVFKRelation" oid="7B690BA9-4169-118B-3C0E-0EFC4EAA76C2" otype="FKIndexAssociation" vid_source="C42094AC-DB22-798E-8CA1-1569C554F03B" vid_target="F6EB3F95-ED6D-AADD-09D8-A9605339D72A">

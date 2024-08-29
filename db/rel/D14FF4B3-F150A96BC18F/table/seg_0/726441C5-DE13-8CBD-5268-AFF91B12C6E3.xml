@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="726441C5-DE13-8CBD-5268-AFF91B12C6E3" name="user">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="726441C5-DE13-8CBD-5268-AFF91B12C6E3" name="userinfo">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:15:46 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -9,7 +9,7 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="email" id="9F7F3448-5D3F-2111-1EC0-5A969B7056D3">
+<Column name="uemail" id="9F7F3448-5D3F-2111-1EC0-5A969B7056D3">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:16:26 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -20,7 +20,7 @@
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="pwd" id="89613128-FCCE-A518-E745-F15CBC4792F1">
+<Column name="upwd" id="89613128-FCCE-A518-E745-F15CBC4792F1">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:17:22 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -31,21 +31,7 @@
 <ownDataTypeParameters>30,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="coid" id="4B26E5F4-1C38-8C77-A733-41BB88CF1481">
-<createdBy>USER</createdBy>
-<createdTime>2024-08-27 06:21:35 UTC</createdTime>
-<ownerDesignName>db</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>30</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="726B92DA-CEBF-6883-01F0-791B70F526C0" referredColumn="1181B478-CD03-F5D6-AB41-6E42BD8A613A"/>
-</associations>
-</Column>
-<Column name="name" id="7E52A96B-B311-8B19-C8CF-1D62F653E116">
+<Column name="uname" id="7E52A96B-B311-8B19-C8CF-1D62F653E116">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:21:56 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -57,9 +43,24 @@
 <ownDataTypeParameters>20,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="did" id="4B26E5F4-1C38-8C77-A733-41BB88CF1481">
+<createdBy>USER</createdBy>
+<createdTime>2024-08-27 06:21:35 UTC</createdTime>
+<notes>company 테이블 coid foreign key 연결</notes>
+<ownerDesignName>db</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="479E3D36-F122-FFA8-D36D-77FB5A6EA2EE" referredColumn="1181B478-CD03-F5D6-AB41-6E42BD8A613A"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="DF26504B-6010-F193-B2F2-691033DA4301" name="user_PK">
+<ind_PK_UK id="DF26504B-6010-F193-B2F2-691033DA4301" name="userinfo_PK">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-27 06:16:26 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -70,9 +71,9 @@
 <colUsage columnID="9F7F3448-5D3F-2111-1EC0-5A969B7056D3"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="07560441-6662-73FC-0D67-57886B8CF505" name="user_company_FK">
+<ind_PK_UK id="241A9D77-F8AB-FAB5-FF58-7C5C5F0B3003" name="userinfo_dept_FK">
 <createdBy>USER</createdBy>
-<createdTime>2024-08-27 06:25:38 UTC</createdTime>
+<createdTime>2024-08-29 01:31:07 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>

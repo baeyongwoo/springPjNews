@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FD77816F-30E1-CD2A-305F-62525A27D481" name="bfile">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FD77816F-30E1-CD2A-305F-62525A27D481" name="bdfile">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 05:10:41 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
@@ -31,7 +31,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="2F903422-E320-7BB7-8122-3E37302661BB" name="bfile_PK">
+<ind_PK_UK id="2F903422-E320-7BB7-8122-3E37302661BB" name="bdfile_PK">
 <createdBy>USER</createdBy>
 <createdTime>2024-08-28 05:11:06 UTC</createdTime>
 <ownerDesignName>db</ownerDesignName>
