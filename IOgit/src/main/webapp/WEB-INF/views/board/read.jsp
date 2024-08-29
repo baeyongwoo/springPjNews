@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +12,10 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container mt-3" style="text-align: center;">
+    <div class="container mt-3" style="text-align: right;">
 
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
                     <img src="img/IOLogo.png" alt="Logo" id="logo">
                 </a>
@@ -34,14 +35,14 @@
             </div>
         </nav>
         <div class="row">
-            <div class="container-fluid" style="display: flex; background-color: gray; height: 400px; border: 0.5px solid red;">
-                <div class="container mt-3">
+            <div class="container-fluid">
+                <div class="container mt-3" style="text-align: left;">
                     <ol class="list-group">
-                      <li class="list-group-item">제목</li>
-                      <li class="list-group-item">기자 이름, 소속사</li>
-                      <li class="list-group-item" style="height: 200px;">
-                          사진
-                          <div>내용</div>
+                        <li class="list-group-item">제목</li>
+                        <li class="list-group-item">기자 이름, 소속사</li>
+                        <li class="list-group-item" style="min-height: 200px; text-align: center;">
+                          <img src="img/swan-7479623_1280.jpg" width="80%" style="margin-bottom: 50px;">
+                          <div style="padding: 30px;">이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐이게 나라냐</div>
                         </li>
                     </ol>
                 </div>
@@ -53,7 +54,7 @@
         </div>
         <div>
             <div class="container mt-3">
-                <h3>댓글</h3>
+                <h3 style="text-align: center;">댓글</h3>
                 <button>댓글 작성</button>
                 <ol class="list-group" style="text-align: left;">
                   <li class="list-group-item">

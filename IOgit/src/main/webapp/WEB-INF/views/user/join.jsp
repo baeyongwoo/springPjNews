@@ -40,7 +40,7 @@
                 
                     <button type="submit" data-oper="regist" class="btn btn-primary">회원가입</button>
                     <button type="reset" data-oper="cancle" class="btn btn-primary">취소</button>
-                    <button type="submit" class="btn btn-primary">메인페이지</button>
+                    <button type="submit" class="btn btn-primary" url="index.html">메인페이지</button>
                 </form>
             </div>
         </div>
@@ -53,4 +53,3 @@
     </footer>
 </body>
 </html>
-

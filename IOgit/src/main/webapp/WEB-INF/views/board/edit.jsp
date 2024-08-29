@@ -25,7 +25,7 @@
                 <div class="navbar-nav right">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">로그아웃</a>
+                            <a class="nav-link" href="login.html">로그인</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="userjoin.html">회원가입</a>
@@ -35,13 +35,13 @@
             </div>
         </nav>
         <div class="row">
-            <div class="container-fluid" style="display: flex; background-color: gray; border: 0.5px solid red;">
+            <div class="container-fluid">
                 <div class="container mt-3">
                     <ol class="list-group">
                       <li class="list-group-item">
-                        <input type="text" placeholder="제목" style="width: 100%;">
+                        <input type="text" placeholder="제목" style="width: 100%; height: 40px;">
                         <div class="form-floating mb-3 mt-3">
-                            <select class="form-select" aria-label="Default select example" onchange="getNationList(event)" style="width: auto;">
+                            <select class="form-select" style="width: auto; height: 50px;">
                                 <option value="no">카테고리을 입력하시오</option>
                                 <option value="it">보안/해킹</option>
                                 <option value="ingea">인터넷/SNS</option>
@@ -49,8 +49,8 @@
                         </div>
                       </li>
                       <li class="list-group-item" style="height: 600px;">
-                          <input type="file">
                           <textarea type="text" style="width: 100%;" rows="20 ,auto" cols="60" placeholder="내용"></textarea>
+                          <input type="file" style="text-align: left;">
                         </li>
                     </ol>
                 </div>
@@ -60,6 +60,54 @@
                 <button>삭제</button>
             </div>
         </div>
+    </div>
+        <div>
+            <div>
+                <div class="container mt-3" style="text-align: right;">
+                    <h3 style="text-align: center;">댓글</h3>
+                    <button>댓글 작성</button>
+                    <ol class="list-group" style="text-align: left;">
+                      <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item" style="width: 10%;">닉네임</li>
+                            <li class="list-group-item" style="width: 90%;">댓글</li>
+                        </ul>
+                        <button>수정</button>
+                        <button>삭제</button>
+                      </li>
+                    </ol>
+                    <ol class="list-group" style="text-align: left;">
+                      <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item" style="width: 10%;">닉네임</li>
+                            <li class="list-group-item" style="width: 90%;">댓글</li>
+                        </ul>
+                        <button>수정</button>
+                        <button>삭제</button>
+                      </li>
+                    </ol>
+                    <ol class="list-group" style="text-align: left;">
+                      <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item" style="width: 10%;">닉네임</li>
+                            <li class="list-group-item" style="width: 90%;">댓글</li>
+                        </ul>
+                        <button>수정</button>
+                        <button>삭제</button>
+                      </li>
+                    </ol>
+                    <ol class="list-group" style="text-align: left;">
+                      <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item" style="width: 10%;">닉네임</li>
+                            <li class="list-group-item" style="width: 90%;">댓글</li>
+                        </ul>
+                        <button>수정</button>
+                        <button>삭제</button>
+                      </li>
+                    </ol>
+                  </div>
+            </div>
     </div>
     <footer class="container-fluid d-flex justify-content-center">
         <a href=".navbar" title="To Top">

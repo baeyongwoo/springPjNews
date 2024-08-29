@@ -23,14 +23,14 @@
                 <form method="post" id="operForm" class="was-validated">
                     <div class="mb-3 mt-3">
                         <label for="uname" class="form-label">아이디:</label>
-                        <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요" name="userId">
+                        <input type="email" class="form-control" id="userId" placeholder="email-id" name="userId">
                     </div>
                     <div class="mb-3">
                         <label for="pwd" class="form-label">비밀번호:</label>
                         <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요" name="pwd">
                     </div>
                 
-                    <button type="submit" data-oper="regist" class="btn btn-primary">회원가입</button>
+                    <button type="submit" data-oper="regist" class="btn btn-primary" href="userjoin.html">회원가입</button>
                     <button type="submit" data-oper="login" class="btn btn-primary">로그인</button>
                     <button type="reset" data-oper="cancle" class="btn btn-primary">취소</button>
                     <button type="button" class="btn btn-primary">메인페이지</button>
@@ -46,4 +46,3 @@
     </footer>
 </body>
 </html>
-
