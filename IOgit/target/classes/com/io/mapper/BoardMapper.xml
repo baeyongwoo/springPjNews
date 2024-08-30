@@ -93,11 +93,16 @@
     </select>
     
     <select id="selectUserList" resultType="com.io.model.BoardDTO">
-    SELECT ui.uemail as umeil, ui.uname as uname, de.dname as dname, count(b.uemail) AS post_count
-	FROM userinfo ui
-	JOIN dept de ON ui.did = de.did
-	LEFT JOIN board b ON ui.uemail = b.uemail
-	GROUP BY ui.uemail, ui.uname, de.dname
+      SELECT 
+    ROW_NUMBER() OVER (ORDER BY ui.uemail) AS row_num,
+    ui.uemail AS uemail,
+    ui.uname AS uname,
+    de.dname AS dname,
+    COUNT(b.uemail) AS post_count
+FROM userinfo ui
+JOIN dept de ON ui.did = de.did
+LEFT JOIN board b ON ui.uemail = b.uemail
+GROUP BY ui.uemail, ui.uname, de.dname
     </select>
 	
 

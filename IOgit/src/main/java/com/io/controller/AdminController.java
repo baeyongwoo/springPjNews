@@ -28,7 +28,6 @@ public class AdminController {
 	
 	@GetMapping("/index")
 	public void index(Model model) {
-		log.info("index count Code " + bs.getsCountOfCode());
 		//기사들 갯수
 		 List<Map<String, Object>> codeCounts =bs.getsCountOfCode();
 	        Map<String, String> tboardCount = new HashMap<>();
@@ -40,7 +39,7 @@ public class AdminController {
 	        model.addAttribute("tboardCount", tboardCount);
 		
 		
-		
+		log.info("userlist log" + bs.listUserListOfPost());
 		
 		model.addAttribute("userList", bs.listUserListOfPost());
 		

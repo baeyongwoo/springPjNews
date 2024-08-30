@@ -114,22 +114,16 @@
 											<th>소속</th>
 											<th>등록된게시글수</th>
 										</tr>
-								<%-- 	<c:forEach items="${userList}" var="ul">
+									<c:forEach items="${userList}" var="ul" varStatus="row" >
 										<tr>
-											<td><c:out value="${ul.userId}"/></td>
-											<td><c:out value="${ul.userNickName}"/></td>
-											<td><c:out value="${ul.loginTime}"/></td>
-											<td><c:out value="${ul.email}"/></td>
-											<td><c:out value="${ul.role}"/></td>
+											<td><c:out value="${row.index+1}"/></td>
+											<td><c:out value="${ul.uemail}"/></td>
+											<td><c:out value="${ul.uname}"/></td>
+											<td><c:out value="${ul.dname}"/></td>
+											<td><c:out value="${ul.post_count}"/></td>
 										</tr>
-									</c:forEach> --%>
-									<tr>
-										<td><c:out value="1"/> </td>
-										<td><c:out value="dyddn30612@naver.com"/> </td>
-										<td><c:out value="용우"/> </td>
-										<td><c:out value="네이버"/> </td>
-										<td><c:out value="1"/> </td>
-									</tr>
+									</c:forEach>
+									
 									</table>
                                     
                                 </div>
