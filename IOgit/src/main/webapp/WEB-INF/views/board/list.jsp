@@ -10,7 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.5.1/uicons-regular-rounded/css/uicons-regular-rounded.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sevillana&display=swap" rel="stylesheet">
+    <link href="/resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/logo" rel="stylesheet">
     <script>
         $(document).ready(function(){
     $(".box").mouseenter(function(){
@@ -20,7 +22,7 @@
         target.find(".hidden-content").show();
     }).mouseleave(function(){
         var target = $(this).find(".box-content");
-        target.animate({top: "250px"}, 300);
+        target.animate({top: "240px"}, 300);
         target.find(".default-content").show();
         target.find(".hidden-content").hide();
     });
@@ -28,14 +30,19 @@
     </script>
 </head>
 <body>
+    <figure class="vid">
+        <video loop autoplay muted>
+            <source src="/resources/logo/simhea.mp4" type="video/mp4">
+        </video>
+    </figure>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <img src="img/IOLogo.png" alt="Logo" id="logo">
+                    <img src="/resources/logo/IOLogo.png" alt="Logo" id="logo">
                 </a>
                 <div class="navbar-nav">
-                    <h1>IO</h1>
+                    <p id="Logoo">IO</p>
                 </div>
                 <div class="navbar-nav right">
                     <ul class="navbar-nav">
@@ -67,12 +74,12 @@
         <div class="tab-content">
             <div id="menu1" class="container tab-pane active"><br>
                 <div class="row">
-                    <a type="submit">
+                    <a type="submit button">
                         <h3>최신순 <i class="fi fi-rr-angle-right"></i></h3>
                     </a>
                     <div class="container_fluid">
-                        <a class="box">
-                            <img src="img/swan-7479623_1280.jpg" class="mx-auto d-block" style="width:100%">
+                        <a type="button" class="box">
+                            <img src="/resources/img/IOLogo.png" class="mx-auto d-block" style="width:100%">
                             <div class="box-content">
                                 <div class="default-content">제목
                                     <div class="container-fluid" style="text-align: left;">기자</div>
