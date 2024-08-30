@@ -107,6 +107,7 @@ $(document).ready(function(){
 	});
 	
 	/* 댓글 등록 */
+	var modal=$(".modal");
 	
 
 	
