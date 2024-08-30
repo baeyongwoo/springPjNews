@@ -2,6 +2,7 @@ package com.io.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,17 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void permitCodeChangeComplete() {
 		bm.updatePermitToComplete();
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> getsCountOfCode() {
+		return bm.selectCodeCount();
+	}
+
+	@Override
+	public List<BoardDTO> listUserListOfPost() {
+		return bm.selectUserList();
 		
 	}
 

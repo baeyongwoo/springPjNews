@@ -21,4 +21,10 @@ public class BoardDTO {
 	private String buploadpath;
 	private String bfilename;
 	private char bfiletype;
+	
+	//user
+	private String dname;
+	
+	//postCount
+	private int post_count;
 }

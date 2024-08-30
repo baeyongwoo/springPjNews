@@ -2,6 +2,7 @@ package com.io.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,29 +23,21 @@ public class AdminController {
 	
 	
 	@GetMapping("/index")
-	public void index() {
-		log.info("왜 안오지?");
+	public void index(Model model) {
+		log.info("index count Code " + bs.getsCountOfCode());
+		//기사들 갯수
+		model.addAttribute("tboardCount", bs.getsCountOfCode());
+		model.addAttribute("userList", bs.listUserListOfPost());
 	}
 	
-	@GetMapping("/test")
-	public void test() {
+	@GetMapping("/board")
+	public void getCodeViewList(String code) {
+		
 		TboardDTO dto = new TboardDTO();
-		log.info("전체 글 보기" + bs.listGetBoard()); 
 		
+		dto.setCode(code);
 		
-		dto.setCode("permit");
-		log.info("temp 테이블 permit 일경우" + bs.listGetTBoard(dto));
-		
-		dto.setCode("reject");
-		//bs.listPutBoard(dto);
-		log.info("temp 테이블 jrect 일경우" + bs.listGetTBoard(dto));
-		
-		dto.setCode("ready");
-		log.info("temp 테이블 ready 일경우" + bs.listGetTBoard(dto));
-		
-		dto.setCode(null);
-		log.info("code가 널일경우 " + bs.listGetTBoard(dto));
-		
+		log.info("입력받은 code에 따라 리스트값들" +bs.listGetTBoard(dto)) ;
 		
 		
 		

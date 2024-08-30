@@ -42,14 +42,6 @@
         </foreach>
     ) A
 </insert>
-
-
-
-
-
-
-
-
 	
 	<update id="updateBoardCode" parameterType="com.io.model.TboardDTO">
 		update tboard set code= #{code} where tno= #{tno}
@@ -61,6 +53,25 @@
       	update tboard set code = 'complete' where code = 'permit'
 	</insert>
 	
+	
+	 <resultMap id="codeCountMap" type="map">
+        <result property="code" column="code"/>
+        <result property="count" column="count"/>
+    </resultMap>
+
+    <select id="selectCodeCount" resultMap="codeCountMap">
+        SELECT code, COUNT(*) AS count
+        FROM tboard
+        GROUP BY code
+    </select>
+    
+    <select id="selectUserList" resultType="com.io.model.BoardDTO">
+    SELECT ui.uemail as umeil, ui.uname as uname, de.dname as dname, count(b.uemail) AS post_count
+	FROM userinfo ui
+	JOIN dept de ON ui.did = de.did
+	LEFT JOIN board b ON ui.uemail = b.uemail
+	GROUP BY ui.uemail, ui.uname, de.dname
+    </select>
 	
 
 
