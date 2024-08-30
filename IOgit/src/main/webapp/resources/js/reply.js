@@ -47,8 +47,8 @@ $(document).ready(function(){
 				str+="			<strong class='primary-font'>"+data.list[i].replyer+"</strong>";
 				str+="			<small class='pull-right text-muted'>"+displayTime(data.list[i].replyDate)+"</small>";
 				str+="		</div>";
-				str+="		<p>"+data.list[i].reply+"</p>;
-				str+="	</div>
+				str+="		<p>"+data.list[i].reply+"</p>";
+				str+="	</div>";
 				str+="</li>";
 			}
 			replyUL.html(str);
