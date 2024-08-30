@@ -37,7 +37,8 @@ public class AdminController {
 	        }
 
 	        model.addAttribute("tboardCount", tboardCount);
-		
+	        
+	        log.info("tcount code value : " + tboardCount);
 		
 		log.info("userlist log" + bs.listUserListOfPost());
 		
@@ -46,16 +47,42 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/board")
-	public void getCodeViewList(String code) {
+	@GetMapping("/newsList")
+	public void getCodeViewList(String code, Model model) {
 		
 		TboardDTO dto = new TboardDTO();
 		
 		dto.setCode(code);
+		model.addAttribute("tboardList",bs.listGetTBoard(dto));
+		log.info("boardList" + bs.listGetTBoard(dto));
+		switch (code) {
+			
+		case "complete":
+			model.addAttribute("code", "complete");
+			
+			break;
+		case "permit":
+			model.addAttribute("code", "permit");
+			break;
+
+		case "ready":
+			model.addAttribute("code", "ready");			
+			break;
+		case "reject":
+			model.addAttribute("code", "reject");
+			break;
+
+		default:
+			break;
+		}
 		
-		log.info("입력받은 code에 따라 리스트값들" +bs.listGetTBoard(dto)) ;
+		
+		
 		
 		
 		
 	}
+	
+	
+	
 }

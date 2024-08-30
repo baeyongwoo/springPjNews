@@ -44,7 +44,7 @@
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">등록된 기사들 (<c:out value="${tboardCount.complete}" />)</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">자료보러가기</a>
+                                        <a class="small text-white stretched-link" href="/admin/newsList?code=complete">자료보러가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">허가된 기사들(<c:out value="${tboardCount.permit}" />)</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">자료보러가기</a>
+                                        <a class="small text-white stretched-link" href="/admin/newsList?code=permit">자료보러가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">확인하지않는 기사들 (<c:out value="${tboardCount.ready}" />)</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">자료보러가기</a>
+                                        <a class="small text-white stretched-link" href="/admin/newsList?code=ready">자료보러가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                 <div class="card bg-danger text-white mb-4">
                                     <div class="card-body">거부된 기사들 (<c:out value="${tboardCount.reject}" />)</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">자료보러가기</a>
+                                        <a class="small text-white stretched-link" href="/admin/newsList?code=reject">자료보러가기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

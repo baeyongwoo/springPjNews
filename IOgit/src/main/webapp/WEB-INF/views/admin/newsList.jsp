@@ -1,0 +1,133 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Dashboard - SB Admin</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+	crossorigin="anonymous"></script>
+<link href="/resources/adcss/css/styles.css" rel="stylesheet" />
+</head>
+<body class="sb-nav-fixed">
+
+	<div id="layoutSidenav">
+
+		<!-- Sidebar -->
+		<aside class="side-bar">
+			<ul class="nav nav-tabs" role="tablist">
+				<i class="fi fi-rr-list"></i>
+				<li><a class="nav-link active" data-bs-toggle="tab"
+					href="#menu1"><i class="fi fi-rr-home"> </i>홈</a>
+				<li><a class="nav-link" data-bs-toggle="tab" href="#menu2"><i
+						class="fi fi-rr-lock"> </i>해킹/보안</a></li>
+				<li><a class="nav-link" data-bs-toggle="tab" href="#menu3"><i
+						class="fi fi-rr-rss"> </i>인터넷/SNS</a></li>
+			</ul>
+		</aside>
+		<!-- End of Sidebar -->
+		<div id="layoutSidenav_content">
+			<main>
+				<div class="container-fluid px-4" style="width: 95%; float: right;">
+					<a href="${pageContext.request.contextPath}/admin/index">
+						<h1 class="mt-4">DashBoard</h1>
+					</a>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item active"></li>
+					</ol>
+
+
+					<!-- 게시글 -->
+					<div class="col-sm-6">
+						<div class="content">
+							<div class="main">
+								<div class="manu">
+
+									<c:choose>
+										<c:when test="${code == 'complete'}">
+											<h3>완료된 기사</h3>
+										</c:when>
+										<c:when test="${code == 'permit'}">
+											<h3>허가된 기사</h3>
+										</c:when>
+										<c:when test="${code == 'ready'}">
+											<h3>미확인 기사</h3>
+										</c:when>
+										<c:when test="${code == 'reject'}">
+											<h3>거부된 기사</h3>
+										</c:when>
+										<c:otherwise>
+											<h3>알 수 없는 상태</h3>
+										</c:otherwise>
+									</c:choose>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="card">
+												<table class="table table-dark table-hover text-center">
+													<tr>
+														<th>row</th>
+														<th>제목</th>
+														<th>내용</th>
+														<th>작성일자</th>
+														<th>작성자</th>
+													</tr>
+												 	<c:forEach items="${tboardList}" var="ul" varStatus="row">
+														<tr>
+															<td><c:out value="${row.index+1}" /></td>
+															<td><c:out value="${ul.tmptitle}" /></td>
+															<td><c:out value="${ul.tmpcontent}" /></td>
+															<td><c:out value="${ul.tmpregdate}" /></td>
+															<td><c:out value="${ul.uemail}" /></td>
+														</tr>
+													</c:forEach> 
+
+												</table>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+		</div>
+		</main>
+		<footer class="py-4 bg-light mt-auto">
+			<div class="container-fluid px-4">
+				<div class="d-flex align-items-center justify-content-between small">
+					<div class="text-muted">Copyright &copy; Information Ocean
+						Company</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/admin/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script src="js/scripts.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		crossorigin="anonymous"></script>
+	<script src="assets/demo/chart-area-demo.js"></script>
+	<script src="assets/demo/chart-bar-demo.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/admin/umd/simple-datatables.min.js"
+		crossorigin="anonymous"></script>
+	<script src="js/datatables-simple-demo.js"></script>
+</body>
+</html>
