@@ -88,7 +88,7 @@ $(document).ready(function(){
 		replyPageFooter.html(str);
 	}
 	
-	
+	/* 댓글 페이지 번호 이벤트 */
 	replyPageFooter.on("click","li a", function(e){
 		e.preventDefault();
 		var targetPageNum=$(this).attr("href");
@@ -96,7 +96,19 @@ $(document).ready(function(){
 		showList(pageNum);
 	});
 	
+	/* 수정 삭제 버튼 이벤트 */
+	var operForm=$("#operForm");
+	$("button[data-oper='modify']").on("click",function(e){
+		operForm.attr("action","/board/modify").submit();//수정화면으로 전송
+	});
+	$("button[data-oper='list']").on("click",function(e){
+		operForm.find("#bno").remove();// hidden태그 bno삭제.목록에서는 bno가 필요없음
+		operForm.attr("action","/board/list").submit();//목록화면으로 전송
+	});
 	
+	/* 댓글 등록 */
+	
+
 	
 	
 	

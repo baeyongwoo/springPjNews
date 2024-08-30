@@ -1,6 +1,5 @@
 package com.io.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

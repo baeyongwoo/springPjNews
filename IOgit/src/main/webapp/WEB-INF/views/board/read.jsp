@@ -107,6 +107,39 @@
         <!-- 댓글 end -->
     </div>
     
+    <!-- 모달 ------------------------------------------------------------------->            
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Reply</label> 
+						<input class="form-control" name='reply'>
+					</div>      
+					<div class="form-group">
+						<label>Replyer</label> 
+						<input class="form-control" name='replyer' readonly>
+					</div>
+					<div class="form-group">
+						<label>Reply Date</label> 
+						<input class="form-control" name='replyDate' value='2018-01-01 13:13'>
+					</div>			      
+				</div>
+				<div class="modal-footer">
+			        <button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
+			        <button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
+			        <button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
+			        <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+	     		</div>          
+    		</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+    </div>
+    <!-- 모달.end -->
+    
     <script src="/resources/js/reply.js?bno=<c:out value='${board.bno}'/>"></script>
     
     <footer class="container-fluid d-flex justify-content-center">
