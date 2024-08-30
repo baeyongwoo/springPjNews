@@ -1,5 +1,9 @@
 package com.io.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +30,21 @@ public class AdminController {
 	public void index(Model model) {
 		log.info("index count Code " + bs.getsCountOfCode());
 		//기사들 갯수
-		model.addAttribute("tboardCount", bs.getsCountOfCode());
+		 List<Map<String, Object>> codeCounts =bs.getsCountOfCode();
+	        Map<String, String> tboardCount = new HashMap<>();
+	        
+	        for (Map<String, Object> codeCount : codeCounts) {
+	            tboardCount.put((String) codeCount.get("code"), String.valueOf(codeCount.get("count")));
+	        }
+
+	        model.addAttribute("tboardCount", tboardCount);
+		
+		
+		
+		
 		model.addAttribute("userList", bs.listUserListOfPost());
+		
+		
 	}
 	
 	@GetMapping("/board")

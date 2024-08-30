@@ -37,14 +37,14 @@ public class PermitBoardInsertTask {
 	}
 	
 	//나중에 새볔시간에 변경하도록 위 스케줄링 보다 늦어야함
-	@Scheduled(cron = "50 * * * * *")
-	public void permitCodeToComplete() {
-		log.info("완료로 스케줄링");
-		try {
-			bs.permitCodeChangeComplete();
-			
-		} catch (Exception e) {
-			log.info("스케줄대상없음");
-		}
-	}
+//	@Scheduled(cron = "50 * * * * *")
+//	public void permitCodeToComplete() {
+//		log.info("완료로 스케줄링");
+//		try {
+//			bs.permitCodeChangeComplete();
+//			
+//		} catch (Exception e) {
+//			log.info("스케줄대상없음");
+//		}
+//	}
 }

@@ -61,8 +61,35 @@
 
     <select id="selectCodeCount" resultMap="codeCountMap">
         SELECT code, COUNT(*) AS count
-        FROM tboard
-        GROUP BY code
+		FROM tboard
+		GROUP BY code
+
+		UNION ALL
+
+		SELECT 'complete' AS code, 0 AS count
+		FROM dual
+		WHERE 'complete' NOT IN (SELECT code FROM tboard)
+		
+		UNION ALL
+
+		SELECT 'permit' AS code, 0 AS count
+		FROM dual
+		WHERE 'permit' NOT IN (SELECT code FROM tboard)
+		
+
+		UNION ALL
+
+		SELECT 'ready' AS code, 0 AS count
+		FROM dual
+		WHERE 'ready' NOT IN (SELECT code FROM tboard)
+
+		UNION ALL
+
+		SELECT 'reject' AS code, 0 AS count
+		FROM dual
+		WHERE 'reject' NOT IN (SELECT code FROM tboard)
+
+		
     </select>
     
     <select id="selectUserList" resultType="com.io.model.BoardDTO">
