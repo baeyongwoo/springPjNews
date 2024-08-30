@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>  
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,13 +56,14 @@
                 <button>삭제</button>
             </div>
         </div>
+	<!-- 댓글 start -------------------------------------------------------------------------------------------------->
         <div>
             <div class="container mt-3">
                 <h3 style="text-align: center;">댓글</h3>
                 <button>댓글 작성</button>
                 <ol class="list-group" style="text-align: left;">
                   <li class="list-group-item">
-                    <ul class="list-group list-group-horizontal">
+                    <ul class="list-group list-group-horizontal chat">
                         <li class="list-group-item" style="width: 10%;">닉네임</li>
                         <li class="list-group-item" style="width: 90%;">댓글</li>
                     </ul>
@@ -96,9 +101,14 @@
                     <button>삭제</button>
                   </li>
                 </ol>
+                <div class="panel-footer"></div>
               </div>
         </div>
+        <!-- 댓글 end -->
     </div>
+    
+    <script src="/resources/js/reply.js?bno=<c:out value='${board.bno}'/>"></script>
+    
     <footer class="container-fluid d-flex justify-content-center">
         <a href=".navbar" title="To Top">
             <span class="glyphicon glyphicon-chevron-up"></span>

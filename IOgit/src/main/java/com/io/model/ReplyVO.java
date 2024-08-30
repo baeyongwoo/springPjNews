@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class ReplyVO {
 	private Long rno; //댓글번호
 	private String rname; //댓글 작성자
