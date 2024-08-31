@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -36,12 +37,15 @@
 		<aside class="side-bar">
 			<ul class="nav nav-tabs" role="tablist">
 				<i class="fi fi-rr-list"></i>
-				<li><a class="nav-link active" 
-					href="${pageContext.request.contextPath}/admin/index"><i class="fi fi-rr-home"> </i>홈</a>
-				<li><a class="nav-link"  href="${pageContext.request.contextPath}/board/list"><i
+				<li><a class="nav-link active"
+					href="${pageContext.request.contextPath}/admin/index"><i
+						class="fi fi-rr-home"> </i>홈</a>
+				<li><a class="nav-link"
+					href="${pageContext.request.contextPath}/board/list"><i
 						class="fi fi-rr-lock"> </i>게시판</a></li>
-				<li><a class="nav-link" 
-					href="${pageContext.request.contextPath}/admin/userList"><i class="fi fi-rr-rss"> </i>유저관리</a></li>
+				<li><a class="nav-link"
+					href="${pageContext.request.contextPath}/admin/userList"><i
+						class="fi fi-rr-rss"> </i>유저관리</a></li>
 			</ul>
 		</aside>
 		<!-- End of Sidebar -->
@@ -95,24 +99,45 @@
 													</tr>
 													<c:forEach items="${tboardList}" var="ul" varStatus="row">
 														<tr class="${ul.code == 'complete' ? 'complete' : ''}">
-															<input type="hidden" id="tno" value="${ul.tno}" />
+
 															<td><c:out value="${row.index+1}" /></td>
 															<td><c:out value="${ul.tmptitle}" /></td>
-															<td><c:out value="${ul.tmpcontent}" /></td>
+															<c:choose>
+																<c:when test="${fn:length(ul.tmpcontent) > 50}">
+																	<td><c:out
+																			value="${fn:substring(ul.tmpcontent, 0, 50)}..." /></td>
+																</c:when>
+																<c:otherwise>
+																	<td><c:out value="${ul.tmpcontent}" /></td>
+																</c:otherwise>
+															</c:choose>
 															<td><c:out value="${ul.tmpregdate}" /></td>
 															<td><c:out value="${ul.uemail}" /></td>
 															<td><c:out value="${ul.uname}" /></td>
-															<td class="check-btn"
-																onclick="checkThisTempContent('${ul.tno}',
-                												'${ul.tmptitle}',
-                												'${ul.tmpcontent}',
-                												'${ul.tmpregdate}', 
-                												'${ul.uemail}', 
-                												'${ul.uname}')"
-																style="cursor: pointer;"><c:out value="확인하기" /></td>
+															<td class="check-btn" style="cursor: pointer;"
+																onclick="checkThisTempContent('${ul.tno}')"><input
+																type="hidden" id="title_${ul.tno}"
+																value="${fn:escapeXml(ul.tmptitle)}" /> <input
+																type="hidden" id="content_${ul.tno}"
+																value="${fn:escapeXml(ul.tmpcontent)}" /> <input
+																type="hidden" id="regdate_${ul.tno}"
+																value="${ul.tmpregdate}" /> <input type="hidden"
+																id="email_${ul.tno}" value="${ul.uemail}" /> <input
+																type="hidden" id="name_${ul.tno}"
+																value="${fn:escapeXml(ul.uname)}" /> <c:out
+																	value="확인하기" /></td>
+
+
+
+
+
+
+
 														</tr>
 													</c:forEach>
 												</table>
+
+
 
 
 											</div>

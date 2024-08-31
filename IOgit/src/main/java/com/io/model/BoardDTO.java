@@ -1,5 +1,6 @@
 package com.io.model;
 
+import java.sql.Clob;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -10,7 +11,7 @@ public class BoardDTO {
 	//board
 	private Long bno;
 	private String title;
-	private String bcontent;
+	private Clob bcontent;
 	private Timestamp regdate;
 	private String uemail;
 	private String caid;
