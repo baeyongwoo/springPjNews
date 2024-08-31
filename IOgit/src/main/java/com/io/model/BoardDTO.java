@@ -27,4 +27,5 @@ public class BoardDTO {
 	
 	//postCount
 	private int post_count;
+	private int insert_count;
 }

@@ -112,7 +112,8 @@
 											<th>Email</th>
 											<th>이름</th>
 											<th>소속</th>
-											<th>등록된게시글수</th>
+											<th>채택된 게시글수</th>
+											<th>등록한 게시글수</th>
 										</tr>
 									<c:forEach items="${userList}" var="ul" varStatus="row" >
 										<tr>
@@ -121,6 +122,7 @@
 											<td><c:out value="${ul.uname}"/></td>
 											<td><c:out value="${ul.dname}"/></td>
 											<td><c:out value="${ul.post_count}"/></td>
+											<td><c:out value="${ul.insert_count}"/></td>
 										</tr>
 									</c:forEach>
 									

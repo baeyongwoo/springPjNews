@@ -79,6 +79,7 @@
 														<th>내용</th>
 														<th>작성일자</th>
 														<th>작성자</th>
+														<th>처리</th>
 													</tr>
 												 	<c:forEach items="${tboardList}" var="ul" varStatus="row">
 														<tr>
@@ -87,6 +88,7 @@
 															<td><c:out value="${ul.tmpcontent}" /></td>
 															<td><c:out value="${ul.tmpregdate}" /></td>
 															<td><c:out value="${ul.uemail}" /></td>
+															<td onclick="checkThisTempContent()"><c:out value="확인하기"/></td>
 														</tr>
 													</c:forEach> 
 
@@ -116,18 +118,8 @@
 		</footer>
 	</div>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/admin/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script src="js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script src="assets/demo/chart-area-demo.js"></script>
-	<script src="assets/demo/chart-bar-demo.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/admin/umd/simple-datatables.min.js"
-		crossorigin="anonymous"></script>
-	<script src="js/datatables-simple-demo.js"></script>
+	
+	<script src="/resources/js/admin/scripts.js"></script>
+	
 </body>
 </html>
