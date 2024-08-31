@@ -5,13 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.io.model.TboardDTO;
 import com.io.service.BoardService;
+import com.io.service.TboardService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -24,6 +31,9 @@ public class AdminController {
 
 	@Autowired
 	BoardService bs;
+	
+	@Autowired
+	TboardService tbs;
 	
 	
 	@GetMapping("/index")
@@ -76,12 +86,23 @@ public class AdminController {
 			break;
 		}
 		
+	}
+	
+	@PostMapping(value="/updateData",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public void getAttachList(Long tno, String code){
+		log.info("tno value " + tno);
+		log.info("code value " + code);
+		TboardDTO dto = new TboardDTO();
+		dto.setTno(tno);
+		dto.setCode(code);
 		
 		
-		
+		tbs.changeCode(dto);
 		
 		
 	}
+
 	
 	
 	

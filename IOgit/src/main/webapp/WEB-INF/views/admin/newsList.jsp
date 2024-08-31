@@ -10,13 +10,22 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Dashboard - SB Admin</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 <link href="/resources/adcss/css/styles.css" rel="stylesheet" />
+
+
+
+<title>Dashboard - SB Admin</title>
+
+
 </head>
 <body class="sb-nav-fixed">
 
@@ -81,16 +90,23 @@
 														<th>작성자</th>
 														<th>처리</th>
 													</tr>
-												 	<c:forEach items="${tboardList}" var="ul" varStatus="row">
+													<c:forEach items="${tboardList}" var="ul" varStatus="row">
 														<tr>
+															<input type="hidden" id="tno" value="${ul.tno}" />
 															<td><c:out value="${row.index+1}" /></td>
 															<td><c:out value="${ul.tmptitle}" /></td>
 															<td><c:out value="${ul.tmpcontent}" /></td>
 															<td><c:out value="${ul.tmpregdate}" /></td>
 															<td><c:out value="${ul.uemail}" /></td>
-															<td onclick="checkThisTempContent()"><c:out value="확인하기"/></td>
+															<td class="check-btn"
+																onclick="checkThisTempContent('${ul.tno}',
+															 '${ul.tmptitle}',
+															 '${ul.tmpcontent}',
+															 '${ul.tmpregdate}', 
+															 '${ul.uemail}')" style="cursor: pointer;">
+															 <c:out value="확인하기"/></td>
 														</tr>
-													</c:forEach> 
+													</c:forEach>
 
 												</table>
 
@@ -117,9 +133,42 @@
 			</div>
 		</footer>
 	</div>
+	<!-- 모달창 -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- 모달 헤더 -->
+				<div class="modal-header">
+					<h4 class="modal-title">상세 정보</h4>
+					<button type="button" class="close" data-dismiss="modal" onclick="cancelModal()">×</button>
+				</div>
+				<!-- 모달 바디 -->
+				<div class="modal-body">
+					<p>
+						<strong>TNO:</strong> <span id="modalTno"></span>
+					</p>
+					<p>
+						<strong>제목:</strong> <span id="modalTitle"></span>
+					</p>
+					<p>
+						<strong>내용:</strong> <span id="modalContent"></span>
+					</p>
+					<p>
+						<strong>작성일자:</strong> <span id="modalRegdate"></span>
+					</p>
+					<p>
+						<strong>작성자:</strong> <span id="modalEmail"></span>
+					</p>
+				</div>
+				<!-- 모달 푸터 -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" onclick="approve()">허가</button>
+					<button type="button" class="btn btn-danger" onclick="reject()">거절</button>
+				</div>
+			</div>
+		</div>
 	</div>
-	
 	<script src="/resources/js/admin/scripts.js"></script>
-	
+
 </body>
 </html>
