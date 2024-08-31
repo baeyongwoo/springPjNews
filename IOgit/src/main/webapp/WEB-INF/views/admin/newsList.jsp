@@ -27,6 +27,7 @@
 
 
 </head>
+
 <body class="sb-nav-fixed">
 
 	<div id="layoutSidenav">
@@ -87,28 +88,31 @@
 														<th>제목</th>
 														<th>내용</th>
 														<th>작성일자</th>
+														<th>이메일</th>
 														<th>작성자</th>
 														<th>처리</th>
 													</tr>
 													<c:forEach items="${tboardList}" var="ul" varStatus="row">
-														<tr>
+														<tr class="${ul.code == 'complete' ? 'complete' : ''}">
 															<input type="hidden" id="tno" value="${ul.tno}" />
 															<td><c:out value="${row.index+1}" /></td>
 															<td><c:out value="${ul.tmptitle}" /></td>
 															<td><c:out value="${ul.tmpcontent}" /></td>
 															<td><c:out value="${ul.tmpregdate}" /></td>
 															<td><c:out value="${ul.uemail}" /></td>
+															<td><c:out value="${ul.uname}" /></td>
 															<td class="check-btn"
 																onclick="checkThisTempContent('${ul.tno}',
-															 '${ul.tmptitle}',
-															 '${ul.tmpcontent}',
-															 '${ul.tmpregdate}', 
-															 '${ul.uemail}')" style="cursor: pointer;">
-															 <c:out value="확인하기"/></td>
+                												'${ul.tmptitle}',
+                												'${ul.tmpcontent}',
+                												'${ul.tmpregdate}', 
+                												'${ul.uemail}', 
+                												'${ul.uname}')"
+																style="cursor: pointer;"><c:out value="확인하기" /></td>
 														</tr>
 													</c:forEach>
-
 												</table>
+
 
 											</div>
 										</div>
@@ -140,7 +144,8 @@
 				<!-- 모달 헤더 -->
 				<div class="modal-header">
 					<h4 class="modal-title">상세 정보</h4>
-					<button type="button" class="close" data-dismiss="modal" onclick="cancelModal()">×</button>
+					<button type="button" class="close" data-dismiss="modal"
+						onclick="cancelModal()">×</button>
 				</div>
 				<!-- 모달 바디 -->
 				<div class="modal-body">
@@ -157,7 +162,10 @@
 						<strong>작성일자:</strong> <span id="modalRegdate"></span>
 					</p>
 					<p>
-						<strong>작성자:</strong> <span id="modalEmail"></span>
+						<strong>이메일:</strong> <span id="modalEmail"></span>
+					</p>
+					<p>
+						<strong>작성자:</strong> <span id="modalName"></span>
 					</p>
 				</div>
 				<!-- 모달 푸터 -->
@@ -169,6 +177,20 @@
 		</div>
 	</div>
 	<script src="/resources/js/admin/scripts.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			var rows = document.querySelectorAll('tr.complete');
+			rows.forEach(function(row) {
+				var ths = row.parentNode.querySelectorAll('th');
+				var tds = row.querySelectorAll('td');
+
+				var hideIndex = 6;
+
+				ths[hideIndex].style.display = 'none';
+				tds[hideIndex].style.display = 'none';
+			});
+		};
+	</script>
 
 </body>
 </html>

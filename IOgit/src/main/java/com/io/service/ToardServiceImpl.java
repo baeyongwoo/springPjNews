@@ -24,6 +24,11 @@ public class ToardServiceImpl implements TboardService{
 	@Override
 	public void changeCode(TboardDTO dto) {
 		tm.updateCode(dto);
+		
+		if(dto.getCode().equals("reject")) {
+			
+		}
+		
 	}
 
 	
