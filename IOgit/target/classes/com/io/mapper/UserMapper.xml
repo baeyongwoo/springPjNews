@@ -9,6 +9,10 @@
         insert into userinfo (uemail, upwd, uname, did) 
         values (#{uemail, jdbcType=VARCHAR}, #{upwd, jdbcType=VARCHAR}, #{uname, jdbcType=VARCHAR}, #{did, jdbcType=VARCHAR})
     </insert>
+    
+    <delete id="deleteUser" parameterType="String">
+    	delete from userinfo where uemail=#{uemail}
+    </delete>
   
   
 </mapper>

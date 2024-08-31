@@ -36,12 +36,12 @@
 		<aside class="side-bar">
 			<ul class="nav nav-tabs" role="tablist">
 				<i class="fi fi-rr-list"></i>
-				<li><a class="nav-link active" data-bs-toggle="tab"
-					href="#menu1"><i class="fi fi-rr-home"> </i>홈</a>
-				<li><a class="nav-link" data-bs-toggle="tab" href="#menu2"><i
-						class="fi fi-rr-lock"> </i>해킹/보안</a></li>
-				<li><a class="nav-link" data-bs-toggle="tab" href="#menu3"><i
-						class="fi fi-rr-rss"> </i>인터넷/SNS</a></li>
+				<li><a class="nav-link active" 
+					href="${pageContext.request.contextPath}/admin/index"><i class="fi fi-rr-home"> </i>홈</a>
+				<li><a class="nav-link"  href="${pageContext.request.contextPath}/board/list"><i
+						class="fi fi-rr-lock"> </i>게시판</a></li>
+				<li><a class="nav-link" 
+					href="${pageContext.request.contextPath}/admin/userList"><i class="fi fi-rr-rss"> </i>유저관리</a></li>
 			</ul>
 		</aside>
 		<!-- End of Sidebar -->
@@ -49,15 +49,16 @@
 			<main>
 				<div class="container-fluid px-4" style="width: 95%; float: right;">
 					<a href="${pageContext.request.contextPath}/admin/index">
-						<h1 class="mt-4">DashBoard</h1>
+						<h1 class="mt-4">Home</h1>
 					</a>
+
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item active"></li>
 					</ol>
 
 
 					<!-- 게시글 -->
-					<div class="col-sm-6">
+					<div class="col-sm-12">
 						<div class="content">
 							<div class="main">
 								<div class="manu">
@@ -136,6 +137,7 @@
 				</div>
 			</div>
 		</footer>
+
 	</div>
 	<!-- 모달창 -->
 	<div class="modal" id="myModal">

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.io.model.TboardDTO;
 import com.io.service.BoardService;
 import com.io.service.TboardService;
+import com.io.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -34,6 +35,9 @@ public class AdminController {
 	
 	@Autowired
 	TboardService tbs;
+	
+	@Autowired
+	UserService us;
 	
 	
 	@GetMapping("/index")
@@ -90,7 +94,7 @@ public class AdminController {
 	
 	@PostMapping(value="/updateData",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public void getAttachList(Long tno, String code){
+	public void updateData(Long tno, String code){
 		log.info("tno value " + tno);
 		log.info("code value " + code);
 		TboardDTO dto = new TboardDTO();
@@ -101,6 +105,19 @@ public class AdminController {
 		tbs.changeCode(dto);
 		
 		
+	}
+	
+	@GetMapping("/userList")
+	public void getUserListPage(Model model) {
+		log.info("userList");
+		model.addAttribute("userList", bs.listUserListOfPost());
+	}
+	
+	@PostMapping(value="/deleteUser",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public void userDelete(@RequestParam String email, @RequestParam String reason) {
+
+	      us.remove(email);
 	}
 
 	
