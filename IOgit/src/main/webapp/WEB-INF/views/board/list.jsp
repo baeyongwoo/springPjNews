@@ -47,10 +47,10 @@
                 <div class="navbar-nav right">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/login">로그인</a>
+                            <a class="nav-link" href="login.html">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/join">회원가입</a>
+                            <a class="nav-link" href="userjoin.html">회원가입</a>
                         </li>
                     </ul>
                 </div>
