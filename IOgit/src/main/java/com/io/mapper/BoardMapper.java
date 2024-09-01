@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.io.model.BoardDTO;
 import com.io.model.TboardDTO;
-import com.io.model.UserVO;
 
 public interface BoardMapper {
 	public List<BoardDTO> selectAllBoard();
