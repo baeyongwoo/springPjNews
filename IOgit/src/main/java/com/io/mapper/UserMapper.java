@@ -7,4 +7,6 @@ public interface UserMapper {
 	public int join(UserDTO user); 
 	
 	public void deleteUser(String uemail);
+
+	public UserDTO read(String userName);
 }
