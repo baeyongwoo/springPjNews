@@ -16,6 +16,7 @@ public class BoardDTO {
 	private String uemail;
 	private String caid;
 	private String uname;
+	private String category;
 	
 	/* file */
 	private String buuid;

@@ -8,7 +8,7 @@ import com.io.model.TboardDTO;
 
 public interface BoardService {
 	
-	public List<BoardDTO> listGetBoard();
+	public Map<String, List<BoardDTO>> listGetBoard();
 	
 	public List<TboardDTO> listGetTBoard(TboardDTO dto);
 

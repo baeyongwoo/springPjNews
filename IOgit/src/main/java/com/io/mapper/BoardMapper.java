@@ -9,7 +9,8 @@ import com.io.model.BoardDTO;
 import com.io.model.TboardDTO;
 
 public interface BoardMapper {
-	public List<BoardDTO> selectAllBoard();
+	public List<BoardDTO> selectAllBoard(BoardDTO dto);
+
 	
 	//스케줄위한 메서드
 	public List<TboardDTO> selectAllTempBoard(TboardDTO tdto);
@@ -27,4 +28,6 @@ public interface BoardMapper {
 	
 	//UserMapper로 옮길것 
 	public List<BoardDTO> selectUserList();
+	
+	public List<BoardDTO> selectCateAll();
 }
