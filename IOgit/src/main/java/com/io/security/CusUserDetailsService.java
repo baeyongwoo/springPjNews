@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.io.mapper.UserMapper;
-import com.io.model.UserVO;
+import com.io.model.UserDTO;
 import com.io.security.domain.CusUser;
 
 import lombok.Setter;
@@ -24,11 +24,11 @@ public class CusUserDetailsService implements UserDetailsService {
 		log.warn("Load User By UserName : " + userName);
 
 		// userName means userid
-		UserVO vo = userMapper.read(userName);
+		UserDTO dto = userMapper.read(userName);
 
-		log.warn("queried by member mapper: " + vo);
+		log.warn("queried by member mapper: " + dto);
 
-		return vo == null ? null : new CusUser(vo);
+		return dto == null ? null : new CusUser(dto);
 	} 
 
 }
