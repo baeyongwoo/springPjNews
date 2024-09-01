@@ -24,4 +24,6 @@ public class TboardDTO {
 	private String tfilename;
 	private String tfiletype;
 	
+	private String category;
+	
 }

@@ -90,6 +90,7 @@
 												<table class="table table-dark table-hover text-center">
 													<tr>
 														<th>row</th>
+														<th>카테고리</th>
 														<th>제목</th>
 														<th>내용</th>
 														<th>작성일자</th>
@@ -101,6 +102,7 @@
 														<tr class="${ul.code == 'complete' ? 'complete' : ''}">
 
 															<td><c:out value="${row.index+1}" /></td>
+															<td><c:out value="${ul.category}" /></td>
 															<td><c:out value="${ul.tmptitle}" /></td>
 															<c:choose>
 																<c:when test="${fn:length(ul.tmpcontent) > 50}">

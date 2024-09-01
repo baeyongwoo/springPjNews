@@ -18,11 +18,12 @@
 
 	<select id="selectAllTempBoard"
 		resultType="com.io.model.TboardDTO">
-		select b.*, ui.uname, d.did, d.dname
+		select b.*, ui.uname, d.did, d.dname, c.category
 		from userinfo ui
 		join dept d on
 		ui.did = d.did
 		join tboard b on b.uemail = ui.uemail
+        join cate c on b.caid = c.caid
 		<where>
 			<if test="code != null">
 				and b.code = #{code}
