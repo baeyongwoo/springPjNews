@@ -39,42 +39,10 @@ CREATE TABLE userinfo (
 CREATE TABLE auth (
     uemail    VARCHAR2(50) NOT NULL,
     authority VARCHAR2(50) NOT NULL,
-    CONSTRAINT fk_auth_usersinfo FOREIGN KEY (uemail) REFERENCES userinfo(uemail)
+    CONSTRAINT fk_auth_usersinfo FOREIGN KEY (uemail) REFERENCES userinfo(uemail) on delete cascade
 );
---board table 조금김
-CREATE TABLE BOARD 
-(
-  BNO NUMBER NOT NULL, -
-  TITLE VARCHAR2(100 BYTE) NOT NULL, 
-  BCONTENT VARCHAR2(2000 BYTE) NOT NULL, 
-  UEMAIL VARCHAR2(50 BYTE) NOT NULL, 
-  REGDATE TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP,
-  CAID VARCHAR2(20 BYTE) NOT NULL, 
-  TNO NUMBER,
- count   NUMBER default 0,
-  CONSTRAINT BOARD_PK PRIMARY KEY (BNO) USING INDEX 
-) 
-LOGGING 
-TABLESPACE IO 
-PCTFREE 10 
-INITRANS 1 
-STORAGE 
-( 
-  INITIAL 65536 
-  NEXT 1048576 
-  MINEXTENTS 1 
-  MAXEXTENTS UNLIMITED 
-  BUFFER_POOL DEFAULT 
-) 
-NOPARALLEL;
-ALTER TABLE BOARD
-ADD CONSTRAINT BOARD_CATE_FK FOREIGN KEY (CAID) REFERENCES CATE (CAID) ENABLE;
 
-ALTER TABLE BOARD
-ADD CONSTRAINT BOARD_FK1 FOREIGN KEY (TNO) REFERENCES TBOARD (TNO) ENABLE;
 
-ALTER TABLE BOARD
-ADD CONSTRAINT BOARD_USERINFO_FK FOREIGN KEY (UEMAIL) REFERENCES USERINFO (UEMAIL) ON DELETE CASCADE ENABLE;
 
 CREATE TABLE tboard (
     tno          NUMBER NOT NULL,
@@ -85,8 +53,23 @@ CREATE TABLE tboard (
     caid         VARCHAR2(20) NOT NULL,
     code         VARCHAR2(10) DEFAULT 'ready', -- 기본값 추가 및 데이터 타입 변경
     CONSTRAINT tboard_pk PRIMARY KEY (tno),
-    CONSTRAINT tboard_userinfo_fk FOREIGN KEY (uemail) REFERENCES userinfo(uemail),
-    CONSTRAINT tboard_cate_fk FOREIGN KEY (caid) REFERENCES cate(caid)
+    CONSTRAINT tboard_userinfo_fk FOREIGN KEY (uemail) REFERENCES userinfo(uemail) on DELETE CASCADE,
+    CONSTRAINT tboard_cate_fk FOREIGN KEY (caid) REFERENCES cate(caid) on DELETE CASCADE
+);
+
+CREATE TABLE board (
+    bno        NUMBER NOT NULL,
+    title      VARCHAR2(100) NOT NULL,
+    bcontent   VARCHAR2(2000) NOT NULL,
+    uemail     VARCHAR2(50) NOT NULL,
+    regdate    TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 기본값 추가
+    caid       VARCHAR2(20) NOT NULL,
+    tno        number not null,
+    CONSTRAINT board_pk PRIMARY KEY (bno),
+    CONSTRAINT board_userinfo_fk FOREIGN KEY (uemail) REFERENCES userinfo(uemail) on DELETE CASCADE,
+    CONSTRAINT board_cate_fk FOREIGN KEY (caid) REFERENCES cate(caid) on DELETE CASCADE,
+    CONSTRAINT board_tboard_fk FOREIGN KEY (tno) REFERENCES tboard(tno) on DELETE CASCADE
+    
 );
 
 CREATE TABLE reply (
@@ -96,13 +79,13 @@ CREATE TABLE reply (
     rcon    VARCHAR2(1000) NOT NULL,
     bno     NUMBER NOT NULL,
     CONSTRAINT reply_pk PRIMARY KEY (rno),
-    CONSTRAINT reply_board_fk FOREIGN KEY (bno) REFERENCES board(bno)
+    CONSTRAINT reply_board_fk FOREIGN KEY (bno) REFERENCES board(bno) on DELETE CASCADE
 );
 
 CREATE TABLE tfile (
     tuuid      VARCHAR2(100 BYTE) PRIMARY KEY, 
     tno        NUMBER NOT NULL,
-    CONSTRAINT tfile_tboard_fk FOREIGN KEY (tno) REFERENCES tboard(tno),
+    CONSTRAINT tfile_tboard_fk FOREIGN KEY (tno) REFERENCES tboard(tno) on DELETE CASCADE,
     tUPLOADPATH VARCHAR2(200 BYTE) NOT NULL, 
     tFILENAME  VARCHAR2(200 BYTE) NOT NULL, 
     tFILETYPE  CHAR(1 BYTE) DEFAULT 'I' -- 기본값 추가
@@ -111,7 +94,7 @@ CREATE TABLE tfile (
 CREATE TABLE bdfile (
     buuid      VARCHAR2(100 BYTE) PRIMARY KEY, 
     bno        NUMBER NOT NULL,
-    CONSTRAINT bdfile_board_fk FOREIGN KEY (bno) REFERENCES board(bno),
+    CONSTRAINT bdfile_board_fk FOREIGN KEY (bno) REFERENCES board(bno) on DELETE CASCADE,
     bUPLOADPATH VARCHAR2(200 BYTE) NOT NULL, 
     bFILENAME  VARCHAR2(200 BYTE) NOT NULL, 
     bFILETYPE  CHAR(1 BYTE) DEFAULT 'I' -- 기본값 추가
@@ -137,8 +120,8 @@ NOCACHE
 NOCYCLE;
 
 -- 데이터 삽입
-INSERT INTO dept (did, dname) VALUES ('D01', '방송국');
-INSERT INTO dept (did, dname) VALUES ('D02', '신문사');
+INSERT INTO dept (did, dname) VALUES ('D01', '부서1');
+INSERT INTO dept (did, dname) VALUES ('D02', '부서2');
 INSERT INTO dept (did, dname) VALUES ('D00', 'Information Oceans');
 
 INSERT INTO cate (caid, category) VALUES ('C01', '기술');
@@ -153,15 +136,16 @@ INSERT INTO auth (uemail, authority) VALUES ('user1@ex.com', 'Member');
 INSERT INTO auth (uemail, authority) VALUES ('user2@ex.com', 'Admin');
 INSERT INTO auth (uemail, authority) VALUES ('io@io.io', 'Admin');
 
-INSERT INTO board (bno, title, bcontent, uemail, regdate, caid) VALUES (board_seq.NEXTVAL, '첫 번째 제목', '내용1', 'user1@ex.com', current_timestamp, 'C01');
-INSERT INTO board (bno, title, bcontent, uemail, regdate, caid) VALUES (board_seq.NEXTVAL, '두 번째 제목', '내용2', 'user2@ex.com', current_timestamp, 'C02');
-
 INSERT INTO tboard (tno, tmptitle, tmpcontent, tmpregdate, uemail, caid, code) VALUES (tboard_seq.NEXTVAL, '임시 제목 1', '임시 내용 1', current_timestamp, 'user1@ex.com', 'C01', 'ready');
 INSERT INTO tboard (tno, tmptitle, tmpcontent, tmpregdate, uemail, caid, code) VALUES (tboard_seq.NEXTVAL, '임시 제목 2', '임시 내용 2', current_timestamp, 'user2@ex.com', 'C02', 'ready');
+
+INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno) VALUES (board_seq.NEXTVAL, '첫 번째 제목', '내용1', 'user1@ex.com', current_timestamp, 'C01', 1);
+INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno) VALUES (board_seq.NEXTVAL, '두 번째 제목', '내용2', 'user2@ex.com', current_timestamp, 'C02', 2);
 
 INSERT INTO reply (rno, rname, rpwd, rcon, bno) VALUES (reply_seq.NEXTVAL, '사용자1', '비밀번호1', '댓글 내용 1', 1);
 INSERT INTO reply (rno, rname, rpwd, rcon, bno) VALUES (reply_seq.NEXTVAL, '사용자2', '비밀번호2', '댓글 내용 2', 1);
 
+commit;
 -- 데이터 확인 (주석 처리된 부분)
 -- SELECT * FROM dept;
 -- SELECT * FROM cate;
