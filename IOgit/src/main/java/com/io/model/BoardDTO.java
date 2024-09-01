@@ -11,7 +11,7 @@ public class BoardDTO {
 	//board
 	private Long bno;
 	private String title;
-	private Clob bcontent;
+	private String bcontent;
 	private Timestamp regdate;
 	private String uemail;
 	private String caid;

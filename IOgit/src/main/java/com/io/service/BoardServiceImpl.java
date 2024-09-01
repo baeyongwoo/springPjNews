@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.io.mapper.BoardMapper;
 import com.io.model.BoardDTO;
@@ -38,6 +39,7 @@ public class BoardServiceImpl implements BoardService{
 
 
 
+	@Transactional
 	@Override
 	public void listPutBoard(TboardDTO dto) {
 		List<TboardDTO> tdtoList =  listGetTBoard(dto);

@@ -47,7 +47,7 @@ CREATE TABLE auth (
 CREATE TABLE tboard (
     tno          NUMBER NOT NULL,
     tmptitle     VARCHAR2(100) NOT NULL,
-    tmpcontent   VARCHAR2(2000) NOT NULL,
+    tmpcontent   CLOB NOT NULL,
     tmpregdate   TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 기본값 추가
     uemail       VARCHAR2(50) NOT NULL,
     caid         VARCHAR2(20) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE tboard (
 CREATE TABLE board (
     bno        NUMBER NOT NULL,
     title      VARCHAR2(100) NOT NULL,
-    bcontent   VARCHAR2(2000) NOT NULL,
+    bcontent   CLOB NOT NULL,
     uemail     VARCHAR2(50) NOT NULL,
     regdate    TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 기본값 추가
     caid       VARCHAR2(20) NOT NULL,

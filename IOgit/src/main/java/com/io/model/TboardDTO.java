@@ -1,5 +1,6 @@
 package com.io.model;
 
+import java.sql.Clob;
 import java.sql.Timestamp;
 
 import lombok.Data;

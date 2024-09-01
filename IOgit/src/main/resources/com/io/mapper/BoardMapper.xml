@@ -32,24 +32,25 @@
 	</select>
 
 
-	<insert id="insertBoards" parameterType="java.util.List">
-		INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno)
-		SELECT board_seq.nextval, A.title, A.tmpcontent, A.uemail,
-		A.systimestamp,
-		A.caid, A.tno
-		FROM (
-		<foreach collection="list" item="item" separator=" UNION ALL ">
-			SELECT
-			#{item.tmptitle} as title,
-			#{item.tmpcontent} as tmpcontent,
-			#{item.uemail} as uemail,
-			current_timestamp as systimestamp,
-			#{item.caid} as caid,
-			#{item.tno} as tno
-			FROM DUAL
-		</foreach>
-		) A
-	</insert>
+    <insert id="insertBoards" parameterType="java.util.List">
+        INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno)
+        SELECT board_seq.nextval, A.title, TO_CLOB(A.tmpcontent), A.uemail,
+        A.systimestamp,
+        A.caid, A.tno
+        FROM (
+        <foreach collection="list" item="item" separator=" UNION ALL ">
+            SELECT
+            #{item.tmptitle} as title,
+            #{item.tmpcontent, typeHandler=utils.ClobTypeHandler} as tmpcontent,
+            #{item.uemail} as uemail,
+            current_timestamp as systimestamp,
+            #{item.caid} as caid,
+            #{item.tno} as tno
+            FROM DUAL
+        </foreach>
+        ) A
+    </insert>
+
 
 
 	<update id="updateBoardCode"
@@ -114,18 +115,21 @@
 	</select>
 
 	<select id="selectUserList" resultType="com.io.model.BoardDTO">
-		 SELECT 
+		SELECT
 		ROW_NUMBER() OVER (ORDER BY ui.uemail) AS row_num,
 		ui.uemail AS uemail,
-		ui.uname AS uname,
+		ui.uname AS
+		uname,
 		de.dname AS dname,
 		COUNT(b.uemail) AS post_count,
 		count(tb.uemail) as insert_count
 		FROM userinfo ui
-		JOIN dept de ON ui.did = de.did
+		JOIN dept de ON ui.did
+		= de.did
 		LEFT JOIN tboard tb on tb.uemail = ui.uemail
-        LEFT JOIN board b ON tb.uemail = b.uemail  and tb.tno = b.tno
-		GROUP BY ui.uemail, ui.uname, de.dname
+		LEFT JOIN board b ON tb.uemail = b.uemail and tb.tno = b.tno
+		GROUP BY
+		ui.uemail, ui.uname, de.dname
 	</select>
 
 
