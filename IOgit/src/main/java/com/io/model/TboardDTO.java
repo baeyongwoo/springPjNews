@@ -14,6 +14,7 @@ public class TboardDTO {
 	private String uemail;
 	private String caid;
 	private String code;
+	private String uname;
 	
 	/* tempFile */
 	
@@ -21,4 +22,5 @@ public class TboardDTO {
 	private String tuploadpth;
 	private String tfilename;
 	private String tfiletype;
+	
 }

@@ -5,113 +5,136 @@
 <mapper namespace="com.io.mapper.BoardMapper">
 
 	<select id="selectAllBoard" resultType="com.io.model.BoardDTO">
-		select  b.*, ui.uname, d.did, d.dname 
-		from userinfo ui join dept d 
+		select b.*, ui.uname,
+		d.did, d.dname
+		from userinfo ui join dept d
 		on ui.did = d.did
-		join board b on b.uemail = ui.uemail
-		order by b.regdate desc
-	
-	</select>
-	
-	 <select id="selectAllTempBoard" resultType="com.io.model.TboardDTO">
-        select b.*, ui.uname, d.did, d.dname 
-        from userinfo ui 
-        join dept d on ui.did = d.did
-        join tboard b on b.uemail = ui.uemail
-        <where>
-            <if test="code != null">
-                and b.code = #{code}
-            </if>
-        </where>
-        order by b.tmpregdate desc
-    </select>
-    
-    
-<insert id="insertBoards" parameterType="java.util.List">
-    INSERT INTO board (bno, title, bcontent, uemail, regdate, caid)
-    SELECT board_seq.nextval, A.title, A.tmpcontent, A.uemail, A.systimestamp, A.caid
-    FROM (
-        <foreach collection="list" item="item" separator=" UNION ALL ">
-            SELECT 
-                #{item.tmptitle} as title, 
-                #{item.tmpcontent} as tmpcontent,
-                #{item.uemail} as uemail,
-                current_timestamp as systimestamp,
-                #{item.caid} as caid 
-            FROM DUAL
-        </foreach>
-    ) A
-</insert>
-	
-	<update id="updateBoardCode" parameterType="com.io.model.TboardDTO">
-		update tboard set code= #{code} where tno= #{tno}
-	
-	</update>
-	
-	
-	<insert id="updatePermitToComplete" parameterType="java.util.List">
-      	update tboard set code = 'complete' where code = 'permit'
-	</insert>
-	
-	
-	 <resultMap id="codeCountMap" type="map">
-        <result property="code" column="code"/>
-        <result property="count" column="count"/>
-    </resultMap>
+		join board
+		b on b.uemail = ui.uemail
+		order by b.regdate
+		desc
 
-    <select id="selectCodeCount" resultMap="codeCountMap">
-        SELECT code, COUNT(*) AS count
+	</select>
+
+	<select id="selectAllTempBoard"
+		resultType="com.io.model.TboardDTO">
+		select b.*, ui.uname, d.did, d.dname
+		from userinfo ui
+		join dept d on
+		ui.did = d.did
+		join tboard b on b.uemail = ui.uemail
+		<where>
+			<if test="code != null">
+				and b.code = #{code}
+			</if>
+		</where>
+		order by b.tmpregdate desc
+	</select>
+
+
+	<insert id="insertBoards" parameterType="java.util.List">
+		INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno)
+		SELECT board_seq.nextval, A.title, A.tmpcontent, A.uemail,
+		A.systimestamp,
+		A.caid, A.tno
+		FROM (
+		<foreach collection="list" item="item" separator=" UNION ALL ">
+			SELECT
+			#{item.tmptitle} as title,
+			#{item.tmpcontent} as tmpcontent,
+			#{item.uemail} as uemail,
+			current_timestamp as systimestamp,
+			#{item.caid} as caid,
+			#{item.tno} as tno
+			FROM DUAL
+		</foreach>
+		) A
+	</insert>
+
+
+	<update id="updateBoardCode"
+		parameterType="com.io.model.TboardDTO">
+		update tboard set code= #{code} where tno= #{tno}
+
+	</update>
+
+
+	<insert id="updatePermitToComplete"
+		parameterType="java.util.List">
+		update tboard set code = 'complete' where code =
+		'permit'
+	</insert>
+
+
+	<resultMap id="codeCountMap" type="map">
+		<result property="code" column="code" />
+		<result property="count" column="count" />
+	</resultMap>
+
+	<select id="selectCodeCount" resultMap="codeCountMap">
+		SELECT code, COUNT(*) AS
+		count
 		FROM tboard
 		GROUP BY code
 
 		UNION ALL
 
-		SELECT 'complete' AS code, 0 AS count
+		SELECT
+		'complete' AS code, 0 AS
+		count
 		FROM dual
-		WHERE 'complete' NOT IN (SELECT code FROM tboard)
-		
-		UNION ALL
+		WHERE 'complete' NOT IN (SELECT
+		code FROM tboard)
+
+		UNION
+		ALL
 
 		SELECT 'permit' AS code, 0 AS count
 		FROM dual
-		WHERE 'permit' NOT IN (SELECT code FROM tboard)
-		
+		WHERE 'permit' NOT IN
+		(SELECT code FROM tboard)
+
 
 		UNION ALL
 
 		SELECT 'ready' AS code, 0 AS count
 		FROM dual
-		WHERE 'ready' NOT IN (SELECT code FROM tboard)
+		WHERE 'ready' NOT IN
+		(SELECT code FROM tboard)
 
 		UNION ALL
 
-		SELECT 'reject' AS code, 0 AS count
+		SELECT
+		'reject' AS code, 0 AS count
 		FROM dual
-		WHERE 'reject' NOT IN (SELECT code FROM tboard)
-
-		
-    </select>
-    
-    <select id="selectUserList" resultType="com.io.model.BoardDTO">
-      SELECT 
-    ROW_NUMBER() OVER (ORDER BY ui.uemail) AS row_num,
-    ui.uemail AS uemail,
-    ui.uname AS uname,
-    de.dname AS dname,
-    COUNT(b.uemail) AS post_count
-FROM userinfo ui
-JOIN dept de ON ui.did = de.did
-LEFT JOIN board b ON ui.uemail = b.uemail
-GROUP BY ui.uemail, ui.uname, de.dname
-    </select>
-	
+		WHERE 'reject' NOT IN (SELECT
+		code FROM tboard)
 
 
+	</select>
 
-    
-	
-	
-  
-  
-  
+	<select id="selectUserList" resultType="com.io.model.BoardDTO">
+		 SELECT 
+		ROW_NUMBER() OVER (ORDER BY ui.uemail) AS row_num,
+		ui.uemail AS uemail,
+		ui.uname AS uname,
+		de.dname AS dname,
+		COUNT(b.uemail) AS post_count,
+		count(tb.uemail) as insert_count
+		FROM userinfo ui
+		JOIN dept de ON ui.did = de.did
+		LEFT JOIN tboard tb on tb.uemail = ui.uemail
+        LEFT JOIN board b ON tb.uemail = b.uemail  and tb.tno = b.tno
+		GROUP BY ui.uemail, ui.uname, de.dname
+	</select>
+
+
+
+
+
+
+
+
+
+
 </mapper>

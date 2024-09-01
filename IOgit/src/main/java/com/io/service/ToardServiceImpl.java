@@ -9,16 +9,27 @@ import org.springframework.stereotype.Service;
 import com.io.mapper.BoardMapper;
 import com.io.mapper.TboardMapper;
 import com.io.model.BoardDTO;
+import com.io.model.TboardDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-/*이 컨트롤러는 실제 유저한테 보여주는 컨트롤러입니다*/
 
 @Log4j
 @Service
 @AllArgsConstructor
 public class ToardServiceImpl implements TboardService{
+	
+	TboardMapper tm;
+	@Override
+	public void changeCode(TboardDTO dto) {
+		tm.updateCode(dto);
+		
+		if(dto.getCode().equals("reject")) {
+			
+		}
+		
+	}
 
 	
 
