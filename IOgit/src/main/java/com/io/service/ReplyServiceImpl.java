@@ -3,7 +3,6 @@ package com.io.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.io.mapper.BoardMapper;
 import com.io.mapper.ReplyMapper;
 import com.io.model.Criteria;
 import com.io.model.ReplyPageDTO;
