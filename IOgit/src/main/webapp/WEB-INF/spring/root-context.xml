@@ -31,10 +31,11 @@
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
+	   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:com/io/mapper/*Mapper.xml"/>
+    </bean>
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -72,7 +73,7 @@
 	
 	<context:component-scan	base-package="com.io.service" />
 	
-	<context:component-scan base-package="org.zerock.task" />
+	<context:component-scan base-package="com.io.task" />
 	
 	<task:annotation-driven />
 	
