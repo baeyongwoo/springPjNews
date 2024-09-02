@@ -35,8 +35,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list/{caid}")
-	public void list(Model model, @PathVariable String caid) {
+	public String list(Model model, @PathVariable String caid) {
 	    BoardDTO dto = new BoardDTO();
+	    
+	    
 	    
 	    if(caid.equals("all")) {
 	    	dto.setCaid(null);
@@ -46,6 +48,13 @@ public class BoardController {
 	    
 	    log.info("dto value + " + dto);
 	    log.info("해당 ㅇlist 값들" +  bs.selectAllBoardOfCaid(dto));
+	    
+	    model.addAttribute("boardList", bs.selectAllBoardOfCaid(dto));
+	    model.addAttribute("cateList", bs.selectCateAll());
+	    
+	    
+	    
+	    return "/board/listView";
 	    
 	    
 	}
