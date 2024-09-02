@@ -104,6 +104,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
+	@Override
+    public BoardDTO readBoard(long bno) {
+        // BoardMapper를 통해 게시글 상세 정보를 조회
+        return bm.readBoard(bno);
+    }
 	
 	
 

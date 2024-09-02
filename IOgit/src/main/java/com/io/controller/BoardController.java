@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.io.model.BoardDTO;
 import com.io.service.BoardService;
@@ -59,6 +60,14 @@ public class BoardController {
 	    
 	}
 	
+	 @GetMapping("/read")
+	    public void readBoard(@RequestParam("bno") long bno, Model model) {
+	        // 게시글 정보를 조회
+	        BoardDTO boardDTO = bs.readBoard(bno);
+	        log.info("read test value ");
+	        model.addAttribute("board", boardDTO);
+	        
+	    }
 	
 	
 }
