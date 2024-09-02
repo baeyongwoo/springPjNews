@@ -8,7 +8,7 @@ public interface UserMapper {
 	
 	public void deleteUser(String uemail);
 
-	public UserDTO read(String userName);
+	public UserDTO read(String uemail);
 	
 	public int updateUser(UserDTO user);
 

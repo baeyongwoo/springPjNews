@@ -17,8 +17,8 @@ public class CustomUserDetailsService implements UserDetailsService{
 
 	// 회원 아이디로 회원정보 조회
 	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		UserDTO dto=userMapper.read(userName);
+	public UserDetails loadUserByUsername(String uemail) throws UsernameNotFoundException {
+		UserDTO dto=userMapper.read(uemail);
 		
 		return dto==null ? null : new CustomUser(dto);
 	}
