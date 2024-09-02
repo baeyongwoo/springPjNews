@@ -51,7 +51,7 @@
 	<div class="container-fluid">
 		<nav class="navbar navbar-expand-sm">
 			<div class="container">
-				<a class="navbar-brand" href="index.html"> <img
+				<a class="navbar-brand" href="/board/list"> <img
 					src="/resources/logo/IOLogo.png" alt="Logo" id="logo">
 				</a>
 				<div class="navbar-nav">

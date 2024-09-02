@@ -96,7 +96,12 @@
 														<th>작성일자</th>
 														<th>이메일</th>
 														<th>작성자</th>
-														<th>처리</th>
+														<c:choose>
+															<c:when
+																test="${not empty tboardList and tboardList[0].code != 'complete'}">
+																<th>처리</th>
+															</c:when>
+														</c:choose>
 													</tr>
 													<c:forEach items="${tboardList}" var="ul" varStatus="row">
 														<tr class="${ul.code == 'complete' ? 'complete' : ''}">
@@ -116,32 +121,25 @@
 															<td><c:out value="${ul.tmpregdate}" /></td>
 															<td><c:out value="${ul.uemail}" /></td>
 															<td><c:out value="${ul.uname}" /></td>
-															<td class="check-btn" style="cursor: pointer;"
-																onclick="checkThisTempContent('${ul.tno}')"><input
-																type="hidden" id="title_${ul.tno}"
-																value="${fn:escapeXml(ul.tmptitle)}" /> <input
-																type="hidden" id="content_${ul.tno}"
-																value="${fn:escapeXml(ul.tmpcontent)}" /> <input
-																type="hidden" id="regdate_${ul.tno}"
-																value="${ul.tmpregdate}" /> <input type="hidden"
-																id="email_${ul.tno}" value="${ul.uemail}" /> <input
-																type="hidden" id="name_${ul.tno}"
-																value="${fn:escapeXml(ul.uname)}" /> <c:out
-																	value="확인하기" /></td>
-
-
-
-
-
-
-
+															<c:choose>
+																<c:when test="${ul.code != 'complete'}">
+																	<td class="check-btn" style="cursor: pointer;"
+																		onclick="checkThisTempContent('${ul.tno}')"><input
+																		type="hidden" id="title_${ul.tno}"
+																		value="${fn:escapeXml(ul.tmptitle)}" /> <input
+																		type="hidden" id="content_${ul.tno}"
+																		value="${fn:escapeXml(ul.tmpcontent)}" /> <input
+																		type="hidden" id="regdate_${ul.tno}"
+																		value="${ul.tmpregdate}" /> <input type="hidden"
+																		id="email_${ul.tno}" value="${ul.uemail}" /> <input
+																		type="hidden" id="name_${ul.tno}"
+																		value="${fn:escapeXml(ul.uname)}" /> <c:out
+																			value="확인하기" /></td>
+																</c:when>
+															</c:choose>
 														</tr>
 													</c:forEach>
 												</table>
-
-
-
-
 											</div>
 										</div>
 
@@ -200,6 +198,30 @@
 				<!-- 모달 푸터 -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-success" onclick="approve()">허가</button>
+					<button type="button" class="btn btn-danger"
+						onclick="openRejectionModal()">거절</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 거절사유 모달 Modal -->
+	<div class="modal" id="rejectionModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">거절 사유</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						onclick="cancelRejectionModal()">×</button>
+				</div>
+				<div class="modal-body">
+					<textarea id="rejectionReason" class="form-control" rows="5"
+						placeholder="거절 사유를 입력하세요" required="required"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"
+						onclick="sendRejectionEmail()">이메일 전송</button>
 					<button type="button" class="btn btn-danger" onclick="reject()">거절</button>
 				</div>
 			</div>
