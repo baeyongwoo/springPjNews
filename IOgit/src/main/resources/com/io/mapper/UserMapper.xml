@@ -20,4 +20,25 @@
 	<delete id="deleteUser" parameterType="String">
 		delete from userinfo where uemail=#{uemail}
 	</delete>
+	
+	<resultMap type="com.io.model.UserDTO" id="userMap">
+  	<id property="uemail" column="uemail" />
+  	<result property="uemail" column="uemail"/>
+  	<result property="upwd" column="upwd"/>
+  	<result property="uname" column="uname"/>
+  	<collection property="authList" resultMap="authMap"></collection>  	
+  </resultMap>
+  
+  <resultMap type="com.io.model.AuthVO" id="authMap">
+  	<result property="userid" column="userid"/>
+  	<result property="auth" column="auth"/>
+  </resultMap>
+  
+  <select id="read" resultMap="userMap">
+  select ui.uemail, ui.upwd, ui.uname, ui.did, auth.authority
+  from userinfo ui left outer join auth auth
+  on ui.uemail=auth.uemail
+  where ui.uemail='user1@ex.com';
+   
+  </select>
 </mapper>
