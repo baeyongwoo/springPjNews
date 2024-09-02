@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,98 +84,124 @@
 			</ul>
 		</aside>
 
-		<!-- Tab Content -->
-		<div class="tab-content">
-			<c:forEach var="entry" items="${boardMap}">
-				<c:choose>
-					<c:when test="${entry.key == '최신순'}">
-						<div id="menu1" class="container tab-pane active">
-							<br>
-							<div class="row">
-								<a type="submit button">
-									<h3>
-										${entry.key} <i class="fi fi-rr-angle-right"></i>
-									</h3>
-								</a>
-								<div class="container_fluid">
-									<c:forEach var="board" items="${entry.value}">
-										<a type="button" class="box"> <img
-											src="/resources/img/IOLogo.png" class="mx-auto d-block"
-											style="width: 100%">
-											<div class="box-content">
-												<div class="default-content">
-													${board.title}
-													<div class="container-fluid" style="text-align: left;">${board.uname}</div>
-												</div>
-												<div class="hidden-content">${board.bcontent}</div>
-											</div>
-										</a>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-					</c:when>
+<!-- Tab Content -->
+<div class="tab-content">
+    <c:forEach var="entry" items="${boardMap}">
+        <c:choose>
+            <c:when test="${entry.key == '최신순'}">
+                <div id="menu1" class="container tab-pane active">
+                    <br>
+                    <div class="row">
+                        <a type="submit button">
+                            <h3>
+                                ${entry.key} <i class="fi fi-rr-angle-right"></i>
+                            </h3>
+                        </a>
+                        <div class="container_fluid">
+                            <c:forEach var="board" items="${entry.value}">
+                                <a type="button" class="box"> <img
+                                    src="/resources/img/IOLogo.png" class="mx-auto d-block"
+                                    style="width: 100%">
+                                    <div class="box-content">
+                                        <div class="default-content">
+                                            ${board.title}
+                                            <div class="container-fluid" style="text-align: left;">${board.uname}</div>
+                                        </div>
+                                        <div class="hidden-content">
+                                            <c:choose>
+                                                <c:when test="${fn:length(board.bcontent) > 180}">
+                                                    ${fn:substring(board.bcontent, 0, 180)}...
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${board.bcontent}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
+                                </a>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </c:when>
 
-					<c:when test="${entry.key == '비즈니스'}">
-						<div id="menu1" class="container tab-pane active">
-							<br>
-							<div class="row">
-								<a type="submit button">
-									<h3>
-										${entry.key} <i class="fi fi-rr-angle-right"></i>
-									</h3>
-								</a>
-								<div class="container_fluid">
-									<c:forEach var="board" items="${entry.value}">
-										<a type="button" class="box"> <img
-											src="/resources/img/IOLogo.png" class="mx-auto d-block"
-											style="width: 100%">
-											<div class="box-content">
-												<div class="default-content">
-													${board.title}
-													<div class="container-fluid" style="text-align: left;">${board.uname}</div>
-												</div>
-												<div class="hidden-content">${board.bcontent}</div>
-											</div>
-										</a>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-					</c:when>
+            <c:when test="${entry.key == '비즈니스'}">
+                <div id="menu1" class="container tab-pane active">
+                    <br>
+                    <div class="row">
+                        <a type="submit button">
+                            <h3>
+                                ${entry.key} <i class="fi fi-rr-angle-right"></i>
+                            </h3>
+                        </a>
+                        <div class="container_fluid">
+                            <c:forEach var="board" items="${entry.value}">
+                                <a type="button" class="box"> <img
+                                    src="/resources/img/IOLogo.png" class="mx-auto d-block"
+                                    style="width: 100%">
+                                    <div class="box-content">
+                                        <div class="default-content">
+                                            ${board.title}
+                                            <div class="container-fluid" style="text-align: left;">${board.uname}</div>
+                                        </div>
+                                        <div class="hidden-content">
+                                            <c:choose>
+                                                <c:when test="${fn:length(board.bcontent) > 180}">
+                                                    ${fn:substring(board.bcontent, 0, 180)}...
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${board.bcontent}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
+                                </a>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </c:when>
 
-					<c:when test="${entry.key == '기술'}">
-						<div id="menu1" class="container tab-pane active">
-							<br>
-							<div class="row">
-								<a type="submit button">
-									<h3>
-										${entry.key} <i class="fi fi-rr-angle-right"></i>
-									</h3>
-								</a>
-								<div class="container_fluid">
-									<c:forEach var="board" items="${entry.value}">
-										<a type="button" class="box"> <img
-											src="/resources/img/IOLogo.png" class="mx-auto d-block"
-											style="width: 100%">
-											<div class="box-content">
-												<div class="default-content">
-													${board.title}
-													<div class="container-fluid" style="text-align: left;">${board.uname}</div>
-												</div>
-												<div class="hidden-content">${board.bcontent}</div>
-											</div>
-										</a>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-					</c:when>
+            <c:when test="${entry.key == '기술'}">
+                <div id="menu1" class="container tab-pane active">
+                    <br>
+                    <div class="row">
+                        <a type="submit button">
+                            <h3>
+                                ${entry.key} <i class="fi fi-rr-angle-right"></i>
+                            </h3>
+                        </a>
+                        <div class="container_fluid">
+                            <c:forEach var="board" items="${entry.value}">
+                                <a type="button" class="box"> <img
+                                    src="/resources/img/IOLogo.png" class="mx-auto d-block"
+                                    style="width: 100%">
+                                    <div class="box-content">
+                                        <div class="default-content">
+                                            ${board.title}
+                                            <div class="container-fluid" style="text-align: left;">${board.uname}</div>
+                                        </div>
+                                        <div class="hidden-content">
+                                            <c:choose>
+                                                <c:when test="${fn:length(board.bcontent) > 180}">
+                                                    ${fn:substring(board.bcontent, 0, 180)}...
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${board.bcontent}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
+                                </a>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </c:when>
+        </c:choose>
+    </c:forEach>
+</div>
 
-
-				</c:choose>
-			</c:forEach>
-		</div>
 		<!-- tabEnd -->
 	</div>
 	<!-- content end -->

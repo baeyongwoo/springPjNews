@@ -107,7 +107,7 @@
 							<th>작성자</th>
 						</tr>
 						<c:forEach items="${boardList}" var="ul" varStatus="row">
-							<tr>
+							 <tr onclick="location.href='/board/read?bno=${ul.bno}'" style="cursor:pointer;">
 								<td><c:out value="${row.index+1}" /></td>
 								<td><c:out value="${ul.title}" /></td>
 								<c:choose>
