@@ -22,6 +22,20 @@
 </select>
 
 
+<select id="selectAllBoardOfCaid" resultType="com.io.model.BoardDTO">
+    SELECT b.*, ui.uname, d.did, d.dname
+    FROM userinfo ui
+    JOIN dept d ON ui.did = d.did
+    JOIN board b ON b.uemail = ui.uemail
+    <choose>
+        <when test="caid != null">
+            WHERE b.caid = #{caid}
+        </when>
+        <otherwise>
+            -- 아무 조건도 추가하지 않음
+        </otherwise>
+    </choose>
+</select>
 
 
 

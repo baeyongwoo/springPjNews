@@ -65,17 +65,21 @@
 				</div>
 			</div>
 		</nav>
-
 		<!-- Sidebar Navigation -->
 		<aside class="side-bar">
 			<ul class="nav nav-tabs" role="tablist">
 				<i class="fi fi-rr-list"></i>
-				<li><a class="nav-link active" data-bs-toggle="tab"
-					href="#menu1"><i class="fi fi-rr-home"> </i>홈</a></li>
-				<li><a class="nav-link" data-bs-toggle="tab" href="#menu2"><i
-						class="fi fi-rr-lock"> </i>해킹/보안</a></li>
-				<li><a class="nav-link" data-bs-toggle="tab" href="#menu3"><i
-						class="fi fi-rr-rss"> </i>인터넷/SNS</a></li>
+				<li><a class="nav-link active" 
+					href="/board/list"><i class="fi fi-rr-home"> </i>홈</a></li>
+				<li><a class="nav-link active" 
+					href="/board/list/all"><i class="fi fi-rr-home"> </i>전체보기</a></li>	
+					<c:forEach var="cate" items="${cateList}">
+						<li><a class="nav-link" href="/board/list/${cate.caid}"><i
+						class="fi fi-rr-lock"> </i>${cate.category}</a></li>
+						
+					</c:forEach>
+				
+
 			</ul>
 		</aside>
 

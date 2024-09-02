@@ -90,6 +90,20 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
+
+	@Override
+	public List<BoardDTO> selectCateAll() {
+		return bm.selectCateAll();
+	}
+
+
+
+	@Override
+	public List<BoardDTO> selectAllBoardOfCaid(BoardDTO dto) {
+		return bm.selectAllBoardOfCaid(dto);
+	}
+
+
 	
 	
 

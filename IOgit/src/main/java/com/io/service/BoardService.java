@@ -23,4 +23,8 @@ public interface BoardService {
 	
 	//UserService로 옮길 예정
 	public List<BoardDTO> listUserListOfPost();
+	
+	public List<BoardDTO> selectCateAll();
+	
+	public List<BoardDTO> selectAllBoardOfCaid(BoardDTO dto);
 }

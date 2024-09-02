@@ -30,4 +30,7 @@ public interface BoardMapper {
 	public List<BoardDTO> selectUserList();
 	
 	public List<BoardDTO> selectCateAll();
+	
+	
+	public List<BoardDTO> selectAllBoardOfCaid(BoardDTO dto);
 }
