@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.io.model.BoardDTO;
 import com.io.service.BoardService;
@@ -28,8 +30,44 @@ public class BoardController {
 		  Map<String, List<BoardDTO>> boardMap = bs.listGetBoard();
 		  log.info("boardMap" + boardMap);
 		    model.addAttribute("boardMap", boardMap);
+		    
+		    log.info("cateList" + bs.selectCateAll());
+		    model.addAttribute("cateList", bs.selectCateAll());
 	}
 	
+	@GetMapping("/list/{caid}")
+	public String list(Model model, @PathVariable String caid) {
+	    BoardDTO dto = new BoardDTO();
+	    
+	    
+	    
+	    if(caid.equals("all")) {
+	    	dto.setCaid(null);
+	    }else {
+	    	dto.setCaid(caid);
+	    }
+	    
+	    log.info("dto value + " + dto);
+	    log.info("해당 ㅇlist 값들" +  bs.selectAllBoardOfCaid(dto));
+	    
+	    model.addAttribute("boardList", bs.selectAllBoardOfCaid(dto));
+	    model.addAttribute("cateList", bs.selectCateAll());
+	    
+	    
+	    
+	    return "/board/listView";
+	    
+	    
+	}
+	
+	 @GetMapping("/read")
+	    public void readBoard(@RequestParam("bno") long bno, Model model) {
+	        // 게시글 정보를 조회
+	        BoardDTO boardDTO = bs.readBoard(bno);
+	        log.info("read test value ");
+	        model.addAttribute("board", boardDTO);
+	        
+	    }
 	
 	
 }

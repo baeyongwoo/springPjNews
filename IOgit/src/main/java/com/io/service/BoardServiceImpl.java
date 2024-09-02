@@ -90,6 +90,25 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 
+
+	@Override
+	public List<BoardDTO> selectCateAll() {
+		return bm.selectCateAll();
+	}
+
+
+
+	@Override
+	public List<BoardDTO> selectAllBoardOfCaid(BoardDTO dto) {
+		return bm.selectAllBoardOfCaid(dto);
+	}
+
+
+	@Override
+    public BoardDTO readBoard(long bno) {
+        // BoardMapper를 통해 게시글 상세 정보를 조회
+        return bm.readBoard(bno);
+    }
 	
 	
 

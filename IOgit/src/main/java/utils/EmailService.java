@@ -24,7 +24,7 @@ public class EmailService {
         
         CreateAuthCode code = new CreateAuthCode();
         helper.setTo(to);
-        helper.setSubject(subject);
+        helper.setSubject("[IOCompany]" + subject);
         helper.setText(text, true);
         helper.setFrom(mail);
 
