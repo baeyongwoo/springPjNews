@@ -124,4 +124,6 @@ public class BoardServiceImpl implements BoardService{
 	        bm.deleteBoard(bno);
 	    }
 
+	
+
 }
