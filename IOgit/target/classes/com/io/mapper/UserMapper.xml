@@ -30,8 +30,8 @@
   </resultMap>
   
   <resultMap type="com.io.model.AuthVO" id="authMap">
-  	<result property="userid" column="userid"/>
-  	<result property="auth" column="auth"/>
+  	<result property="authority" column="uemail"/>
+  	<result property="authority" column="authority"/>
   </resultMap>
   
   <select id="selectUser" resultMap="userMap">

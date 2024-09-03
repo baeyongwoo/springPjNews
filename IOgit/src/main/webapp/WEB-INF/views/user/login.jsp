@@ -43,6 +43,7 @@
 						<label for="pwd" class="form-label">비밀번호:</label> <input
 							type="password" class="form-control" id="pwd"
 							placeholder="비밀번호를 입력하세요" name="password">
+							 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</div>
 
 					<a href="/user/join" class="btn btn-primary" role="button">회원가입</a>

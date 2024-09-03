@@ -10,8 +10,9 @@ import org.springframework.security.core.userdetails.User;
 import com.io.model.UserDTO;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j;
 
-
+@Log4j
 @Getter
 public class CustomUser extends User{
 	
@@ -31,7 +32,7 @@ public class CustomUser extends User{
 		//부모클래스 생성자호출
 		super(dto.getUemail(), dto.getUpwd(), dto.getAuthList().stream()
 				.map(auth -> new SimpleGrantedAuthority(auth.getAuthority())).collect(Collectors.toList()));
-
+		log.info("custom DTO" + dto.getAuthList());
 		
 		this.user=dto;
 	}

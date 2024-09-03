@@ -20,6 +20,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 			Authentication auth) throws IOException, ServletException {
 		
 		log.info("여기오냐? 로그인 성공했을때");
+		log.info("auth data?" + auth);
 		//역할이름 목록
 		List<String> roleNames=new ArrayList<>();
 		auth.getAuthorities().forEach(authority->{
