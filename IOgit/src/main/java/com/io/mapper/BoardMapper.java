@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.io.model.BoardDTO;
+import com.io.model.Criteria;
 import com.io.model.TboardDTO;
 
 public interface BoardMapper {
@@ -16,6 +17,8 @@ public interface BoardMapper {
 
 	// 스케줄위한 메서드
 	public List<TboardDTO> selectAllTempBoard(TboardDTO tdto);
+	
+	public List<TboardDTO> selectAllTempBoardOfPaging(@Param("dto") TboardDTO dto, @Param("cri") Criteria cri);
 
 	public void insertBoards(@Param("list") List<TboardDTO> tdto);
 
