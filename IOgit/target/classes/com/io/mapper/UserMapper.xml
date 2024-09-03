@@ -34,11 +34,21 @@
   	<result property="auth" column="auth"/>
   </resultMap>
   
-  <select id="read" resultMap="userMap">
+  <select id="selectUser" resultMap="userMap">
   select ui.uemail, ui.upwd, ui.uname, ui.did, auth.authority
   from userinfo ui left outer join auth auth
   on ui.uemail=auth.uemail
-  where ui.uemail='user1@ex.com';
+  where ui.uemail=#{userid}
    
   </select>
+  
+  <update id="insertUserAuth">
+  INSERT ALL
+  	<foreach collection="authList" item="item" separator=" ">
+  		INTO AUTH(uemail,AUTHORITY) values(#{item.uemail}, #{item.authority})
+  	</foreach>
+  	select * from dual
+  
+  
+  </update>
 </mapper>

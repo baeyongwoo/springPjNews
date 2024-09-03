@@ -21,17 +21,18 @@
         <div class="container d-flex justify-content-center">
             <div>
                 <h3>로그인</h3>
-                <form method="post" id="operForm" class="was-validated">
+                <form method="post" id="operForm" class="was-validated" action="/user/login">
                     <div class="mb-3 mt-3">
                         <label for="uname" class="form-label">아이디:</label>
-                        <input type="email" class="form-control" id="userId" placeholder="email-id" name="userId">
+                        <input type="email" class="form-control" id="userId" placeholder="email-id" name="username">
                     </div>
                     <div class="mb-3">
                         <label for="pwd" class="form-label">비밀번호:</label>
-                        <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요" name="pwd">
+                        <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요" name="password">
                     </div>
                 
-                    <button type="submit" data-oper="regist" class="btn btn-primary" href="userjoin.html">회원가입</button>
+                   <a href="/user/join" class="btn btn-primary" role="button">회원가입</a>
+
                     <button type="submit" data-oper="login" class="btn btn-primary">로그인</button>
                     <button type="reset" data-oper="cancle" class="btn btn-primary">취소</button>
                     <button type="button" class="btn btn-primary">메인페이지</button>

@@ -11,11 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import lombok.extern.log4j.Log4j;
+@Log4j
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication auth) throws IOException, ServletException {
+		
+		log.info("여기오냐? 로그인 성공했을때");
 		//역할이름 목록
 		List<String> roleNames=new ArrayList<>();
 		auth.getAuthorities().forEach(authority->{

@@ -77,6 +77,14 @@
 							<option value="D02">부서2</option>
 						</select>
 					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label">권한</label>
+						<input type="checkbox" name="role" value="ROLE_ADMIN">관리자
+						<input type="checkbox" name="role" value="ROLE_MEMBER">기자
+						<input type="checkbox" name="role" value="ROLE_USER">일반
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					</div>
+					
 
 					<button type="submit" class="btn btn-primary">회원가입</button>
 					<button type="button" class="btn btn-primary"
