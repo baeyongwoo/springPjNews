@@ -105,8 +105,8 @@
 													</tr>
 													<c:forEach items="${tboardList}" var="ul" varStatus="row">
 														<tr class="${ul.code == 'complete' ? 'complete' : ''}">
-
-															<td><c:out value="${row.index+1}" /></td>
+														
+														   <td><c:out value="${(currentPage - 1) * criteria.amount + row.index + 1}" /></td>
 															<td><c:out value="${ul.category}" /></td>
 															<td><c:out value="${ul.tmptitle}" /></td>
 															<c:choose>
@@ -142,6 +142,16 @@
 												</table>
 											</div>
 										</div>
+										<nav>
+											<ul class="pagination">
+												<c:forEach var="i" begin="1" end="${totalPages}">
+													<li class="page-item ${i == currentPage ? 'active' : ''}">
+														<a class="page-link"
+														href="?pageNum=${i}&amount=${criteria.amount}&code=${code}">${i}</a>
+													</li>
+												</c:forEach>
+											</ul>
+										</nav>
 
 									</div>
 								</div>

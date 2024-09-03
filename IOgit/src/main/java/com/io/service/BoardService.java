@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.io.model.BoardDTO;
+import com.io.model.Criteria;
 import com.io.model.TboardDTO;
 
 public interface BoardService {
@@ -16,6 +17,8 @@ public interface BoardService {
 	public Map<String, List<BoardDTO>> listGetBoard();
 
 	public List<TboardDTO> listGetTBoard(TboardDTO dto);
+	
+	public List<TboardDTO> listGetTBoardOfPaging(TboardDTO dto, Criteria cri);
 
 	public void listPutBoard(TboardDTO dto);
 

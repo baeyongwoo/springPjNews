@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.io.mapper.BoardMapper;
 import com.io.model.BoardDTO;
+import com.io.model.Criteria;
 import com.io.model.TboardDTO;
 
 import lombok.AllArgsConstructor;
@@ -54,6 +55,14 @@ public class BoardServiceImpl implements BoardService{
 	public List<TboardDTO> listGetTBoard(TboardDTO dto) {
 		//dto안에 있는 code가 null일 경우 전체 보여주고 null이 아닐경우 code값에 따라서 보여주는 쿼리
 		return bm.selectAllTempBoard(dto);
+	}
+	
+	@Override
+	public List<TboardDTO> listGetTBoardOfPaging(TboardDTO dto, Criteria cri) {
+		   // 페이징 처리를 위한 로직 추가
+	    int offset = (cri.getPageNum() - 1) * cri.getAmount() + 1;
+	    cri.setOffset(offset); // offset 값을 Criteria 객체에 설정
+	    return bm.selectAllTempBoardOfPaging(dto, cri);
 	}
 
 
@@ -109,11 +118,19 @@ public class BoardServiceImpl implements BoardService{
         // BoardMapper를 통해 게시글 상세 정보를 조회
         return bm.readBoard(bno);
     }
+<<<<<<< HEAD
+
+
+
+	
+	
+=======
 	 @Override
 	    public void deleteBoard(Long bno) {
 	        bm.deleteBoard(bno);
 	    }
 
+>>>>>>> 235729e67b02b53d4aded924604a5654390b252e
 	
 
 }
