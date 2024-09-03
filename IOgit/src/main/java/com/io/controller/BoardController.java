@@ -33,18 +33,22 @@ public class BoardController {
 
 	@GetMapping("/list")
 	public String list(HttpSession session, Model model) {
-		 String logoutMessage = (String) session.getAttribute("logoutMessage");
-		    if (logoutMessage != null) {
-		        model.addAttribute("logoutMessage", logoutMessage);
-		        session.removeAttribute("logoutMessage");
-		    }
-		Map<String, List<BoardDTO>> boardMap = bs.listGetBoard();
-		log.info("boardMap" + boardMap);
-		model.addAttribute("boardMap", boardMap);
+	    String logoutMessage = (String) session.getAttribute("logoutMessage");
+	    if (logoutMessage != null) {
+	        model.addAttribute("logoutMessage", logoutMessage);
+	        session.removeAttribute("logoutMessage");
+	        session.removeAttribute("username");
+	    }
+	    
+	    model.addAttribute("username", session.getAttribute("username"));
+	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
+	    Map<String, List<BoardDTO>> boardMap = bs.listGetBoard();
+	    log.info("boardMap" + boardMap);
+	    model.addAttribute("boardMap", boardMap);
 
-		log.info("cateList" + bs.selectCateAll());
-		model.addAttribute("cateList", bs.selectCateAll());
-		return "board/list";
+	    log.info("cateList" + bs.selectCateAll());
+	    model.addAttribute("cateList", bs.selectCateAll());
+	    return "board/list";
 	}
 
 	@GetMapping("/list/{caid}")

@@ -42,10 +42,13 @@
 					<div class="mb-3">
 						<label for="pwd" class="form-label">비밀번호:</label> <input
 							type="password" class="form-control" id="pwd"
-							placeholder="비밀번호를 입력하세요" name="password">
-							 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							placeholder="비밀번호를 입력하세요" name="password"> <input
+							type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 					</div>
-
+					<c:if test="${param.error == 'true'}">
+						<div style="color: red;">아이디와 비밀번호를 확인해주세요.</div>
+					</c:if>
 					<a href="/user/join" class="btn btn-primary" role="button">회원가입</a>
 
 					<button type="submit" data-oper="login" class="btn btn-primary">로그인</button>

@@ -19,6 +19,7 @@
 	<security:http>
     <security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
     <security:intercept-url pattern="/board/*" access="hasRole('ROLE_MEMBER')"/>
+    <security:intercept-url pattern="/board/list" access="permitAll"/>
     <security:form-login 
         login-page="/user/login" 
         login-processing-url="/user/login" 

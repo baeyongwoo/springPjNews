@@ -2,6 +2,7 @@
 package com.io.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.io.model.AuthVO;
+import com.io.model.MypageDTO;
 import com.io.model.UserDTO;
 import com.io.security.SecurityService;
+import com.io.service.MyPageService;
 import com.io.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,7 +41,22 @@ public class UserController {
 	@Autowired
 	private SecurityService ss;
 	
+	@Autowired
+    private MyPageService mypageService;
 
+    @GetMapping("/mypage")
+    public String myPage(HttpSession session, Model model) {
+        String uemail = (String) session.getAttribute("username");
+        if (uemail == null) {
+            return "redirect:/login";
+        }
+
+        List<MypageDTO> myPosts = mypageService.getMypagePosts(uemail);
+        model.addAttribute("myPosts", myPosts);
+
+        return "mypage";
+    }
+    
 	// 회원가입
 	@GetMapping("/join")
 	public void joinForm() {
