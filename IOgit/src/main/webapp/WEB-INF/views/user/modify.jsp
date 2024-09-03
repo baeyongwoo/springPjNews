@@ -19,11 +19,15 @@
         
         <div class="container d-flex justify-content-center">
             <div>
-                <h3>회원가입</h3>
+                <h3>회원정보수정</h3>
                 <form method="post" id="operForm" class="was-validated">
                     <div class="mb-3 mt-3">
                         <label for="uname" class="form-label">이름:</label>
                         <input type="text" class="form-control" id="uname" placeholder="이름을 입력하세요" name="uname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">이메일:</label>
+                        <input type="email" class="form-control" id="pwd" placeholder="이메일을 입력하세요" name="email">
                     </div>
                     <div class="mb-3">
                         <label for="pwd" class="form-label">비밀번호:</label>
@@ -33,12 +37,12 @@
                         <label for="pswdch" class="form-label">비밀번호 확인:</label>
                         <input type="password" class="form-control" id="pswdch" placeholder="비밀번호확인를 입력하세요" name="pwdch">
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">이메일:</label>
-                        <input type="email" class="form-control" id="pwd" placeholder="이메일을 입력하세요" name="email">
-                    </div>
-                
-                    <button type="submit" data-oper="regist" class="btn btn-primary">변경</button>
+                	<label for="did" class="form-label">소속:</label> 
+                	<select name="did">
+						<option value="D01">부서1</option>
+						<option value="D02">부서2</option>
+					</select>
+                   	<button type="submit" data-oper="regist" class="btn btn-primary">변경</button>
                     <button type="reset" data-oper="cancle" class="btn btn-primary">취소</button>
                 </form>
             </div>

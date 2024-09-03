@@ -29,6 +29,12 @@ public class CommonController {
 			model.addAttribute("logout", "로그아웃되었습니다.");
 		}
 	}
+	//커스텀로그아웃화면
+		@GetMapping("/list")
+		public void logoutGET() {}
+		//커스텀로그아웃처리
+		@PostMapping("/list")
+		public void logoutPost() {}
 	
 }
 

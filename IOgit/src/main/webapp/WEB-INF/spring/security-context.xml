@@ -12,20 +12,19 @@
 	<bean id="customUserDetailsService"	class="com.io.security.CustomUserDetailsService"></bean>
 	
 	<security:http>
-		<!-- <security:intercept-url pattern="/sample2/all" access="permitAll"/>
-		<security:intercept-url pattern="/sample2/member" access="hasRole('ROLE_MEMBER')"/>
-		<security:intercept-url pattern="/sample2/admin" access="hasRole('ROLE_ADMIN')"/> -->
+		<security:intercept-url pattern="/board/*" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/admin/index" access="hasRole('ROLE_ADMIN')"/>
 		
 		<!-- <security:access-denied-handler error-page="/accessError" /> -->
-		<security:access-denied-handler ref="customAccessDenied" />
+ 		<security:access-denied-handler ref="customAccessDenied" />
 	
-		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
+ 		<security:form-login login-page="/user/login" authentication-success-handler-ref="customLoginSuccess"/>
 		
-		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
+		<security:logout logout-url="/board/list" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
 		
-	<!-- 	<security:csrf disabled="true"/> -->
+		<security:csrf disabled="true"/>
 		
-		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+ 		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
 		
 	</security:http>
 	
