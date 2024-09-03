@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@RequestMapping("/*")
+@RequestMapping("/test/*")
 @Controller
 public class SecurityController {
 	//모든 사용자 접근
