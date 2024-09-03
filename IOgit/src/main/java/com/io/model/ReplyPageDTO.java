@@ -1,13 +1,15 @@
 package com.io.model;
 
+import lombok.Data;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 @Data
-@AllArgsConstructor
 public class ReplyPageDTO {
-	private int replyCnt;
-	private List<ReplyVO> list;
+    private List<ReplyVO> list;
+    private int total;
+
+    public ReplyPageDTO(List<ReplyVO> list, int total) {
+        this.list = list;
+        this.total = total;
+    }
 }
