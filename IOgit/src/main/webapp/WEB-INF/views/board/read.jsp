@@ -62,22 +62,23 @@
 
 						<li class="list-group-item"><c:out value="${board.bno}" />번기사</li>
 						<li class="list-group-item">
-						
-						<h2 style="font-weight: bold;">
+
+							<h2 style="font-weight: bold;">
 								<c:out value="${board.title}" />
-								</h2>
+							</h2>
 						</li>
-						<li class="list-group-item"><strong>${board.dname}</strong>
-						 <b><c:out value="${board.uname}" /></b> 
-						<span>(${board.uemail})</span></li>
+						<li class="list-group-item"><strong>${board.dname}</strong> <b><c:out
+									value="${board.uname}" /></b> <span>(${board.uemail})</span></li>
 
 
 
-						<li class="list-group-item" style="color: #6c757d; font-style: italic;">
-						<fmt:formatDate value="${board.regdate}" pattern="yyyy-MM-dd HH:mm:ss" />
-						</li>
+						<li class="list-group-item"
+							style="color: #6c757d; font-style: italic;"><fmt:formatDate
+								value="${board.regdate}" pattern="yyyy-MM-dd HH:mm:ss" /></li>
 						<li class="list-group-item" style="min-height: 200px;">
-							<h4 style="margin: 50px;"><c:out value="${board.bcontent}" /></h4>
+							<h4 style="margin: 50px;">
+								<c:out value="${board.bcontent}" />
+							</h4>
 						</li>
 
 
@@ -85,8 +86,17 @@
 				</div>
 			</div>
 			<div>
-				<button type="button" href="/board/update">수정</button>
-				<button type="button" href="/board/delete">삭제</button>
+				<form
+					action="${pageContext.request.contextPath}/board/edit/${board.bno}"
+					method="get" style="display: inline;">
+					<button type="submit" class="btn btn-primary">수정</button>
+				</form>
+				<form action="/board/delete" method="post"
+					onsubmit="return confirm('정말 삭제하시겠습니까?');">
+					  <input type="hidden" name="bno" value="${board.bno}" />
+					<button type="submit" >삭제</button>
+				</form>
+
 			</div>
 		</div>
 		<div>
@@ -129,6 +139,7 @@
 							<li class="list-group-item" style="width: 10%;">닉네임</li>
 							<li class="list-group-item" style="width: 90%;">댓글</li>
 						</ul>
+						<button type="button" onclick="location.href='/board/list'">목록</button>
 						<button>수정</button>
 						<button>삭제</button>
 					</li>

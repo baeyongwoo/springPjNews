@@ -185,7 +185,12 @@
     </select>
 
 
-
+  
+    <delete id="deleteBoard" parameterType="long" >
+    DELETE FROM board
+    WHERE bno = #{bno}
+</delete>
+    
 
 
 
