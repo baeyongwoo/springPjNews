@@ -30,7 +30,33 @@ public class ToardServiceImpl implements TboardService{
 		}
 		
 	}
+	@Override
+	public int postTboard(TboardDTO board) {
+		log.info("등록: " + board);
+		return tm.postTboard(board);
+	}
 
+
+    @Override
+    public void updateTboard(TboardDTO tboardDTO) {
+        tm.editTboard(tboardDTO); // Mapper의 editTboard 메서드 호출
+    }
+
+    @Override
+    public void deleteTboard(Long tno) {
+        tm.deleteTboard(tno);
+    }
+
+    @Override
+    public void updateTboardToReady(Long tno) {
+        // Ensure this method exists in your TboardMapper if used
+        tm.updateTboardToReady(tno);
+    }
+
+    @Override
+    public TboardDTO getTboard(Long tno) {
+        return tm.selectTboardById(tno);
+    }
 	
 
 	}

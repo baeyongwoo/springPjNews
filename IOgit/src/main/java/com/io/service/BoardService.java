@@ -10,6 +10,9 @@ public interface BoardService {
 	// 기사상세보기
 	public BoardDTO readBoard(long bno);
 
+	// 게시글 삭제
+	void deleteBoard(Long bno);
+
 	public Map<String, List<BoardDTO>> listGetBoard();
 
 	public List<TboardDTO> listGetTBoard(TboardDTO dto);

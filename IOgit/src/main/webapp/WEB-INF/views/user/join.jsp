@@ -40,17 +40,17 @@
 					<div class="mb-3 mt-3">
 						<label for="uname" class="form-label">이름:</label> <input
 							type="text" class="form-control" id="uname"
-							placeholder="이름을 입력하세요" name="uname">
+							placeholder="이름을 입력하세요" name="uname" required>
 					</div>
 					<div class="mb-3">
 						<label for="upwd" class="form-label">비밀번호:</label> <input
 							type="password" class="form-control" id="upwd"
-							placeholder="비밀번호를 입력하세요" name="upwd">
+							placeholder="비밀번호를 입력하세요" name="upwd" required>
 					</div>
 					<div class="mb-3">
 						<label for="upwdch" class="form-label">비밀번호 확인:</label> <input
 							type="password" class="form-control" id="upwdch"
-							placeholder="비밀번호 확인을 입력하세요" name="upwdch">
+							placeholder="비밀번호 확인을 입력하세요" name="upwdch"required>
 					</div>
 					<div class="mb-3">
 						<label for="uemail" class="form-label">이메일:</label> <input
@@ -79,9 +79,8 @@
 					</div>
 
 					<button type="submit" class="btn btn-primary">회원가입</button>
-					<button type="reset" data-oper="cancle" class="btn btn-primary">취소</button>
 					<button type="button" class="btn btn-primary"
-						onclick="window.location.href='/index.html'">메인페이지</button>
+						onclick="location.href='/board/list'">메인페이지</button>
 				</form>
 			</div>
 		</div>
