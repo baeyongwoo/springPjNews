@@ -99,54 +99,30 @@
 				<button type="button" onclick="location.href='/board/list'">목록</button>
 			</div>
 		</div>
-		<div>
-			<div class="container mt-3">
-				<h3 style="text-align: center;">댓글</h3>
-				<button>댓글 작성</button>
-				<ol class="list-group" style="text-align: left;">
-					<li class="list-group-item">
-						<ul class="list-group list-group-horizontal">
-							<li class="list-group-item" style="width: 10%;">닉네임</li>
-							<li class="list-group-item" style="width: 90%;">댓글</li>
-						</ul>
-						<button>수정</button>
-						<button>삭제</button>
-					</li>
-				</ol>
-				<ol class="list-group" style="text-align: left;">
-					<li class="list-group-item">
-						<ul class="list-group list-group-horizontal">
-							<li class="list-group-item" style="width: 10%;">닉네임</li>
-							<li class="list-group-item" style="width: 90%;">댓글</li>
-						</ul>
-						<button>수정</button>
-						<button>삭제</button>
-					</li>
-				</ol>
-				<ol class="list-group" style="text-align: left;">
-					<li class="list-group-item">
-						<ul class="list-group list-group-horizontal">
-							<li class="list-group-item" style="width: 10%;">닉네임</li>
-							<li class="list-group-item" style="width: 90%;">댓글</li>
-						</ul>
-						<button>수정</button>
-						<button>삭제</button>
-					</li>
-				</ol>
-				<ol class="list-group" style="text-align: left;">
-					<li class="list-group-item">
-						<ul class="list-group list-group-horizontal">
-							<li class="list-group-item" style="width: 10%;">닉네임</li>
-							<li class="list-group-item" style="width: 90%;">댓글</li>
-						</ul>
-						<button type="button" onclick="location.href='/board/list'">목록</button>
-						<button>수정</button>
-						<button>삭제</button>
-					</li>
-				</ol>
-			</div>
+		
+        <!-- 댓글 -->
+        <div class="container mt-3">
+			<h3 class="text-center">댓글</h3>
+
+			<!-- 댓글 입력 폼 -->
+			<div class="mb-3">
+				<label for="replyer" class="form-label">작성자</label>
+				<input type="text" class="form-control" id="replyer">
+
+				<label for="reply" class="form-label">댓글 내용</label>
+				<textarea class="form-control" id="reply" rows="3"></textarea>
+
+				<label for="password" class="form-label">비밀번호</label>
+				<input type="password" class="form-control" id="password">
+
+				<button id="addReplyBtn" class="btn btn-primary mt-2">댓글 등록</button>
+				<button id="updateReplyBtn" class="btn btn-warning mt-2" style="display: none;">댓글 수정</button>
+         	</div>
+         	<!-- 댓글 목록 -->
+         	<ul id="replyList" class="list-group"></ul>
 		</div>
-	</div>
+    </div>
+
 	<footer class="container-fluid d-flex justify-content-center">
 		<a href=".navbar" title="To Top"> <span
 			class="glyphicon glyphicon-chevron-up"></span>

@@ -9,10 +9,8 @@ public interface ReplyService {
 	public int register(ReplyVO vo);
 	//댓글목록
 	public ReplyPageDTO getListPage(Criteria cri, Long bno);
-	//댓글상세
-	public ReplyVO get(Long rno);
 	//댓글수정
 	public int edit(ReplyVO vo);
 	//댓글삭제
-	public int remove(Long rno);
+	public int remove(Long rno, String rpwd);
 }
