@@ -106,6 +106,7 @@ public class UserController {
 		
 	@PostMapping("/login")
 	public void loginInputData(String username, String password) {
+		log.info("loginpost");
 		UserDTO dto = new UserDTO();
 		dto.setUemail(username);
 		dto.setUpwd(password);
