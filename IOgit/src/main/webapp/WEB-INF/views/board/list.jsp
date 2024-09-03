@@ -37,8 +37,11 @@
                 target.find(".default-content").show();
                 target.find(".hidden-content").hide();
             });
+          
         });
     </script>
+    
+    
 </head>
 <body>
 	<!-- Video Section -->
@@ -202,6 +205,7 @@
     </c:forEach>
 </div>
 
+
 		<!-- tabEnd -->
 	</div>
 	<!-- content end -->
@@ -213,5 +217,13 @@
 		</a>
 		<p>© IO All rights reserved.</p>
 	</footer>
+	  <script>
+        $(document).ready(function() {
+            var logoutMessage = "${logoutMessage}";
+            if (logoutMessage) {
+                alert(logoutMessage);
+            }
+        });
+        </script>
 </body>
 </html>

@@ -32,17 +32,23 @@ public class BoardController {
 	private TboardService ts;
 
 	@GetMapping("/list")
-	public void list(Model model) {
+	public String list(HttpSession session, Model model) {
+		 String logoutMessage = (String) session.getAttribute("logoutMessage");
+		    if (logoutMessage != null) {
+		        model.addAttribute("logoutMessage", logoutMessage);
+		        session.removeAttribute("logoutMessage");
+		    }
 		Map<String, List<BoardDTO>> boardMap = bs.listGetBoard();
 		log.info("boardMap" + boardMap);
 		model.addAttribute("boardMap", boardMap);
 
 		log.info("cateList" + bs.selectCateAll());
 		model.addAttribute("cateList", bs.selectCateAll());
+		return "board/list";
 	}
 
 	@GetMapping("/list/{caid}")
-	public String list(Model model, @PathVariable String caid) {
+	public String lists(Model model, @PathVariable String caid) {
 		BoardDTO dto = new BoardDTO();
 
 		if (caid.equals("all")) {
