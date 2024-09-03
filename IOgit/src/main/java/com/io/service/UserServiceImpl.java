@@ -2,6 +2,7 @@ package com.io.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.io.mapper.UserMapper;
 import com.io.model.UserDTO;
 
@@ -34,4 +35,10 @@ public class UserServiceImpl implements UserService {
 		return mapper.updateUser(user);
 	}
 
+	@Override
+	public UserDTO getUserByEmail(String uemail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

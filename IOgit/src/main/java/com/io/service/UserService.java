@@ -12,5 +12,8 @@ public interface UserService {
 
     // 회원정보수정
     int updateuser(UserDTO user);
+
+	UserDTO getUserByEmail(String uemail);
+
     
 }
