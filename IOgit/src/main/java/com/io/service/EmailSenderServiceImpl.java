@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class EmailSenderServiceImpl implements EmailSenderService {
@@ -20,7 +21,8 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         MimeMessageHelper helper;
 
         try {
-            helper = new MimeMessageHelper(message, true);
+            // UTF-8 인코딩을 명시적으로 설정
+            helper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
             helper.setFrom("dyddn30612@naver.com"); // 발신자 이메일 주소
             helper.setTo(toEmail);
             helper.setSubject(subject);

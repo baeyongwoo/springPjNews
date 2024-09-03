@@ -86,17 +86,17 @@
 				</div>
 			</div>
 			<div>
-				<form
+				<%-- <form
 					action="${pageContext.request.contextPath}/board/edit/${board.bno}"
 					method="get" style="display: inline;">
 					<button type="submit" class="btn btn-primary">수정</button>
-				</form>
+				</form> --%>
 				<form action="/board/delete" method="post"
 					onsubmit="return confirm('정말 삭제하시겠습니까?');">
 					  <input type="hidden" name="bno" value="${board.bno}" />
 					<button type="submit" >삭제</button>
 				</form>
-
+				<button type="button" onclick="location.href='/board/list'">목록</button>
 			</div>
 		</div>
 		<div>
