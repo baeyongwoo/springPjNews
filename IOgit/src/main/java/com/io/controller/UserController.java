@@ -40,22 +40,17 @@ public class UserController {
 		}
 	}
 
-	// 회원정보수정
-	@GetMapping("/update")
-	public void userupdateForm(String uemail, Model model) {
-		UserDTO user = service.(uemail);
-		model.addAttribute("user", user);
-	}
-
-	@PostMapping("/update")
-	public String userupdateForm(@ModelAttribute UserDTO userDTO) {
-		service.updateUser(dto);
-		int userupdateResult = userService.updateuser(userDTO);
-		if (userupdateResult > 0) {
-			return "redirect:/board/list";
-		} else {
-			return "redirect:/user/update";
-		}
-	}
+	/*
+	 * // 회원정보수정
+	 * 
+	 * @GetMapping("/update") public void userupdateForm(String uemail, Model model)
+	 * { UserDTO user = userService.updateuser(uemail); model.addAttribute("user",
+	 * user); }
+	 * 
+	 * @PostMapping("/update") public String userupdateForm(@ModelAttribute UserDTO
+	 * userDTO) { userService.updateUser(userDTO); int userupdateResult =
+	 * userService.updateuser(userDTO); if (userupdateResult > 0) { return
+	 * "redirect:/board/list"; } else { return "redirect:/user/update"; } }
+	 */
 	
 }
