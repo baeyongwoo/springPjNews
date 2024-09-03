@@ -27,8 +27,8 @@ public class EmailSendController {
         session.setAttribute("authCode", authCode);
 
         // 이메일 발송
-        String subject = "Your Authentication Code";
-        String text = "Your authentication code is: " + authCode;
+        String subject = "Information Oceans 회원가입 인증코드입니다";
+        String text = "IO 회원가입 인증코드는 ["+ authCode + "]입니다";
         try {
             emailSenderService.sendEmail(email, subject, text);
             return "success";

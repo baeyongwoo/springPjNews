@@ -118,11 +118,19 @@ public class BoardServiceImpl implements BoardService{
         // BoardMapper를 통해 게시글 상세 정보를 조회
         return bm.readBoard(bno);
     }
+<<<<<<< HEAD
 
 
 
 	
 	
+=======
+	 @Override
+	    public void deleteBoard(Long bno) {
+	        bm.deleteBoard(bno);
+	    }
+
+>>>>>>> 235729e67b02b53d4aded924604a5654390b252e
 	
 
 }

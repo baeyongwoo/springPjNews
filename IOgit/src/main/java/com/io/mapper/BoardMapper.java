@@ -14,6 +14,8 @@ public interface BoardMapper {
 
 	// 기사상세페이지
 	public BoardDTO readBoard(long bno);
+	// 게시글 삭제
+    void deleteBoard(Long bno);
 
 	// 스케줄위한 메서드
 	public List<TboardDTO> selectAllTempBoard(TboardDTO tdto);
