@@ -35,9 +35,9 @@
 		<aside class="side-bar">
 			<ul class="nav nav-tabs" role="tablist">
 				<i class="fi fi-rr-list"></i>
-				<li><a class="nav-link active" href="/board/list"><i
+				<li><a class="nav-link" href="/board/list"><i
 						class="fi fi-rr-home"> </i>홈</a></li>
-				<li><a class="nav-link active" href="/board/list/all"><i
+				<li><a class="nav-link" href="/board/list/all"><i
 						class="fi fi-rr-home"> </i>전체보기</a></li>
 				<c:forEach var="cate" items="${cateList}">
 					<li><a class="nav-link" href="/board/list/${cate.caid}"><i

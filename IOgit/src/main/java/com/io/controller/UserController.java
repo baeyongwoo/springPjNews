@@ -7,17 +7,22 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.io.mapper.UserMapper;
 import com.io.model.AuthVO;
 import com.io.model.MypageDTO;
 import com.io.model.UserDTO;
@@ -105,18 +110,27 @@ public class UserController {
 	}
 
 
-	/*
-	 * // 회원정보수정
-	 * 
-	 * @GetMapping("/update") public void userupdateForm(String uemail, Model model)
-	 * { UserDTO user = userService.updateuser(uemail); model.addAttribute("user",
-	 * user); }
-	 * 
-	 * @PostMapping("/update") public String userupdateForm(@ModelAttribute UserDTO
-	 * userDTO) { userService.updateUser(userDTO); int userupdateResult =
-	 * userService.updateuser(userDTO); if (userupdateResult > 0) { return
-	 * "redirect:/board/list"; } else { return "redirect:/user/update"; } }
-	 */
+	@Autowired
+    private UserMapper userMapper;
+
+    // 사용자 정보 수정
+    @PutMapping("/modify/{uemail}")
+    public ResponseEntity<String> updateUser(@PathVariable("uemail") String uemail, @RequestBody UserDTO userDTO) {
+        userDTO.setUemail(uemail);
+        int result = userMapper.updateUser(userDTO);
+        if (result > 0) {
+            return ResponseEntity.ok("정보가 수정되었습니다");
+        } else {
+            return ResponseEntity.status(400).body("수정이 실패하였습니다.");
+        }
+    }
+
+    // 사용자 삭제
+    @DeleteMapping("/modify/{uemail}")
+    public ResponseEntity<String> deleteUser(@PathVariable("uemail") String uemail) {
+        userMapper.deleteUser(uemail);
+        return ResponseEntity.ok("삭제가 완료되었습니다");
+    }
 
 	//에러페이지
 	@GetMapping("/accessError")
