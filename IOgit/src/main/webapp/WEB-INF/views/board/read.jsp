@@ -9,17 +9,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<link
-	href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
-	rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <link href="/resources/css/style.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/resources/js/board/reply.js?bno=<c:out value='${board.bno}'/>"></script>  
 <title>Document</title>
 
 <script>
@@ -79,28 +75,51 @@
 			</div>
 		</div>
 		
-        <!-- 댓글 -->
-        <div class="container mt-3">
-			<h3 class="text-center">댓글</h3>
+		<!-- 댓글 입력 폼 -->
+        <div id="replyContainer" class="container mt-3">
+            <h3 class="text-center">댓글</h3>
+            <div class="panel-body">
+                <ul class="chat">
+                    
+                </ul>
+            </div>
+            <div class="panel-footer"></div>
+        </div>
+		
+		<!-- 모달 ------------------------------------------------------------------->            
+	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h4 class="modal-title" id="myModalLabel">댓글 창</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>댓글</label>
+                            <input class="form-control" name='reply'>
+                        </div>
+                        <div class="form-group">
+                            <label>작성자</label>
+                            <input class="form-control" name='replyer' readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>등록일</label>
+                            <input class="form-control" name='replyDate' readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
+                        <button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제</button>
+                        <button id='modalRegisterBtn' type="button" class="btn btn-primary">등록</button>
+                        <button id='modalCloseBtn' type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
 
-			<!-- 댓글 입력 폼 -->
-			<div class="mb-3">
-				<label for="replyer" class="form-label">작성자</label>
-				<input type="text" class="form-control" id="replyer">
-
-				<label for="reply" class="form-label">댓글 내용</label>
-				<textarea class="form-control" id="reply" rows="3"></textarea>
-
-				<label for="password" class="form-label">비밀번호</label>
-				<input type="password" class="form-control" id="password">
-
-				<button id="addReplyBtn" class="btn btn-primary mt-2">댓글 등록</button>
-				<button id="updateReplyBtn" class="btn btn-warning mt-2" style="display: none;">댓글 수정</button>
-         	</div>
-         	<!-- 댓글 목록 -->
-         	<ul id="replyList" class="list-group"></ul>
-		</div>
-    </div>
+		
 
 	<%@ include file="/resources/heater/footer.jsp" %>
 </body>

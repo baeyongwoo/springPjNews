@@ -1,15 +1,13 @@
 package com.io.model;
 
-import lombok.Data;
 import java.util.List;
 
-@Data
-public class ReplyPageDTO {
-    private List<ReplyVO> list;
-    private int total;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-    public ReplyPageDTO(List<ReplyVO> list, int total) {
-        this.list = list;
-        this.total = total;
-    }
+@Data
+@AllArgsConstructor  // 모든 필드를 parameter로 갖는 생성자를 구현해줌
+public class ReplyPageDTO {
+	private int replyCnt; //댓글갯수
+	private List<ReplyVO> list; //댓글목록
 }

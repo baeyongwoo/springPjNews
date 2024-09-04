@@ -1,130 +1,222 @@
-$(document).ready(function() {
-    // 댓글 목록을 표시하는 함수
-    function showList(page) {
-        $.getJSON("/replies/pages/" + bnoValue + "/" + (page || 1) + ".json", function(data) {
-            var str = "";
-            if (!data.list || data.list.length == 0) {
-                $("#replyList").html("댓글이 없습니다.");
-                return;
-            }
+/* parameter를 처리하는 함수 *************************************************/
+  function scriptQuery() {
+        var script = document.getElementsByTagName('script');
+        script = script[script.length - 1].src
+            .replace(/^[^\?]+\?/, '')
+            .replace(/#.+$/, '')
+            .split('&');
 
-            $(data.list).each(function(index, reply) {
-                var replyHTML = "<li class='list-group-item' data-id='" + reply.rno + "'>" +
-                                "<h5 class='list-group-item-heading'>작성자: " + reply.rname + "</h5>" +
-                                "<p class='list-group-item-text'>" + reply.rcon + "</p>" +
-                                "<button class='btn btn-warning btn-sm float-end mx-1 edit-reply-btn' data-id='" + reply.rno + "'>수정</button>" +
-                                "<button class='btn btn-danger btn-sm float-end delete-reply-btn' data-id='" + reply.rno + "'>삭제</button>" +
-                                "</li>";
-                str += replyHTML;
-            });
-            $("#replyList").html(str);
-        });
-    }
-
-    // 댓글 삭제 함수
-    function deleteReply(rno) {
-        var rpwd = prompt("댓글 비밀번호를 입력하세요:");
-        if (rpwd) {
-            $.ajax({
-                type: "DELETE",
-                url: "/replies/" + rno,
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ rpwd: rpwd }),
-                success: function(result) {
-                    alert(result);
-                    showList(); // 댓글 목록 새로고침
-                },
-                error: function(xhr, status, error) {
-                    alert("댓글 삭제 실패: " + error);
-                }
-            });
+        var queries = {}
+            , query;
+        while (script.length) {
+            query = script.shift().split('=');
+            queries[query[0]] = query[1];
         }
+        return queries;
     }
-
-    // 댓글 수정 함수
-    function editReply(rno) {
-        var rpwd = prompt("댓글 비밀번호를 입력하세요:");
-        if (rpwd) {
-            $.getJSON("/replies/" + rno + ".json", function(reply) {
-                $('#replyer').val(reply.rname);
-                $('#reply').val(reply.rcon);
-                $('#password').val(rpwd); // 비밀번호 필드에 기존 비밀번호 입력
-                $('#addReplyBtn').hide();
-                $('#updateReplyBtn').show().data('rno', rno);
-            });
-        }
-    }
-
-    // 댓글 등록 버튼 클릭 이벤트
-    $('#addReplyBtn').click(function() {
+    var param = scriptQuery();
+    console.log(param.bno); // parameter bno확인
+ 
+$(document).ready(function(){
+	/* 댓글목록 *************************************************************************/            	
+	var bnoValue=param.bno;//부모글번호
+	var replyUL=$(".chat"); // 댓글목록 출력되는 ul태그 찾아놓기
+	
+	showList(1); // 첫페이지 출력
+	
+	function showList(p){
+		var bno=bnoValue; //부모글번호
+		var page=p || 1; //페이지번호. 페이지번호가 넘어오면 page변수에 저장. 페이지번호가 넘어오지 않으면 page는 1.
+		$.getJSON("/replies/pages/"+bno+"/"+page+".json",function(data){
+			//댓글목록출력
+			//댓글등록시 마지막페이지로 이동. -1(eof를 의미)은 마지막페이지로 가기위한 약속
+			if(page==-1){
+				pageNum=Math.ceil(data.replyCnt/10.0); //전체페이지수==마지막페이지
+				showList(pageNum); //재귀호출
+				return;
+			}
+			var str="";
+			//댓글이 없으면 종료
+			if(data.list==null || data.list.length==0){
+				replyUL.empty(); //댓글목록 초기화
+				replyPageFooter.empty(); //페이지번호목록 초기화
+				return;
+			}
+			for(var i=0,len=data.list.length||0; i<len ; i++){
+				str+="<li style='cursor:pointer;' data-rno='"+data.list[i].rno+"'>";
+				str+="	<div>";
+				str+="		<div class='header'>";
+				str+=" 			<strong class='primary-font'>"+data.list[i].replyer+"</strong>";
+				str+="			<small class='pull-right text-muted'>"+displayTime(data.list[i].replyDate)+"</small>";
+				str+="		</div>";
+				str+="		<p>"+data.list[i].reply+"</p>";
+				str+="	</div>";
+				str+="</li>";
+			}
+			replyUL.html(str);//ul태그에 li태그 출력
+			
+			showReplyPage(data.replyCnt); // 페이지번호 출력           			
+			
+		});
+	}
+	/* 댓글 페이징처리 페이지 번호출력 *******************************************************/
+	var pageNum=1; // 기본 1페이지
+	var replyPageFooter=$(".panel-footer"); // 페이지번호가 출력될 태그.
+	
+	function showReplyPage(replyCnt){
+		var endNum=Math.ceil(pageNum/10.0)*10; // 계산으로 구한 현재구간의 마지막 페이지
+		var startNum=endNum-9; // 첫번째 페이지
+		var prev=startNum!=1; // prev 존재 유무. startNum가 1이 아니면 true
+		var next=false; // next 존재 유무. false가 기본값
+		
+		//실제 마지막페이지가 계산으로 구한 마지막페이지보다 작으면 마지막페이지 변경
+		if(endNum*10>=replyCnt){
+			endNum=Math.ceil(replyCnt/10.0);
+		}
+		//실제 마지막페이지가 계산으로 구한 마지막페이지보다 크면 next가 true
+		if(endNum*10<replyCnt){
+			next=true;
+		}
+		//ul태그
+		var str="<ul class='pagination pull-right'>";
+		// li태그
+		if(prev){
+			str+="<li class='page-item'><a class='page-link' href='"+(startNum-1)+"'>Previous</a></li>";
+		}
+		for(var i=startNum;i<=endNum;i++){
+			var active = pageNum==i?"active":""; //현재페이지와 페이지번호가 같으면 active 적용
+			str+="<li class='page-item "+active+"'><a class='page-link' href='"+i+"'>"+i+"</a></li>";						
+		}					
+		if(next){
+			str+="<li class='page-item'><a class='page-link' href='"+(endNum+1)+"'>Next</a></li>";
+		}					
+		str+="</ul>";
+		$(".panel-footer").html(str); //페이지번호출력	
+	}
+	
+	$(".panel-footer").on("click", "li a", function(e) {
+        e.preventDefault();
+        var page = $(this).attr("href");
+        showList(page);
+    });
+	
+	/* 댓글 페이지 번호 이벤트 처리 *********************************************************/
+	// 부모인 replyPageFooter에게 이벤트를 위임(Delegate)
+	replyPageFooter.on("click","li a",function(e){
+		e.preventDefault(); // 링크를 클릭했을 때 다음페이지로 넘어가는 것 방지
+		var targetPageNum=$(this).attr("href"); //이벤트가 발생한 a태그의 href속성값 구하기
+		pageNum=targetPageNum;
+		showList(pageNum);  // 해당 페이지 댓글목록 출력
+	});   
+	
+	/* 수정.삭제버튼 이벤트처리 ************************************************************/
+	var operForm=$("#operForm");
+	$("button[data-oper='edit']").on("click",function(e){
+		operForm.attr("action","/board/edit").submit();//수정화면으로 전송
+	});
+	$("button[data-oper='list']").on("click",function(e){
+		operForm.find("#bno").delete();// hidden태그 bno삭제.목록에서는 bno가 필요없음
+		operForm.attr("action","/board/list").submit();//목록화면으로 전송
+	});
+	
+	/* 댓글등록 ************************************************************************/
+	var modal = $(".modal"); //모달창
+    var modalInputReply = modal.find("input[name='reply']"); //댓글내용
+    var modalInputReplyer = modal.find("input[name='replyer']"); //댓글작성자
+    var modalInputReplyDate = modal.find("input[name='replyDate']"); //댓글작성일			    
+    var modalModBtn = $("#modalModBtn"); // 댓글수정버튼
+    var modalRemoveBtn = $("#modalRemoveBtn"); //댓글삭제버튼
+    var modalRegisterBtn = $("#modalRegisterBtn"); //댓글등록버튼
+    
+	//'new reply'버튼 클릭시 모달창띄우기	
+    $("#addReplyBtn").on("click",function(e){
+    	modal.find("input").val(""); // input태그 값 초기화
+    	modal.find("input[name='replyer']").val(replyer); //댓글작성자    	
+    	modalInputReplyDate.closest("div").hide(); // 댓글등록일 안보이게
+    	modal.find("button[id!='modalCloseBtn']").hide(); //모달창 close버튼을 제외한 나머지 버튼 모두 안보이게
+    	modalRegisterBtn.show(); //모달창 등록버튼은 다시 보이게
+    	modal.modal("show"); //모달창 보이게
+    });
+    // 댓글모달창 등록버튼 이벤트처리
+    $("#modalRegisterBtn").on("click",function(e){
         var reply = {
-            bno: bnoValue,
-            rname: $('#replyer').val(),
-            rpwd: $('#password').val(),
-            rcon: $('#reply').val()
-        };
-
-        $.ajax({
-            type: "POST",
-            url: "/replies/new",
-            data: JSON.stringify(reply),
-            contentType: "application/json; charset=utf-8",
-            success: function(result) {
-                alert(result);
-                $('#replyer').val('');
-                $('#reply').val('');
-                $('#password').val('');
-                showList(); // 댓글 목록 새로고침
-            },
-            error: function(xhr, status, error) {
-                alert("댓글 등록 실패: " + error);
-            }
-        });
+              reply: modalInputReply.val(),
+              replyer:modalInputReplyer.val(),
+              bno:bnoValue
+            };
+        
+		$.ajax({
+			type:"post", //전송방식
+			url: "/replies/new", //서버주소
+			data: JSON.stringify(reply), // 서버로 전달되는 데이터
+			contentType: "application/json; charset=utf-8", //서버로 전달되는 데이터형식,
+			success:function(result,status,xhr){
+				//성공했을 때 해야할 작업
+				alert(result);			          
+			    modal.find("input").val("");
+		        modal.modal("hide");  
+		       
+		        //마지막페이지로 이동
+		        showList(-1); // page번호 -1은 마지막페이지로 가기위해 사용.
+			}			
+		});			        		        
+      });  
+    
+    /* 댓글상세보기 모달창.수정/삭제 ********************************************/
+    // 부모인 ".chat"을 찾아서 이벤트 처리를 위임(delegate)
+    $(".chat").on("click","li",function(e){
+    	var rno=$(this).data("rno"); // 클릭이벤트가 발생한 li태그를 $(this)로 찾아서 data-rno속성값 읽기.			    	
+    	
+    	//get방식 전용
+		$.get("/replies/"+rno+".json",function(reply){
+			modalInputReply.val(reply.reply); // 댓글
+    		modalInputReplyer.val(reply.replyer).attr("readonly","readonly"); // 댓글작성자
+    		modalInputReplyDate.val(displayTime(reply.replyDate)).attr("readonly","readonly"); // 댓글작성자
+    		modal.data("rno",reply.rno); //댓글번호
+    		
+    		modal.find("button[id!='modalCloseBtn']").hide(); // close버튼 이외의 버튼은 안보이게하기.
+    		modalModBtn.show(); // 수정버튼 보이게
+    		modalRemoveBtn.show();// 삭제버튼 보이게
+    		$(".modal").modal("show");
+		});			    	
     });
-
-    // 댓글 수정 버튼 클릭 이벤트
-    $('#updateReplyBtn').click(function() {
-        var reply = {
-            rname: $('#replyer').val(),
-            rpwd: $('#password').val(),
-            rcon: $('#reply').val()
-        };
-        var rno = $(this).data('rno');
-
-        $.ajax({
-            type: "PATCH",
-            url: "/replies/" + rno,
-            data: JSON.stringify(reply),
-            contentType: "application/json; charset=utf-8",
-            success: function(result) {
-                alert(result);
-                $('#replyer').val('');
-                $('#reply').val('');
-                $('#password').val('');
-                $('#addReplyBtn').show();
-                $('#updateReplyBtn').hide();
-                showList(); // 댓글 목록 새로고침
-            },
-            error: function(xhr, status, error) {
-                alert("댓글 수정 실패: " + error);
-            }
-        });
+   
+    /* 모달창 close버튼 이벤트처리 ***************************************/
+    $("#modalCloseBtn").on("click",function(e){
+    	modal.modal("hide"); //모달창 안보이게
+    })
+    
+    /* 모달창 수정버튼 이벤트처리 *****************************************/
+    modalModBtn.on("click",function(e){
+    	var reply={rno:modal.data("rno"),reply:modalInputReply.val(),replyer:modalInputReplyer.val()};
+    	
+    	$.ajax({
+			type:"put",  // update시에는 put or patch 타입으로 전송
+			url:"/replies/"+reply.rno, //서버주소
+			data:JSON.stringify(reply), //서버로 전송되는 데이터
+			contentType:"application/json;charset=utf-8", //서버로 전송되는 데이터의 형식
+			success:function(result,status,xhr){ //성공시 호출하는 함수
+				alert(result); //알림창띄우기
+	    		modal.modal("hide"); //모달창닫기
+	    		showList(pageNum); //목록갱신
+			}
+		});
     });
-
-    // 댓글 삭제 버튼 클릭 이벤트
-    $(document).on('click', '.delete-reply-btn', function() {
-        var rno = $(this).data('id');
-        deleteReply(rno);
+    
+    /* 모달창 삭제버튼 이벤트처리 **********************************************/
+    modalRemoveBtn.on("click",function(e){
+    	var rno=modal.data("rno"); //댓글번호
+    	
+    	$.ajax({
+			type:"delete", //전송방식
+			url:"/replies/"+rno, //서버주소
+			data:  JSON.stringify({rno:rno, replyer:replyer}), //서버로 전송되는 데이터	       
+	      	contentType: "application/json; charset=utf-8", //서버로 전송되는 데이터의 형식
+			success:function(result,status,xhr){ //성공했을 때 호출하는 함수
+				alert(result); // 알림창띄우기
+	    		modal.modal("hide"); //모달창닫기
+	    		showList(pageNum); //목록갱신
+			}
+		});
     });
-
-    // 댓글 수정 버튼 클릭 이벤트
-    $(document).on('click', '.edit-reply-btn', function() {
-        var rno = $(this).data('id');
-        editReply(rno);
-    });
-
-    // 페이지 로드시 댓글 목록 가져오기
-    showList();
-
-
 });
