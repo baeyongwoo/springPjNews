@@ -4,23 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>My Page</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
+    <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn-uicons.flaticon.com/2.5.1/uicons-regular-rounded/css/uicons-regular-rounded.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sevillana&display=swap"
+	rel="stylesheet">
+<link href="/resources/css/style.css" rel="stylesheet">
+<link href="/resources/css/logo" rel="stylesheet">
 </head>
 <body>
-    <h1>My Posts</h1>
+ <div th:include="header :: header"></div>
+    <h1>My page</h1>
     <table>
         <thead>
             <tr>
@@ -45,5 +48,6 @@
             </c:forEach>
         </tbody>
     </table>
+    <div th:include="footer :: footer"></div>
 </body>
 </html>

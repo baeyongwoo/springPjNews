@@ -20,7 +20,7 @@
       JOIN cate c ON t.caid = c.caid
       JOIN dept d ON u.did = d.did
     WHERE
-      t.tno = #{tno} AND u.uemail = #{uemail}
+      u.uemail = #{uemail}
   </select>
 
 </mapper>
