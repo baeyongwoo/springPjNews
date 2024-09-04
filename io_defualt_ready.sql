@@ -29,7 +29,7 @@ CREATE TABLE cate (
 
 CREATE TABLE userinfo (
     uemail   VARCHAR2(50) NOT NULL,
-    upwd     VARCHAR2(30) NOT NULL,
+    upwd     VARCHAR2(100) NOT NULL,
     uname    VARCHAR2(20) DEFAULT 'Unknown', -- 기본값 추가
     did      VARCHAR2(30) NOT NULL,
     CONSTRAINT userinfo_pk PRIMARY KEY (uemail),
