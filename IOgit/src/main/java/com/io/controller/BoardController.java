@@ -95,8 +95,21 @@ public class BoardController {
 
 	// 이용자 글작성
 	@GetMapping("/post")
-	public void postForm() {
+	public void postForm(Model model, HttpSession session) {
+		  String logoutMessage = (String) session.getAttribute("logoutMessage");
+		    if (logoutMessage != null) {
+		        model.addAttribute("logoutMessage", logoutMessage);
+		        session.removeAttribute("logoutMessage");
+		        session.removeAttribute("username");
+		    }
+		    
+		    model.addAttribute("username", session.getAttribute("username"));
+		    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
+		
+		
+		
 		log.info("기사작성폼실행");
+		model.addAttribute("cateList", bs.selectCateAll());
 		// 게시글 작성 폼
 	}
 
