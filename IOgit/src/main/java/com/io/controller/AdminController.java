@@ -120,7 +120,7 @@ public class AdminController {
 		model.addAttribute("userList", bs.listUserListOfPost());
 	}
 
-	@PostMapping(value="/deleteUser",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value="/deleteUser",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public void userDelete(@RequestParam String email, @RequestParam String reason) {
 

@@ -38,7 +38,7 @@ function deleteUser() {
 
   $.ajax({
     url: '/admin/deleteUser',
-    type: 'POST',
+    type: 'GET',
     data: {
       email: email,
       reason: reason
