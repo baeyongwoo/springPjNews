@@ -128,26 +128,40 @@ public class UserController {
 	}
 	
 	@PostMapping("/modify")
-    public String updateuser(@ModelAttribute UserDTO dto) {
-        userService.updateuser(dto);
-        return "redirect:/board/list";
-    }
+	public String updateUser(@ModelAttribute UserDTO dto) {
+	    // DTO 값 로그로 출력 (디버깅용)
+	    log.info("수정 요청 받은 UserDTO: " + dto);
+
+	    if (!dto.getUpwd().equals(dto.getPwdch())) {
+	        return "redirect:/user/modify?error=passwordMismatch";
+	    }
+
+	    // 비밀번호 암호화
+	    dto.setUpwd(pwen.encode(dto.getUpwd()));
+
+	    // 업데이트 서비스 호출
+	    userService.updateUser(dto);
+
+	    return "redirect:/user/login";
+	}
+
 	
-    // 사용자 정보 수정
-    @PutMapping("/modify")
+    // 유저정보 수정
+    @PutMapping("/update")
     public ResponseEntity<String> updateUser(@PathVariable("uemail") String uemail, @RequestBody UserDTO userDTO) {
         userDTO.setUemail(uemail);
-        int result = userService.updateuser(userDTO);
+        int result = userService.updateUser(userDTO);
         if (result > 0) {
             return ResponseEntity.ok("정보가 수정되었습니다");
         } else {
             return ResponseEntity.status(400).body("수정이 실패하였습니다.");
         }
     }
-    
+    //유저 삭제
     @GetMapping("/delete")
-	public <string> String delete(@RequestParam("uemail") String uemail) {
+	public String deleteUser(@RequestParam("uemail") String uemail, HttpSession session) {
 		userService.remove(uemail);
+		session.removeAttribute("username");
 		return "redirect:/board/list";
 	}
     

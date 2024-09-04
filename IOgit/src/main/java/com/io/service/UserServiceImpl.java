@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int updateuser(UserDTO user) {
+	public int updateUser(UserDTO user) {
 		log.info("정보 수정: " + user.getUemail());
 		return mapper.updateUser(user);
 	}

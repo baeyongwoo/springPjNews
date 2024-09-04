@@ -12,10 +12,14 @@
 	</insert>
 	<!--회원정보수정  -->
 	<update id="updateUser" parameterType="com.io.model.UserDTO">
-		 UPDATE users
-        SET upwd = #{upwd}, uname = #{uname}, did = #{did}, dname = #{dname}
-        WHERE uemail = #{uemail}
+	    UPDATE users
+	    SET upwd = #{upwd},
+	        uname = #{uname},
+	        did = #{did},
+	        dname = #{dname}
+	    WHERE uemail = #{uemail}
 	</update>
+
 
 	<delete id="deleteUser" parameterType="String">
 		delete from userinfo where uemail=#{uemail}

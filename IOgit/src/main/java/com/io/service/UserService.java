@@ -11,7 +11,7 @@ public interface UserService {
     void remove(String uemail);
 
     // 회원정보수정
-    int updateuser(UserDTO user);
+    int updateUser(UserDTO user);
 
 	UserDTO getUserByEmail(String uemail);
 
