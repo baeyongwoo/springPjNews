@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.io.model.AuthVO;
 import com.io.model.MypageDTO;
@@ -34,29 +36,29 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private PasswordEncoder pwen;
-	
+
 	@Autowired
 	private SecurityService ss;
-	
+
 	@Autowired
-    private MyPageService mypageService;
+	private MyPageService mypageService;
 
-    @GetMapping("/mypage")
-    public String myPage(HttpSession session, Model model) {
-        String uemail = (String) session.getAttribute("username");
-        if (uemail == null) {
-            return "redirect:/login";
-        }
+	@GetMapping("/mypage")
+	public String myPage(HttpSession session, Model model) {
+		String uemail = (String) session.getAttribute("username");
+		if (uemail == null) {
+			return "redirect:/login";
+		}
 
-        List<MypageDTO> myPosts = mypageService.getMypagePosts(uemail);
-        model.addAttribute("myPosts", myPosts);
+		List<MypageDTO> myPosts = mypageService.getMypagePosts(uemail);
+		model.addAttribute("myPosts", myPosts);
 
-        return "mypage";
-    }
-    
+		return "mypage";
+	}
+
 	// 회원가입
 	@GetMapping("/join")
 	public void joinForm() {
@@ -67,25 +69,36 @@ public class UserController {
 	public String join(@ModelAttribute UserDTO userDTO, String[] role) {
 		userDTO.setUpwd(pwen.encode(userDTO.getUpwd()));
 		log.info("회원가입정보 : " + userDTO+ "권한 : " + role);
-		
+
 		userDTO.setAuthList(new ArrayList<AuthVO>());
-		
+
 		for(int i = 0; i < role.length; i++) {
 			userDTO.getAuthList().add(new AuthVO());
 			userDTO.getAuthList().get(i).setAuthority(role[i]);
 			userDTO.getAuthList().get(i).setUemail(userDTO.getUemail());
 		}
-		
-		
-		
-		int joinResult = ss.insertUser(userDTO);
-		if (joinResult > 0) {
-			return "redirect:/board/list";
-		} else {
 
-			return "redirect:/user/join";
-		}
+
+
+		ss.insertUser(userDTO);
+
+		return "redirect:/user/login";
+
 	}
+
+
+	@GetMapping(value="/findUser")
+	@ResponseBody
+	public String joinForm(String uemail) {
+		log.info("find email" + userService.getUserByEmail(uemail));
+
+		String response = (userService.getUserByEmail(uemail) == null) ? "useable" :"non-useable";
+		return response;
+
+
+
+	}
+
 
 	/*
 	 * // 회원정보수정
@@ -110,7 +123,7 @@ public class UserController {
 	@GetMapping("/login")
 	public void loginInput(String error,String logout,Model model) {
 		//UserVO login_session = (UserVO)session.getAttribute("login_session");
-//		userDto.setUemail()
+		//		userDto.setUemail()
 		log.info("error" + error);
 		log.info("logout" + logout);
 		if(error!=null) {
@@ -120,22 +133,22 @@ public class UserController {
 			model.addAttribute("logout", "로그아웃되었습니다.");
 		}
 	}
-		
-		
+
+
 	@PostMapping("/login")
 	public void loginInputData(String username, String password) {
 		log.info("loginpost");
 		UserDTO dto = new UserDTO();
 		dto.setUemail(username);
 		dto.setUpwd(password);
-		
-		
+
+
 	}
-	
+
 	@GetMapping("/logout")
 	public String logoutForm(Model model, HttpSession session) {
-		 session.setAttribute("logoutMessage", "로그아웃되었습니다.");
-	    return "redirect:/board/list";
+		session.setAttribute("logoutMessage", "로그아웃되었습니다.");
+		return "redirect:/board/list";
 	}
 
 

@@ -37,8 +37,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO getUserByEmail(String uemail) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.selectUser(uemail);
 	}
 	
 }

@@ -1,15 +1,44 @@
 console.log("JavaScript 호출");
 
+const code = generateAuthCode();
+
+function emptyCheckEmail(){
+	let uemail = $("#uemail").val();
+	
+	 $.ajax({
+        type: 'GET',
+        url: '/user/findUser',
+        data: { uemail:uemail },
+        success: function(response) {
+            console.log(response);
+            if (response ==='useable') {
+                $('#checkBtn').show();
+                $('#emailAuth').show();
+                $('#messageEmail').text('사용가능한 이메일입니다.');
+            } else {
+                $('#messageEmail').text('이미 사용된 이메일입니다.').css('color', 'red');
+                $('#emailAuth').hide();
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("이메일 발송 오류:", error);
+        }
+    });
+}
+
+
+
 // 이메일 인증 코드 요청 함수
 function sendEmailAuth() {
     let email = $("#uemail").val();
+    
     $.ajax({
-        type: 'POST',
-        url: '/sendAuthCode.do',
-        data: { email: email },
+        type: 'GET',
+        url: '/send-email',
+        data: { to: email, subject:'email인증', text:code },
         success: function(response) {
             console.log(response);
-            if (response === 'success') {
+            if (response) {
                 $('#emailLabel').show();
                 $('#emailCheck').show();
                 $('#checkBtn').show();
@@ -24,29 +53,37 @@ function sendEmailAuth() {
     });
 }
 
+function generateAuthCode() {
+    const length = 6;
+    const characters = '0123456789';
+    let authCode = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        authCode += characters[randomIndex];
+    }
+    return authCode;
+}
+
+
+
+
+
 // 인증 코드 확인 함수
 function emailAuthCheck() {
     let authCode = $("#emailCheck").val();
-    $.ajax({
-        type: 'POST',
-        url: '/verifyAuthCode.do',
-        data: { code: authCode },
-        success: function(response) {
-            if (response === 'access') {
-                $('#messageEmail').text('인증되었습니다.');
+    let sendCode = code;
+    
+    if(authCode === sendCode){
+     $('#messageEmail').text('인증되었습니다.');
                 $('#emailCheck').hide();
                 $('#emailLabel').hide();
                 $('#emailAuth').hide();
                 $('#checkBtn').hide();
                 $('#uemail').prop('readonly', true);
-            } else {
-                $('#messageEmail').text('인증 실패하였습니다.');
-            }
-        },
-        error: function() {
-            console.log('error');
-        }
-    });
+    }else{
+     $('#messageEmail').text('인증 실패하였습니다.');
+    }
+   
 }
 
 // 폼 유효성 검사 함수

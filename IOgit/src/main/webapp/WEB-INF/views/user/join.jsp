@@ -55,7 +55,7 @@
 					<div class="mb-3">
 						<label for="uemail" class="form-label">이메일:</label> <input
 							type="email" class="form-control" id="uemail" name="uemail"
-							placeholder="Email" required>
+							placeholder="Email" required onchange="emptyCheckEmail();">
 						<div class="invalid-feedback">이메일을 입력하세요.</div>
 						<button type="button" id="emailAuth"
 							class="btn btn-info my-1 mb-3" onclick="sendEmailAuth();">이메일
