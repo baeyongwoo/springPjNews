@@ -1,45 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <header>
 	<nav class="navbar navbar-expand-sm">
-      <div class="container">
-         <a class="navbar-brand" href="index.html"> <img
-            src="/resources/img/IOLogo.png" alt="Logo" id="logo">
-         </a>
-         <div class="navbar-nav">
-            <p id="Logoo">IO</p>
-         </div>
-         <div class="navbar-nav right">
-            <ul class="navbar-nav">
-               <li class="nav-item"><a class="nav-link" href="/user/login">╥н╠вюн</a>
-               </li>
-               <li class="nav-item"><a class="nav-link" href="/user/join">х╦©Ь╟║ют</a>
-               </li>
-            </ul>
-         </div>
-      </div>
-      <aside class="side-bar">
-         <ul class="nav nav-tabs" role="tablist">
-            <li><a class="nav-link active" data-bs-toggle="tab"
-               href="/board/list"><i class="fi fi-rr-home"> </i>х╗</a>
-            <li><a class="nav-link active" data-bs-toggle="tab"
-               href="/board/list/all"><i class="fi fi-rr-home"> </i>юЭц╪╨╦╠Б</a>
-            <li><a class="nav-link active" data-bs-toggle="tab"
-               href="/board/list/C01">><i class="fi fi-rr-lock"> </i>гье╥/╨╦╬х
-            </a></li>
-            <li><a class="nav-link active" data-bs-toggle="tab"
-               href="/board/list/C02">><i class="fi fi-rr-rss"></i>юнемЁщ/SNS
-            </a></li>
-         </ul>
-      </aside>
-   </nav>
+			<div class="container">
+				<a class="navbar-brand" href="/board/list"> <img
+					src="/resources/logo/IOLogo.png" alt="Logo" id="logo">
+				</a>
+				<div class="navbar-nav">
+					<p id="Logoo">IO</p>
+				</div>
+				<div class="navbar-nav right">
+					<ul class="navbar-nav">
+						<c:choose>
+							<c:when test="${loggedIn}">
+								<li class="nav-item"><a class="nav-link"
+									href="/user/logout">К║°Й╥╦Л∙└Л⌡┐</a></li>
+							<li class="nav-item"><a class="nav-link" href="/user/mypage">К╖┬Л²╢М▌≤Л²╢Л╖─</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="nav-item"><a class="nav-link" href="/user/login">К║°Й╥╦Л²╦</a></li>
+								<li class="nav-item"><a class="nav-link" href="/user/join">М ▄Л⌡░Й╟─Л·┘</a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</div>
+			</div>
+		<aside class="side-bar">
+			<ul class="nav nav-tabs" role="tablist">
+				<i class="fi fi-rr-list"></i>
+				<li><a class="nav-link active" href="/board/list"><i
+						class="fi fi-rr-home"> </i>М≥┬</a></li>
+				<li><a class="nav-link active" href="/board/list/all"><i
+						class="fi fi-rr-home"> </i>Л═└Л╡╢КЁ╢Й╦╟</a></li>
+				<c:forEach var="cate" items="${cateList}">
+					<li><a class="nav-link" href="/board/list/${cate.caid}"><i
+							class="fi fi-rr-lock"> </i>${cate.category}</a></li>
+
+				</c:forEach>
+
+
+			</ul>
+		</aside>
+		</nav>
 </header>
 </body>
 </html>

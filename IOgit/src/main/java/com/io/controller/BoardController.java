@@ -50,9 +50,18 @@ public class BoardController {
 	    model.addAttribute("cateList", bs.selectCateAll());
 	    return "board/list";
 	}
-
+	
 	@GetMapping("/list/{caid}")
-	public String lists(Model model, @PathVariable String caid) {
+	public String lists(Model model, @PathVariable String caid, HttpSession session) {
+		String logoutMessage = (String) session.getAttribute("logoutMessage");
+	    if (logoutMessage != null) {
+	        model.addAttribute("logoutMessage", logoutMessage);
+	        session.removeAttribute("logoutMessage");
+	        session.removeAttribute("username");
+	    }
+	    
+	    model.addAttribute("username", session.getAttribute("username"));
+	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
 		BoardDTO dto = new BoardDTO();
 
 		if (caid.equals("all")) {
