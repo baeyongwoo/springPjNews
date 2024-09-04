@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -27,26 +27,29 @@
 <link href="/resources/css/style.css" rel="stylesheet">
 <link href="/resources/css/logo" rel="stylesheet">
 <script>
-        $(document).ready(function(){
-            $(".box").mouseenter(function(){
-                var target = $(this).find(".box-content");
-                target.animate({top: "0"}, 300);
-                target.find(".default-content").hide();
-                target.find(".hidden-content").show();
-            }).mouseleave(function(){
-                var target = $(this).find(".box-content");
-                target.animate({top: "240px"}, 300);
-                target.find(".default-content").show();
-                target.find(".hidden-content").hide();
-            });
-        });
-    </script>
-    <style type="text/css">
-    
-    	.row{
-    		margin-left: 170px;
-    	}
-    </style>
+	$(document).ready(function() {
+		$(".box").mouseenter(function() {
+			var target = $(this).find(".box-content");
+			target.animate({
+				top : "0"
+			}, 300);
+			target.find(".default-content").hide();
+			target.find(".hidden-content").show();
+		}).mouseleave(function() {
+			var target = $(this).find(".box-content");
+			target.animate({
+				top : "240px"
+			}, 300);
+			target.find(".default-content").show();
+			target.find(".hidden-content").hide();
+		});
+	});
+</script>
+<style type="text/css">
+.row {
+	margin-left: 170px;
+}
+</style>
 </head>
 <body>
 	<!-- Video Section -->
@@ -58,11 +61,9 @@
 
 	<!-- Navigation Bar -->
 	<div class="container-fluid">
-		<%@ include file="/resources/heater/header.jsp" %>
-		<h3>
-		${cate.category}
-		</h3>
-		
+		<%@ include file="/resources/heater/header.jsp"%>
+		<h3>${cate.category}</h3>
+
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="card">
@@ -76,13 +77,13 @@
 							<th>작성자</th>
 						</tr>
 						<c:forEach items="${boardList}" var="ul" varStatus="row">
-							 <tr onclick="location.href='/board/read?bno=${ul.bno}'" style="cursor:pointer;">
+							<tr onclick="location.href='/board/read?bno=${ul.bno}'"
+								style="cursor: pointer;">
 								<td><c:out value="${row.index+1}" /></td>
 								<td><c:out value="${ul.title}" /></td>
 								<c:choose>
 									<c:when test="${fn:length(ul.bcontent) > 50}">
-										<td><c:out
-												value="${fn:substring(ul.bcontent, 0, 50)}..." /></td>
+										<td><c:out value="${fn:substring(ul.bcontent, 0, 50)}..." /></td>
 									</c:when>
 									<c:otherwise>
 										<td><c:out value="${ul.bcontent}" /></td>
@@ -96,7 +97,16 @@
 					</table>
 				</div>
 			</div>
-
+			<nav>
+				<ul class="pagination">
+					<c:forEach var="i" begin="1" end="${totalPages}">
+						<li class="page-item ${i == currentPage ? 'active' : ''}"><a
+							class="page-link"
+							href="?pageNum=${i}&amount=${criteria.amount}&caid=${caid}">${i}</a>
+						</li>
+					</c:forEach>
+				</ul>
+			</nav>
 		</div>
 
 		<!-- tabEnd -->
@@ -104,6 +114,6 @@
 	<!-- content end -->
 
 	<!-- Footer -->
-	<%@ include file="/resources/heater/footer.jsp" %>
+	<%@ include file="/resources/heater/footer.jsp"%>
 </body>
 </html>

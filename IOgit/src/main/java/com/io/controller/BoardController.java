@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.io.model.BoardDTO;
+import com.io.model.Criteria;
 import com.io.model.TboardDTO;
 import com.io.service.BoardService;
 import com.io.service.TboardService;
@@ -55,7 +56,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list/{caid}")
-	public String lists(Model model, @PathVariable String caid, HttpSession session) {
+	public String lists(Model model, @PathVariable String caid, HttpSession session, Criteria criteria) {
 		String logoutMessage = (String) session.getAttribute("logoutMessage");
 	    if (logoutMessage != null) {
 	        model.addAttribute("logoutMessage", logoutMessage);
@@ -70,14 +71,27 @@ public class BoardController {
 
 		if (caid.equals("all")) {
 			dto.setCaid(null);
+			
 		} else {
 			dto.setCaid(caid);
 		}
 
+		// 페이징 처리를 위한 로직 추가
+		int totalItems = bs.selectAllBoardOfCaid(dto).size(); // 전체 항목 수를 가져오는 메서드
+		int totalPages = (int) Math.ceil((double) totalItems / criteria.getAmount());
+		
+		// 페이징 처리된 리스트를 가져오는 메서드
+
+		model.addAttribute("boardList", bs.listGetBoardOfPaging(dto,criteria));
+		model.addAttribute("currentPage", criteria.getPageNum());
+		model.addAttribute("totalPages", totalPages);
+		
+		model.addAttribute("caid", caid);
+		
 		log.info("dto value + " + dto);
 		log.info("해당 list 값들" + bs.selectAllBoardOfCaid(dto));
 
-		model.addAttribute("boardList", bs.selectAllBoardOfCaid(dto));
+		//model.addAttribute("boardList", bs.selectAllBoardOfCaid(dto));
 		model.addAttribute("cateList", bs.selectCateAll());
 
 		return "/board/listView";

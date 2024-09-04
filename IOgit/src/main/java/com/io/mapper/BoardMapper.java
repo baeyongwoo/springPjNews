@@ -21,6 +21,8 @@ public interface BoardMapper {
 	public List<TboardDTO> selectAllTempBoard(TboardDTO tdto);
 	
 	public List<TboardDTO> selectAllTempBoardOfPaging(@Param("dto") TboardDTO dto, @Param("cri") Criteria cri);
+	
+	public List<BoardDTO> selectAllBoardOfPaging(@Param("dto") BoardDTO dto, @Param("cri") Criteria cri);
 
 	public void insertBoards(@Param("list") List<TboardDTO> tdto);
 
