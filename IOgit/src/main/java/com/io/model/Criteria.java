@@ -13,6 +13,7 @@ import lombok.ToString;
 public class Criteria {
     private int pageNum;
     private int amount;
+    private int offset;
 
     public Criteria() {
         this.pageNum = 1;
