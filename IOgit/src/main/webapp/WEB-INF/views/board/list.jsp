@@ -70,49 +70,7 @@
 
 	<!-- Navigation Bar -->
 	<div class="container-fluid">
-		<nav class="navbar navbar-expand-sm">
-			<div class="container">
-				<a class="navbar-brand" href="/board/list"> <img
-					src="/resources/logo/IOLogo.png" alt="Logo" id="logo">
-				</a>
-				<div class="navbar-nav">
-					<p id="Logoo">IO</p>
-				</div>
-				<div class="navbar-nav right">
-					<ul class="navbar-nav">
-						<c:choose>
-							<c:when test="${loggedIn}">
-								<li class="nav-item"><a class="nav-link"
-									href="/user/logout">로그아웃</a></li>
-							<li class="nav-item"><a class="nav-link" href="/user/mypage">마이페이지</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
-								<li class="nav-item"><a class="nav-link" href="/user/join">회원가입</a></li>
-							</c:otherwise>
-						</c:choose>
-					</ul>
-				</div>
-			</div>
-		<aside class="side-bar">
-			<ul class="nav nav-tabs" role="tablist">
-				<i class="fi fi-rr-list"></i>
-				<li><a class="nav-link active" href="/board/list"><i
-						class="fi fi-rr-home"> </i>홈</a></li>
-				<li><a class="nav-link active" href="/board/list/all"><i
-						class="fi fi-rr-home"> </i>전체보기</a></li>
-				<c:forEach var="cate" items="${cateList}">
-					<li><a class="nav-link" href="/board/list/${cate.caid}"><i
-							class="fi fi-rr-lock"> </i>${cate.category}</a></li>
-
-				</c:forEach>
-
-
-			</ul>
-		</aside>
-		</nav>
-		<!-- Sidebar Navigation -->
-
+		<%@ include file="/resources/heater/header.jsp" %>
 		<!-- Tab Content -->
 		<div class="tab-content">
 			<c:forEach var="entry" items="${boardMap}">
