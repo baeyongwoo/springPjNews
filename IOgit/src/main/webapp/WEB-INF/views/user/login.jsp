@@ -58,11 +58,6 @@
 			</div>
 		</div>
 	</div>
-	<footer class="container-fluid d-flex justify-content-center">
-		<a href=".navbar" title="To Top"> <span
-			class="glyphicon glyphicon-chevron-up"></span>
-		</a>
-		<p>&copy; IO All rights reserved.</p>
-	</footer>
+	<%@ include file="/resources/heater/footer.jsp" %>
 </body>
 </html>

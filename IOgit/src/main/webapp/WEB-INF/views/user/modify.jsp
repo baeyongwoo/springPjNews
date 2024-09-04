@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,11 +49,6 @@
             </div>
         </div>
     </div>
-    <footer class="container-fluid d-flex justify-content-center">
-        <a href=".navbar" title="To Top">
-            <span class="glyphicon glyphicon-chevron-up"></span>
-        </a>
-        <p>&copy; IO All rights reserved.</p>
-    </footer>
+    <%@ include file="/resources/heater/footer.jsp" %>
 </body>
 </html>

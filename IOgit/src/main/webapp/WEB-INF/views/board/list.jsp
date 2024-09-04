@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,8 +94,6 @@
 					</ul>
 				</div>
 			</div>
-		</nav>
-		<!-- Sidebar Navigation -->
 		<aside class="side-bar">
 			<ul class="nav nav-tabs" role="tablist">
 				<i class="fi fi-rr-list"></i>
@@ -111,6 +110,8 @@
 
 			</ul>
 		</aside>
+		</nav>
+		<!-- Sidebar Navigation -->
 
 		<!-- Tab Content -->
 		<div class="tab-content">
@@ -236,12 +237,7 @@
 	<!-- content end -->
 
 	<!-- Footer -->
-	<footer class="container-fluid d-flex justify-content-center">
-		<a href=".navbar" title="To Top"> <span
-			class="glyphicon glyphicon-chevron-up"></span>
-		</a>
-		<p>© IO All rights reserved.</p>
-	</footer>
+	<%@ include file="/resources/heater/footer.jsp" %>
 	<script>
         $(document).ready(function() {
             var logoutMessage = "${logoutMessage}";

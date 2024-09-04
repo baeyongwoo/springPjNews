@@ -47,16 +47,21 @@ public class UserController {
 	private MyPageService mypageService;
 
 	@GetMapping("/mypage")
-	public String myPage(HttpSession session, Model model) {
+	public void myPage(HttpSession session, Model model) {
 		String uemail = (String) session.getAttribute("username");
-		if (uemail == null) {
-			return "redirect:/login";
-		}
 
 		List<MypageDTO> myPosts = mypageService.getMypagePosts(uemail);
 		model.addAttribute("myPosts", myPosts);
-
-		return "mypage";
+		
+		String logoutMessage = (String) session.getAttribute("logoutMessage");
+	    if (logoutMessage != null) {
+	        model.addAttribute("logoutMessage", logoutMessage);
+	        session.removeAttribute("logoutMessage");
+	        session.removeAttribute("username");
+	    }
+	    
+	    model.addAttribute("username", session.getAttribute("username"));
+	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
 	}
 
 	// 회원가입

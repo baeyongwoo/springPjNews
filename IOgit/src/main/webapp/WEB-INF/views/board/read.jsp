@@ -31,28 +31,7 @@
 <body>
 	<div class="container mt-3" style="text-align: right;">
 
-		<nav class="navbar navbar-expand-sm">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="index.html"> <img
-					src="img/IOLogo.png" alt="Logo" id="logo">
-				</a>
-				<div class="navbar-nav">
-					<h1>IO</h1>
-				</div>
-				<div class="navbar-nav right">
-					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="login.html">로그인</a>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="userjoin.html">회원가입</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-
-
-
-
+		<%@ include file="/resources/heater/header.jsp" %>
 
 		<div class="row">
 			<div class="container-fluid">
@@ -123,11 +102,6 @@
 		</div>
     </div>
 
-	<footer class="container-fluid d-flex justify-content-center">
-		<a href=".navbar" title="To Top"> <span
-			class="glyphicon glyphicon-chevron-up"></span>
-		</a>
-		<p>&copy; IO All rights reserved.</p>
-	</footer>
+	<%@ include file="/resources/heater/footer.jsp" %>
 </body>
 </html>
