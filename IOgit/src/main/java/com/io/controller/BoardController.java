@@ -43,7 +43,10 @@ public class BoardController {
 	    model.addAttribute("username", session.getAttribute("username"));
 	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
 	    Map<String, List<BoardDTO>> boardMap = bs.listGetBoard();
-	    log.info("boardMap" + boardMap);
+	    log.info("boardMap" + boardMap.get("최신순"));
+	    model.addAttribute("latestList", boardMap.get("최신순"));
+	    model.addAttribute("latestListName", "최신순");
+	    
 	    model.addAttribute("boardMap", boardMap);
 
 	    log.info("cateList" + bs.selectCateAll());
