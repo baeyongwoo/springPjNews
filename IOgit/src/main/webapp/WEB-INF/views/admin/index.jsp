@@ -32,6 +32,8 @@
 						class="fi fi-rr-lock"> </i>게시판</a></li>
 				<li><a class="nav-link" data-bs-toggle="tab"
 					href="/admin/userList"><i class="fi fi-rr-rss"> </i>유저관리</a></li>
+					<li><a class="nav-link" data-bs-toggle="tab"
+					href="/admin/category"><i class="fi fi-rr-rss"> </i>카테고리관리</a></li>
 			</ul>
 		</aside>
 		<!-- End of Sidebar -->

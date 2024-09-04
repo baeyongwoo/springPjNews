@@ -34,4 +34,6 @@ public interface BoardService {
 	public List<BoardDTO> selectCateAll();
 
 	public List<BoardDTO> selectAllBoardOfCaid(BoardDTO dto);
+	
+	public void putCategory(BoardDTO dto);
 }

@@ -124,6 +124,14 @@ public class BoardServiceImpl implements BoardService{
 	        bm.deleteBoard(bno);
 	    }
 
+
+
+	@Override
+	public void putCategory(BoardDTO dto) {
+		bm.insertCategory(dto);
+		
+	}
+
 	
 
 }

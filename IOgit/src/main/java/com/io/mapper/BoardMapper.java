@@ -38,4 +38,6 @@ public interface BoardMapper {
 	public List<BoardDTO> selectCateAll();
 
 	public List<BoardDTO> selectAllBoardOfCaid(BoardDTO dto);
+	
+	public void insertCategory(BoardDTO dto);
 }

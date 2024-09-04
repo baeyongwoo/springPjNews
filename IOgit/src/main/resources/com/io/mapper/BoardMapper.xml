@@ -207,6 +207,10 @@
     WHERE bno = #{bno}
 </delete>
 
+<insert id="insertCategory" parameterType="com.io.model.BoardDTO">
+	INSERT INTO cate (caid, category) values(#{caid}, #{category})
+</insert>
+
 
 
 </mapper>

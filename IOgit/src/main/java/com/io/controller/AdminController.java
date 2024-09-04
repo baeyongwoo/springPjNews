@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.io.model.BoardDTO;
 import com.io.model.Criteria;
 import com.io.model.TboardDTO;
 import com.io.service.BoardService;
@@ -126,6 +127,27 @@ public class AdminController {
 
 		us.remove(email);
 	}
+	
+	@GetMapping("/category")
+	public void getCatePage(Model model) {
+		model.addAttribute("cate", bs.selectCateAll());
+		
+	}
+	
+	@PostMapping(value="/saveCategory",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public void getCatePage(Model model, String caid,String category) {
+		log.info("test value" + caid + ", caid" + category);
+		BoardDTO dto = new BoardDTO();
+		dto.setCaid(caid);
+		dto.setCategory(category);
+		
+		bs.putCategory(dto);
+		
+		
+	}
+	
+	
 
 
 

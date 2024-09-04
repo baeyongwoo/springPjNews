@@ -102,3 +102,65 @@ function reject() {
 function cancelModal() {
     location.reload();
 }
+
+  function generateCode(category) {
+        console.log('cate value ' + category);
+        var engCategory = Hangul.disassemble(category).join('').replace(/[^a-zA-Z]/g, ''); // 한글을 로마자로 변환
+        var prefix = engCategory.substring(0, 2).toLowerCase();
+        
+        return prefix + '01'; // 예시로 '01'을 붙임
+    }
+
+
+//category
+$(document).ready(function() {
+    var csrfToken = $('meta[name="_csrf"]').attr('content');
+    var csrfHeader = $('meta[name="_csrf_header"]').attr('content');
+
+    $('#addRowBtn').click(function() {
+        $('#newRowForm').show();
+    });
+
+    $('#newCategory').on('input', function() {
+        var category = $(this).val();
+        var code = generateCode(category);
+        console.log('category value ' + code);
+        $('#newCode').val(code);
+    });
+
+    $('#saveRowBtn').click(function() {
+        let newCode = $('#newCode').val();
+        let newCategory = $('#newCategory').val();
+        
+        console.log('data ' + newCode + ', ' + newCategory);
+      $.ajax({
+            type: 'POST',
+            url: '/admin/saveCategory',
+            data: { caid: newCode, category: newCategory },
+            success: function(response) {
+                alert('저장되었습니다!');
+                location.reload(); // 페이지 새로고침
+            },
+            error: function(xhr, status, error) {
+                alert('저장에 실패했습니다: ' + error);
+            }
+        });
+    });
+
+  function generateCode(category) {
+    console.log('cate value ' + category);
+    
+    // 오늘 날짜를 'YYYYMMDD' 형식으로 가져오기
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+    var dateString = year + month + day;
+    
+    // 카테고리명과 오늘 날짜 결합
+    var code = category + dateString;
+    
+    return code;
+}
+
+});

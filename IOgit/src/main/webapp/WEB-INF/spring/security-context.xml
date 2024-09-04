@@ -27,6 +27,9 @@
         authentication-failure-url="/user/login?error=true"/>
     <security:logout logout-url="/user/logout" invalidate-session="true"/>
     <security:access-denied-handler error-page="/accessError"/>
+    
+      <!-- CSRF 비활성화 -->
+    <security:csrf disabled="true"/>
 </security:http>
 
  <security:authentication-manager>
