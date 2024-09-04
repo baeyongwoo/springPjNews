@@ -61,7 +61,7 @@ public class BoardServiceImpl implements BoardService{
 	public List<TboardDTO> listGetTBoardOfPaging(TboardDTO dto, Criteria cri) {
 		   // 페이징 처리를 위한 로직 추가
 	    int offset = (cri.getPageNum() - 1) * cri.getAmount() + 1;
-//	    cri.setOffset(offset); // offset 값을 Criteria 객체에 설정
+	    cri.setOffset(offset); // offset 값을 Criteria 객체에 설정
 	    return bm.selectAllTempBoardOfPaging(dto, cri);
 	}
 
@@ -130,6 +130,17 @@ public class BoardServiceImpl implements BoardService{
 	public void putCategory(BoardDTO dto) {
 		bm.insertCategory(dto);
 		
+	}
+
+
+
+	@Override
+	public List<BoardDTO> listGetBoardOfPaging(BoardDTO dto, Criteria cri) {
+		 int offset = (cri.getPageNum() - 1) * cri.getAmount() + 1;
+		    cri.setOffset(offset); // offset 값을 Criteria 객체에 설정
+		 
+		 log.info("paing value + " + bm.selectAllBoardOfPaging(dto, cri));
+		    return bm.selectAllBoardOfPaging(dto, cri);
 	}
 
 	

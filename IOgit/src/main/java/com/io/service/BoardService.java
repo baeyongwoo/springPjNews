@@ -19,6 +19,8 @@ public interface BoardService {
 	public List<TboardDTO> listGetTBoard(TboardDTO dto);
 	
 	public List<TboardDTO> listGetTBoardOfPaging(TboardDTO dto, Criteria cri);
+	
+	public List<BoardDTO> listGetBoardOfPaging(BoardDTO dto, Criteria cri);
 
 	public void listPutBoard(TboardDTO dto);
 

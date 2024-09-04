@@ -68,18 +68,35 @@
 	
 	<select id="selectAllTempBoardOfPaging" resultType="com.io.model.TboardDTO">
     SELECT * FROM (
-       select b.*, ui.uname, d.did, d.dname, c.category,  ROW_NUMBER() OVER (ORDER BY b.tno DESC) AS rn
-		from userinfo ui
-		join
-		dept d on
-		ui.did = d.did
-		join tboard b on b.uemail = ui.uemail
-		join cate
-		c on b.caid = c.caid
+        SELECT b.*, ui.uname, d.did, d.dname, c.category, ROW_NUMBER() OVER (ORDER BY b.tmpregdate DESC) AS rn
+		FROM userinfo ui
+		JOIN dept d ON ui.did = d.did
+		JOIN tboard b ON b.uemail = ui.uemail
+		JOIN cate c ON b.caid = c.caid
           WHERE code = #{dto.code}
     )
     WHERE rn BETWEEN #{cri.offset} AND #{cri.offset} + #{cri.amount} - 1
 </select>
+
+
+<select id="selectAllBoardOfPaging" resultType="com.io.model.BoardDTO">
+	SELECT * FROM (
+		  SELECT b.*, ui.uname, d.did, d.dname, c.category, ROW_NUMBER() OVER (ORDER BY b.regdate DESC) AS rn
+		FROM userinfo ui
+		JOIN dept d ON ui.did = d.did
+		JOIN board b ON b.uemail = ui.uemail
+		JOIN cate c ON b.caid = c.caid
+		<where>
+			<choose>
+				<when test="dto.caid != null">
+					b.caid = #{dto.caid}
+				</when>
+			</choose>
+		</where>
+	) 
+	WHERE rn BETWEEN #{cri.offset} AND #{cri.offset} + #{cri.amount} - 1
+</select>
+
 
 
 	<insert id="insertBoards" parameterType="java.util.List">
