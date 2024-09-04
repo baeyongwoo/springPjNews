@@ -21,7 +21,11 @@
 						<c:choose>
 							<c:when test="${loggedIn}">
 								<li class="nav-item"><a class="nav-link"
-									href="/user/logout">로그아웃</a></li>
+									href="/board/post">기사 작성 </a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/user/modify">회원정보 수정/삭제 </a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/user/logout">로그아웃 </a></li>
 							<li class="nav-item"><a class="nav-link" href="/user/mypage">마이페이지</a></li>
 							</c:when>
 							<c:otherwise>

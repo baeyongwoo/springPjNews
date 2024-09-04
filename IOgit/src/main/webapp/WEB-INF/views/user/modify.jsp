@@ -9,42 +9,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="/resources/css/style.css" rel="stylesheet">
     <title>회원정보 수정</title>
 </head>
 <body>
     <div class="container" style="text-align: center; margin-top: 90px;">
-        <a class="navbar-brand" href="/index.html">
-        <img src="/img/IOLogo.png" alt="Logo" style="width: 100px; border-radius: 20%; margin-bottom: 100px;">
+        <a class="navbar-brand" href="/board/list">
+        <img src="/resources/logo/IOLogo.png" alt="Logo" style="width: 100px; border-radius: 20%; margin-bottom: 100px;">
         </a>
         
         <div class="container d-flex justify-content-center">
             <div>
                 <h3>회원정보수정</h3>
-                <form method="post" id="operForm" class="was-validated">
+                <form method="post" action="/user/modify" id="operForm" class="was-validated">
                     <div class="mb-3 mt-3">
                         <label for="uname" class="form-label">이름:</label>
-                        <input type="text" class="form-control" id="uname" placeholder="이름을 입력하세요" name="uname">
+                        <input type="text" class="form-control" id="uname" name="uname" value="${userData.uname}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">이메일:</label>
-                        <input type="email" class="form-control" id="pwd" placeholder="이메일을 입력하세요" name="email">
+                        <input type="email" class="form-control" id="email" name="email" value="${userData.uemail}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="pwd" class="form-label">비밀번호:</label>
-                        <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요" name="pwd">
+                        <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요" value="${userData.upwd}" name="pwd" required>
                     </div>
                     <div class="mb-3">
                         <label for="pswdch" class="form-label">비밀번호 확인:</label>
-                        <input type="password" class="form-control" id="pswdch" placeholder="비밀번호확인를 입력하세요" name="pwdch">
+                        <input type="password" class="form-control" id="pswdch" placeholder="비밀번호 확인을 입력하세요" name="pwdch" required>
                     </div>
-                	<label for="did" class="form-label">소속:</label> 
-                	<select name="did">
-						<option value="D01">부서1</option>
-						<option value="D02">부서2</option>
-					</select>
-                   	<button type="submit" data-oper="regist" class="btn btn-primary">변경</button>
-                    <button type="reset" data-oper="cancle" class="btn btn-primary">취소</button>
+                    <div class="mb-3">
+                        <label for="did" class="form-label">소속:</label>
+                        <select name="did" class="form-select" required>
+                            <option value="D01" ${did == 'D01' ? 'selected' : ''}>부서1</option>
+                            <option value="D02" ${did == 'D02' ? 'selected' : ''}>부서2</option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <input type="submit" value="수정">
+                        <input type="button" value="취소" onclick="location.href=''/board/list'">
+                    </div>
                 </form>
             </div>
         </div>

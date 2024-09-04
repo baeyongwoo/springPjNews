@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.io.mapper.UserMapper;
 import com.io.model.AuthVO;
 import com.io.model.MypageDTO;
 import com.io.model.UserDTO;
@@ -50,7 +49,8 @@ public class UserController {
 
 	@Autowired
 	private MyPageService mypageService;
-
+	
+	
 	@GetMapping("/mypage")
 	public void myPage(HttpSession session, Model model) {
 		String uemail = (String) session.getAttribute("username");
@@ -88,7 +88,7 @@ public class UserController {
 			userDTO.getAuthList().get(i).setUemail(userDTO.getUemail());
 		}
 
-
+		
 
 		ss.insertUser(userDTO);
 
@@ -108,30 +108,49 @@ public class UserController {
 
 
 	}
-
-
-	@Autowired
-    private UserMapper userMapper;
-
+	
+	@GetMapping("/modify")
+	public void modifyForm(HttpSession session, Model model) {
+		String logoutMessage = (String) session.getAttribute("logoutMessage");
+	    if (logoutMessage != null) {
+	        model.addAttribute("logoutMessage", logoutMessage);
+	        session.removeAttribute("logoutMessage");
+	        session.removeAttribute("username");
+	    }
+	    String uemail = (String) session.getAttribute("username");
+	    
+	    
+	    ;
+	    
+	    model.addAttribute("userData",userService.getUserByEmail(uemail));
+	    model.addAttribute("username", uemail);
+	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
+	}
+	
+	@PostMapping("/modify")
+    public String updateuser(@ModelAttribute UserDTO dto) {
+        userService.updateuser(dto);
+        return "redirect:/board/list";
+    }
+	
     // 사용자 정보 수정
-    @PutMapping("/modify/{uemail}")
+    @PutMapping("/modify")
     public ResponseEntity<String> updateUser(@PathVariable("uemail") String uemail, @RequestBody UserDTO userDTO) {
         userDTO.setUemail(uemail);
-        int result = userMapper.updateUser(userDTO);
+        int result = userService.updateuser(userDTO);
         if (result > 0) {
             return ResponseEntity.ok("정보가 수정되었습니다");
         } else {
             return ResponseEntity.status(400).body("수정이 실패하였습니다.");
         }
     }
-
-    // 사용자 삭제
-    @DeleteMapping("/modify/{uemail}")
-    public ResponseEntity<String> deleteUser(@PathVariable("uemail") String uemail) {
-        userMapper.deleteUser(uemail);
-        return ResponseEntity.ok("삭제가 완료되었습니다");
-    }
-
+    
+    @GetMapping("/delete")
+	public <string> String delete(@RequestParam("uemail") String uemail) {
+		userService.remove(uemail);
+		return "redirect:/board/list";
+	}
+    
 	//에러페이지
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {

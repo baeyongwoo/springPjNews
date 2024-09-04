@@ -66,6 +66,7 @@
 			</ul>
 		</aside>
 		</nav>
+		
     <h1>내 게시글</h1>
     <table class="table table-dark table-hover text-center">
         <thead>

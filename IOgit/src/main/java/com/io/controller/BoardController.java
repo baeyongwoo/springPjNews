@@ -62,6 +62,7 @@ public class BoardController {
 	    
 	    model.addAttribute("username", session.getAttribute("username"));
 	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
+	    
 		BoardDTO dto = new BoardDTO();
 
 		if (caid.equals("all")) {

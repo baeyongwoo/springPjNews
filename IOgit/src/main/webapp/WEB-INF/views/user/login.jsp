@@ -16,7 +16,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
 	rel="stylesheet">
-<link href="/css/style.css" rel="stylesheet">
+<link href="/resources/css/style.css" rel="stylesheet">
 <title>로그인</title>
 
 <meta name="_csrf" content="${_csrf.token}" />
@@ -25,7 +25,7 @@
 <body>
 	<div class="container" style="text-align: center; margin-top: 90px;">
 		<a class="navbar-brand" href="/index.html"> <img
-			src="/img/IOLogo.png" alt="Logo"
+			src="/resouces/logo/IOLogo.png" alt="Logo"
 			style="width: 100px; border-radius: 20%; margin-bottom: 100px;">
 		</a>
 
