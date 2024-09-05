@@ -29,9 +29,9 @@
 </script>
 </head>
 <body>
+		<%@ include file="/resources/heater/header.jsp" %>
 	<div class="container mt-3" style="text-align: right;">
 
-		<%@ include file="/resources/heater/header.jsp" %>
 
 		<div class="row">
 			<div class="container-fluid">

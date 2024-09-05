@@ -78,8 +78,8 @@
 <!--첨부파일 스타일  -->
 </head>
 <body>
-	<div class="container mt-3" style="text-align: center;">
 		<%@ include file="/resources/heater/header.jsp" %>
+	<div class="container mt-3" style="text-align: center;">
 		<div class="row">
 			<div class="container-fluid">
 				<form role="form" action="/board/post" method="post" id="postForm" enctype="multipart/form-data">

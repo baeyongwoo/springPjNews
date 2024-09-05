@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,72 +20,76 @@
 
 
 <style>
-			.uploadResult {
-			  width:100%;
-			  height:150px;
-			  background-color: gray;
-			  overflow:auto;
-			}
-			.uploadResult ul{
-			  display:flex;
-			  flex-flow: row;
-			  justify-content: center;
-			  align-items: center;
-			}
-			.uploadResult ul li {
-			  list-style: none;
-			  padding: 10px;
-			  align-content: center;
-			  text-align: center;
-			}
-			.uploadResult ul li img{
-			  width: 100px;
-			}
-			.uploadResult ul li span {
-			  color:white;
-			}
-			.bigPictureWrapper {
-			  position: absolute;
-			  display: none;
-			  justify-content: center;
-			  align-items: center;
-			  top:0%;
-			  width:100%;
-			  height:100%;
-			  background-color: gray; 
-			  z-index: 100;
-			  background:rgba(255,255,255,0.5);
-			}
-			.bigPicture {
-			  position: relative;
-			  display:flex;
-			  justify-content: center;
-			  align-items: center;
-			}
-			
-			.bigPicture img {
-			  width:600px;
-			}
-			
-			</style>
+.uploadResult {
+	width: 100%;
+	height: 150px;
+	background-color: gray;
+	overflow: auto;
+}
+
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+	align-content: center;
+	text-align: center;
+}
+
+.uploadResult ul li img {
+	width: 100px;
+}
+
+.uploadResult ul li span {
+	color: white;
+}
+
+.bigPictureWrapper {
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: gray;
+	z-index: 100;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.bigPicture {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bigPicture img {
+	width: 600px;
+}
+</style>
 <title>Document</title>
 </head>
 <body>
+	<%@ include file="/resources/heater/header.jsp"%>
 	<div class="container mt-3" style="text-align: center;">
 
-		<%@ include file="/resources/heater/header.jsp" %>
 		<div class="row">
 			<div class="container-fluid">
 				<div class="container mt-3">
-					<form action="/board/edit"
-						method="post">
+					<form action="/board/edit" method="post">
 						<ol class="list-group">
-							<input type="hidden" name="tno"  value="${tboard.tno}" readonly/>
+							<input type="hidden" name="tno" value="${tboard.tno}" readonly />
 
 							<div class="mb-3">
 								<label for="title" class="form-label">제목</label> <input
 									type="text" name="tmptitle" id="title" class="form-control"
-									value="${tboard.tmptitle}" >
+									value="${tboard.tmptitle}">
 							</div>
 
 							<div class="mb-3">
@@ -99,41 +103,40 @@
 								<textarea name="tmpcontent" id="content" class="form-control"
 									rows="10" required>${tboard.tmpcontent}</textarea>
 							</div>
-							  <!-- 원본이미지 출력 --------------------------------------------------------------->
-            <div class='bigPictureWrapper'>
-			  <div class='bigPicture'>
-			  </div>
-			</div>
-			<!-- 원본이미지 출력.end -->
-			<!-- 첨부파일목록 ------------------------------------------------------------------------->
-			<div class="row">
-			  <div class="col-lg-12">
-			    <div class="panel panel-default">
-			
-			      <div class="panel-heading">Files</div>
-			      <!-- /.panel-heading -->
-			      <div class="panel-body">
-			        <div class="form-group uploadDiv">
-			            <input type="file" name='uploadFile' multiple="multiple">
-			        </div>
-			        
-			        <div class='uploadResult'>
-			        	파일을 여기에 끌어다 놓으세요. 
-			          <ul>
-			          
-			          </ul>
-			        </div>
-			      </div>
-			      <!--  end panel-body -->
-			  
-			    </div>
-			    <!--  end panel-body -->
-			  </div>
-			  <!-- end panel -->
-			</div>
-			<!-- /.row -->
-            <!-- 첨부파일목록.end ------------------------------------------------------------------------->
-           
+							<!-- 원본이미지 출력 --------------------------------------------------------------->
+							<div class='bigPictureWrapper'>
+								<div class='bigPicture'></div>
+							</div>
+							<!-- 원본이미지 출력.end -->
+							<!-- 첨부파일목록 ------------------------------------------------------------------------->
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-default">
+
+										<div class="panel-heading">Files</div>
+										<!-- /.panel-heading -->
+										<div class="panel-body">
+											<div class="form-group uploadDiv">
+												<input type="file" name='uploadFile' multiple="multiple">
+											</div>
+
+											<div class='uploadResult'>
+												파일을 여기에 끌어다 놓으세요.
+												<ul>
+
+												</ul>
+											</div>
+										</div>
+										<!--  end panel-body -->
+
+									</div>
+									<!--  end panel-body -->
+								</div>
+								<!-- end panel -->
+							</div>
+							<!-- /.row -->
+							<!-- 첨부파일목록.end ------------------------------------------------------------------------->
+
 
 							<button data-oper="edit">수정 완료</button>
 							<button data-oper="delete">삭제</button>
@@ -144,7 +147,7 @@
 
 		</div>
 	</div>
-	
+
 	<!--script-------------------------------------------------  -->
 	<script>
 		/* 파일크기.파일확장자 체크 ****************************************************************************/
@@ -314,8 +317,8 @@
 			
 		});
 	</script>
-            
+
 	<!--script-------------------------------------------------  -->
-	<%@ include file="/resources/heater/footer.jsp" %>
+	<%@ include file="/resources/heater/footer.jsp"%>
 </body>
 </html>

@@ -59,6 +59,7 @@
 </script>
 </head>
 <body>
+	<%@ include file="/resources/heater/header.jsp"%>
 	<!-- 비디오 섹션 -->
 	<figure class="vid">
 		<video loop autoplay muted>
@@ -77,7 +78,6 @@
 	</c:if>
 	<!-- 네비게이션 바 -->
 	<div class="container-fluid">
-		<%@ include file="/resources/heater/header.jsp"%>
 		<!-- 탭 콘텐츠 -->
 		<div class="tab-content">
 			<div id="menu1" class="container tab-pane active">
