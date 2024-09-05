@@ -1,5 +1,6 @@
 package com.io.controller;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +31,8 @@ import com.io.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
+
+
 @Controller
 @RequestMapping("/admin/*")
 @AllArgsConstructor
@@ -41,8 +48,8 @@ public class AdminController {
 	@Autowired
 	UserService us;
 
-
 	@GetMapping("/index")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	public void index(Model model) {
 		//기사들 갯수
 		List<Map<String, Object>> codeCounts =bs.getsCountOfCode();
@@ -59,10 +66,16 @@ public class AdminController {
 		log.info("userlist log" + bs.listUserListOfPost());
 
 		model.addAttribute("userList", bs.listUserListOfPost());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+		authorities.forEach(authority -> {
+		    log.info("auth check " + authority.getAuthority());
+		});
+
 
 
 	}
-
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/newsList")
 	public void getCodeViewList(@RequestParam(value = "code", required = false) String code,Criteria criteria,
 			Model model) {
@@ -102,7 +115,7 @@ public class AdminController {
 		}
 	}
 
-
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping(value="/updateData", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public void updateData(@RequestParam("tno") Long tno, @RequestParam("code") String code) {
@@ -114,26 +127,26 @@ public class AdminController {
 
 	    tbs.changeCode(dto);
 	}
-
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/userList")
 	public void getUserListPage(Model model) {
 		log.info("userList");
 		model.addAttribute("userList", bs.listUserListOfPost());
 	}
-
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping(value="/deleteUser",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public void userDelete(@RequestParam String email, @RequestParam String reason) {
 
 		us.remove(email);
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/category")
 	public void getCatePage(Model model) {
 		model.addAttribute("cate", bs.selectCateAll());
 		
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping(value="/saveCategory",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public void getCatePage(Model model, String caid,String category) {

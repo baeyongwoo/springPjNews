@@ -32,6 +32,7 @@ public class BoardController {
 	private BoardService bs;
 	private TboardService ts;
 
+	
 	@GetMapping("/list")
 	public String list(HttpSession session, Model model) {
 	    String logoutMessage = (String) session.getAttribute("logoutMessage");
