@@ -41,47 +41,46 @@ public class BoardController {
 	private BoardService bs;
 	private TboardService ts;
 
-	
 	@GetMapping("/list")
 	public String list(HttpSession session, Model model) {
-	    String logoutMessage = (String) session.getAttribute("logoutMessage");
-	    if (logoutMessage != null) {
-	        model.addAttribute("logoutMessage", logoutMessage);
-	        session.removeAttribute("logoutMessage");
-	        session.removeAttribute("username");
-	    }
-	    
-	    model.addAttribute("username", session.getAttribute("username"));
-	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
-	    Map<String, List<BoardDTO>> boardMap = bs.listGetBoard();
-	    log.info("boardMap" + boardMap.get("최신순"));
-	    model.addAttribute("latestList", boardMap.get("최신순"));
-	    model.addAttribute("latestListName", "최신순");
-	    
-	    model.addAttribute("boardMap", boardMap);
+		String logoutMessage = (String) session.getAttribute("logoutMessage");
+		if (logoutMessage != null) {
+			model.addAttribute("logoutMessage", logoutMessage);
+			session.removeAttribute("logoutMessage");
+			session.removeAttribute("username");
+		}
 
-	    log.info("cateList" + bs.selectCateAll());
-	    model.addAttribute("cateList", bs.selectCateAll());
-	    return "board/list";
+		model.addAttribute("username", session.getAttribute("username"));
+		model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
+		Map<String, List<BoardDTO>> boardMap = bs.listGetBoard();
+		log.info("boardMap" + boardMap.get("최신순"));
+		model.addAttribute("latestList", boardMap.get("최신순"));
+		model.addAttribute("latestListName", "최신순");
+
+		model.addAttribute("boardMap", boardMap);
+
+		log.info("cateList" + bs.selectCateAll());
+		model.addAttribute("cateList", bs.selectCateAll());
+		return "board/list";
 	}
-	
+
 	@GetMapping("/list/{caid}")
 	public String lists(Model model, @PathVariable String caid, HttpSession session, Criteria criteria) {
 		String logoutMessage = (String) session.getAttribute("logoutMessage");
-	    if (logoutMessage != null) {
-	        model.addAttribute("logoutMessage", logoutMessage);
-	        session.removeAttribute("logoutMessage");
-	        session.removeAttribute("username");
-	    }
-	    
-	    model.addAttribute("username", session.getAttribute("username"));
-	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
-	    
+		if (logoutMessage != null) {
+			model.addAttribute("logoutMessage", logoutMessage);
+			session.removeAttribute("logoutMessage");
+			session.removeAttribute("username");
+		}
+
+		model.addAttribute("username", session.getAttribute("username"));
+		model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
+
 		BoardDTO dto = new BoardDTO();
 
 		if (caid.equals("all")) {
 			dto.setCaid(null);
-			
+
 		} else {
 			dto.setCaid(caid);
 		}
@@ -89,19 +88,19 @@ public class BoardController {
 		// 페이징 처리를 위한 로직 추가
 		int totalItems = bs.selectAllBoardOfCaid(dto).size(); // 전체 항목 수를 가져오는 메서드
 		int totalPages = (int) Math.ceil((double) totalItems / criteria.getAmount());
-		
+
 		// 페이징 처리된 리스트를 가져오는 메서드
 
-		model.addAttribute("boardList", bs.listGetBoardOfPaging(dto,criteria));
+		model.addAttribute("boardList", bs.listGetBoardOfPaging(dto, criteria));
 		model.addAttribute("currentPage", criteria.getPageNum());
 		model.addAttribute("totalPages", totalPages);
-		
+
 		model.addAttribute("caid", caid);
-		
+
 		log.info("dto value + " + dto);
 		log.info("해당 list 값들" + bs.selectAllBoardOfCaid(dto));
 
-		//model.addAttribute("boardList", bs.selectAllBoardOfCaid(dto));
+		// model.addAttribute("boardList", bs.selectAllBoardOfCaid(dto));
 		model.addAttribute("cateList", bs.selectCateAll());
 
 		return "/board/listView";
@@ -116,7 +115,6 @@ public class BoardController {
 		model.addAttribute("board", boardDTO);
 
 	}
-
 
 	// 이용자 글작성
 	@GetMapping("/post")
