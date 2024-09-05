@@ -120,8 +120,6 @@ INSERT INTO dept (did, dname) VALUES ('Y01', 'YTN');
 INSERT INTO dept (did, dname) VALUES ('IO', 'Information Oceans');
 
 
-
-
 commit;
 -- 데이터 확인 (주석 처리된 부분)
 -- SELECT * FROM dept;
