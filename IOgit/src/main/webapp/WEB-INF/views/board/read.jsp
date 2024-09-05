@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <link href="/resources/css/style.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/resources/js/board/reply.js?bno=<c:out value='${board.bno}'/>"></script>  
+    
 <title>Document</title>
 
 <script>
@@ -75,37 +75,51 @@
 			</div>
 		</div>
 		
-		<!-- 댓글 입력 폼 -->
-        <div id="replyContainer" class="container mt-3">
-            <h3 class="text-center">댓글</h3>
-            <div class="panel-body">
-                <ul class="chat">
-                    
-                </ul>
-            </div>
-            <div class="panel-footer"></div>
+		<!-- 댓글목록 ---------------------------------------------------------------->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-defualt">
+					<div class="panel-heading">
+						<i class="fa fa-comments fa-fw">댓글</i>
+        				
+        				<%-- 로그인한 경우만 댓글등록 버튼 출력 --%>
+         				<sec:authorize access="isAuthenticated()">
+        				<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">등록</button>
+         				</sec:authorize>  
+        				
+					</div>
+					<div class="panel-body">
+						<!-- 댓글목록 출력 UL태그 ---------------------------->
+						<ul class="chat">
+        				
+						</ul>
+					</div>
+					<div class="panel-footer"></div>
+				</div>
+			</div>
         </div>
+		<!-- 댓글목록.end -->
 		
 		<!-- 모달 ------------------------------------------------------------------->            
 	    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         <h4 class="modal-title" id="myModalLabel">댓글 창</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>댓글</label>
-                            <input class="form-control" name='reply'>
+                            <label>댓글</label><a href="#" class="pull-right" id="emoji">emoji</a>
+                            <input class="form-control" name='reply' id="message">
                         </div>
                         <div class="form-group">
                             <label>작성자</label>
-                            <input class="form-control" name='replyer' readonly>
-                        </div>
+                             <input class="form-control" name='replyer' readonly>
+
+                         </div>
                         <div class="form-group">
                             <label>등록일</label>
-                            <input class="form-control" name='replyDate' readonly>
+                            <input class="form-control" name='replyDate' value="SYSDATE" readonly>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -119,8 +133,38 @@
         </div>
 	</div>
 
+	<script>   
+		/* csrf토큰 *****************************************************************/
+		var csrfHeaderName ="${_csrf.headerName}"; 
+		var csrfTokenValue="${_csrf.token}";
 		
+		
+		/* 댓글작성자 *****************************************************************************/
+      <sec:authorize access="isAuthenticated()">          
+         <sec:authentication property="principal" var="pinfo" />
+         const replyerid= "${pinfo.username}";
+      </sec:authorize>
+ 		
+   </script>
 
+
+	<script src="/resources/js/board/vanillaEmojiPicker.js"></script>
+    <script>
+
+        new EmojiPicker({
+            trigger: [
+                {
+                    selector: '#emoji',
+                    insertInto: '#message'
+                },
+            ],
+            closeButton: true,
+        });
+
+    </script>
+
+
+<script src="/resources/js/board/reply.js?bno=<c:out value='${board.bno}'/>"></script>  
 	<%@ include file="/resources/heater/footer.jsp" %>
 </body>
 </html>

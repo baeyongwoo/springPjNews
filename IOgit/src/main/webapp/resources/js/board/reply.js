@@ -16,7 +16,29 @@
     }
     var param = scriptQuery();
     console.log(param.bno); // parameter bno확인
- 
+
+/* 날짜형식 출력 ***************************************************************/
+ function displayTime(timeValue){
+	var today=new Date(); //현재날짜시간
+	var gap=today.getTime()-timeValue; //댓글등록이후 지난 시간
+	var dateObj=new Date(timeValue); //댓글작성시간을 Date타입으로 변환
+	
+	//gap이 24시간이 안되면 시:분:초 출력
+	if(gap<(24*60*60*1000)){
+		var hh=dateObj.getHours();
+		var mi=dateObj.getMinutes();
+		var ss=dateObj.getSeconds();
+		
+		return [(hh>9?'':'0')+hh, ':' , (mi>9?'':'0')+mi , ':' , (ss>9?'':'0')+ss].join('');
+	}else{
+		var yy=dateObj.getFullYear();
+		var mm=dateObj.getMonth()+1;
+		var dd=dateObj.getDate();
+		
+		return [yy, '/', (mm>9?'':'0')+mm, '/', (dd>9?'':'0')+dd ].join('');
+	}
+}
+
 $(document).ready(function(){
 	/* 댓글목록 *************************************************************************/            	
 	var bnoValue=param.bno;//부모글번호
@@ -43,11 +65,12 @@ $(document).ready(function(){
 				return;
 			}
 			for(var i=0,len=data.list.length||0; i<len ; i++){
+			console.log(data.list[i].rno);
 				str+="<li style='cursor:pointer;' data-rno='"+data.list[i].rno+"'>";
 				str+="	<div>";
 				str+="		<div class='header'>";
 				str+=" 			<strong class='primary-font'>"+data.list[i].replyer+"</strong>";
-				str+="			<small class='pull-right text-muted'>"+displayTime(data.list[i].replyDate)+"</small>";
+//				str+="			<small class='pull-right text-muted'>"+displayTime(data.list[i].replyDate)+"</small>";
 				str+="		</div>";
 				str+="		<p>"+data.list[i].reply+"</p>";
 				str+="	</div>";
@@ -128,10 +151,11 @@ $(document).ready(function(){
     var modalRemoveBtn = $("#modalRemoveBtn"); //댓글삭제버튼
     var modalRegisterBtn = $("#modalRegisterBtn"); //댓글등록버튼
     
-	//'new reply'버튼 클릭시 모달창띄우기	
+	//등록 버튼 클릭시 모달창띄우기	
     $("#addReplyBtn").on("click",function(e){
     	modal.find("input").val(""); // input태그 값 초기화
-    	modal.find("input[name='replyer']").val(replyer); //댓글작성자    	
+    	console.log(replyerid);
+    	modal.find("input[name='replyer']").val(replyerid); //댓글작성자    
     	modalInputReplyDate.closest("div").hide(); // 댓글등록일 안보이게
     	modal.find("button[id!='modalCloseBtn']").hide(); //모달창 close버튼을 제외한 나머지 버튼 모두 안보이게
     	modalRegisterBtn.show(); //모달창 등록버튼은 다시 보이게
@@ -170,8 +194,8 @@ $(document).ready(function(){
     	//get방식 전용
 		$.get("/replies/"+rno+".json",function(reply){
 			modalInputReply.val(reply.reply); // 댓글
-    		modalInputReplyer.val(reply.replyer).attr("readonly","readonly"); // 댓글작성자
-    		modalInputReplyDate.val(displayTime(reply.replyDate)).attr("readonly","readonly"); // 댓글작성자
+			modalInputReplyer.val(reply.replyer); // 작성자
+    		modalInputReplyDate.val(displayTime(reply.replyDate)).attr("readonly"); // 댓글작성자
     		modal.data("rno",reply.rno); //댓글번호
     		
     		modal.find("button[id!='modalCloseBtn']").hide(); // close버튼 이외의 버튼은 안보이게하기.
@@ -210,7 +234,7 @@ $(document).ready(function(){
     	$.ajax({
 			type:"delete", //전송방식
 			url:"/replies/"+rno, //서버주소
-			data:  JSON.stringify({rno:rno, replyer:replyer}), //서버로 전송되는 데이터	       
+			data:  JSON.stringify({rno:rno, replyerid:replyerid}), //서버로 전송되는 데이터	       
 	      	contentType: "application/json; charset=utf-8", //서버로 전송되는 데이터의 형식
 			success:function(result,status,xhr){ //성공했을 때 호출하는 함수
 				alert(result); // 알림창띄우기

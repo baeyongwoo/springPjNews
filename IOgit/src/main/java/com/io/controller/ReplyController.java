@@ -37,23 +37,27 @@ public class ReplyController {
 	@PostMapping(value="/new",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> create(@RequestBody ReplyVO vo){
 		log.info("555555555555555555555555555555555555555555555555555555");
-		vo.setRno(null);
+		log.info("Creating reply: " + vo);
+		vo.setRno(null); //새 댓글은 ID가 없음
 		int insertCount=service.register(vo); //영향을 받은 행의 수 리턴
 		//영향을 받은 행의 수가 1이면 정상적으로 insert된 것임.
 		return insertCount==1 ? new ResponseEntity<>("success",HttpStatus.OK)
-							  : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);	
+							  : new ResponseEntity<>("fail",HttpStatus.INTERNAL_SERVER_ERROR);	
 	}
 	//목록 with paging
 	@GetMapping(value="/pages/{bno}/{page}",produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno){
 		log.info("7777777777777777777777777777777777777777777");
+		log.info("Fetching replies for board number: " + bno + " and page: " + page);
 		Criteria cri=new Criteria(page,10);
+		log.info("888888888888888888888888888888888888888888888888888"+service.getListPage(cri, bno));
 		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	//상세보기
 	@GetMapping(value="/{rno}",produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<ReplyVO> get(@PathVariable("rno") Long rno){
 		log.info("11111111111111111111111111111111111111111111");
+		log.info("Fetching reply with ID: " + rno);
 		return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
 	}
 	//수정. put, patch 방식 모두 처리
@@ -61,15 +65,18 @@ public class ReplyController {
 			value="/{rno}",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> update(@RequestBody ReplyVO vo,@PathVariable("rno") Long rno){
 		log.info("888888888888888888888888888888888888888888888888888888888888888");
-		vo.setRno(rno);
+		log.info("Updating reply with ID: " + rno + " and data: " + vo);
+		vo.setRno(rno); //댓글 ID 설정
 		return service.edit(vo)==1 ? 	new ResponseEntity<>("success",HttpStatus.OK) : 
-										new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+										new ResponseEntity<>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	//삭제. delete방식
 	@DeleteMapping(value="/{rno}",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> delete(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno){
+		log.info("9999999999999999999999999999999999999999999999999999999999999");
+		log.info("Deleting reply with ID: " + rno);
 		return service.delete(rno)==1 ? new ResponseEntity<>("success",HttpStatus.OK) :
-										new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+										new ResponseEntity<>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	//js파일 로딩
@@ -78,7 +85,7 @@ public class ReplyController {
 			BufferedReader reader = null;
 			String script=""; 
 			 try{
-				   String filePath = request.getRealPath("/resources/js/board/reply2js"); 
+				   String filePath = request.getRealPath("/resources/js/board/reply.js"); 
 				   reader = new BufferedReader(new FileReader(filePath));
 				   //out.print("<script>\n");
 				   script+="var bnoValue='"+bno+"'\n;";
