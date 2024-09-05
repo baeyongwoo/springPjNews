@@ -1,13 +1,18 @@
+--io최종에 가가우 file
+--한번만 하기
+DROP TABLE tfile CASCADE CONSTRAINTS;
+DROP TABLE bdfile CASCADE CONSTRAINTS;
+
 -- 기존 테이블 삭제 (제약 조건과 시퀀스 포함)
 DROP TABLE reply CASCADE CONSTRAINTS;
 DROP TABLE board CASCADE CONSTRAINTS;
 DROP TABLE tboard CASCADE CONSTRAINTS;
-DROP TABLE tfile CASCADE CONSTRAINTS;
-DROP TABLE bdfile CASCADE CONSTRAINTS;
+
 DROP TABLE cate CASCADE CONSTRAINTS;
 DROP TABLE dept CASCADE CONSTRAINTS;
 DROP TABLE userinfo CASCADE CONSTRAINTS;
 DROP TABLE auth CASCADE CONSTRAINTS;
+
 
 -- 시퀀스 삭제
 DROP SEQUENCE tboard_seq;
@@ -81,25 +86,14 @@ CREATE TABLE reply (
     CONSTRAINT reply_pk PRIMARY KEY (rno),
     CONSTRAINT reply_board_fk FOREIGN KEY (bno) REFERENCES board(bno) on DELETE CASCADE
 );
-
-CREATE TABLE tfile (
-    tuuid      VARCHAR2(100 BYTE) PRIMARY KEY, 
+CREATE TABLE iofile (
+    uuid      VARCHAR2(100 BYTE) PRIMARY KEY, 
     tno        NUMBER NOT NULL,
-    CONSTRAINT tfile_tboard_fk FOREIGN KEY (tno) REFERENCES tboard(tno) on DELETE CASCADE,
-    tUPLOADPATH VARCHAR2(200 BYTE) NOT NULL, 
-    tFILENAME  VARCHAR2(200 BYTE) NOT NULL, 
-    tFILETYPE  CHAR(1 BYTE) DEFAULT 'I' -- 기본값 추가
+    CONSTRAINT iofile_tboard_fk FOREIGN KEY (tno) REFERENCES tboard(tno) on DELETE CASCADE,
+    UPLOADPATH VARCHAR2(200 BYTE) NOT NULL, 
+    FILENAME  VARCHAR2(200 BYTE) NOT NULL, 
+    FILETYPE  VARCHAR2(20 BYTE) 
 );
-
-CREATE TABLE bdfile (
-    buuid      VARCHAR2(100 BYTE) PRIMARY KEY, 
-    bno        NUMBER NOT NULL,
-    CONSTRAINT bdfile_board_fk FOREIGN KEY (bno) REFERENCES board(bno) on DELETE CASCADE,
-    bUPLOADPATH VARCHAR2(200 BYTE) NOT NULL, 
-    bFILENAME  VARCHAR2(200 BYTE) NOT NULL, 
-    bFILETYPE  CHAR(1 BYTE) DEFAULT 'I' -- 기본값 추가
-);
-
 -- 시퀀스 생성
 CREATE SEQUENCE tboard_seq
 START WITH 1
@@ -124,26 +118,8 @@ INSERT INTO dept (did, dname) VALUES ('D01', '부서1');
 INSERT INTO dept (did, dname) VALUES ('D02', '부서2');
 INSERT INTO dept (did, dname) VALUES ('D00', 'Information Oceans');
 
-INSERT INTO cate (caid, category) VALUES ('C01', '기술');
-INSERT INTO cate (caid, category) VALUES ('C02', '비즈니스');
 
-INSERT INTO userinfo (uemail, upwd, uname, did) VALUES ('user1@ex.com', 'pw1', '홍길동', 'D01');
-INSERT INTO userinfo (uemail, upwd, uname, did) VALUES ('user2@ex.com', 'pw2', '김철수', 'D02');
--- 추가한 사용자
-INSERT INTO userinfo (uemail, upwd, uname, did) VALUES ('io@io.io', 'password', '관리자', 'D00');
 
-INSERT INTO auth (uemail, authority) VALUES ('user1@ex.com', 'Member');
-INSERT INTO auth (uemail, authority) VALUES ('user2@ex.com', 'Admin');
-INSERT INTO auth (uemail, authority) VALUES ('io@io.io', 'Admin');
-
-INSERT INTO tboard (tno, tmptitle, tmpcontent, tmpregdate, uemail, caid, code) VALUES (tboard_seq.NEXTVAL, '임시 제목 1', '임시 내용 1', current_timestamp, 'user1@ex.com', 'C01', 'ready');
-INSERT INTO tboard (tno, tmptitle, tmpcontent, tmpregdate, uemail, caid, code) VALUES (tboard_seq.NEXTVAL, '임시 제목 2', '임시 내용 2', current_timestamp, 'user2@ex.com', 'C02', 'ready');
-
-INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno) VALUES (board_seq.NEXTVAL, '첫 번째 제목', '내용1', 'user1@ex.com', current_timestamp, 'C01', 1);
-INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno) VALUES (board_seq.NEXTVAL, '두 번째 제목', '내용2', 'user2@ex.com', current_timestamp, 'C02', 2);
-
-INSERT INTO reply (rno, rname, rpwd, rcon, bno) VALUES (reply_seq.NEXTVAL, '사용자1', '비밀번호1', '댓글 내용 1', 1);
-INSERT INTO reply (rno, rname, rpwd, rcon, bno) VALUES (reply_seq.NEXTVAL, '사용자2', '비밀번호2', '댓글 내용 2', 1);
 
 commit;
 -- 데이터 확인 (주석 처리된 부분)
