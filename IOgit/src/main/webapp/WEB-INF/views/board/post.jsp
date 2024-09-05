@@ -226,7 +226,7 @@
 			var formObj=$("form[role='form']");// form태그 찾아놓기
 			$("button[type='submit']").on("click",function(e){
 				
-				console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+				console.log("form이벤트")
 				//전송방지
 				e.preventDefault();
 				var str="";

@@ -12,10 +12,10 @@ public interface TboardService {
 	public void post(TboardDTO tboardDTO);
 
 	// 게시글 수정 (제목과 내용만 업데이트)
-	public boolean edit(TboardDTO tboardDTO);
+	int updateTboard(TboardDTO tboard);
 
 	// 게시글 삭제
-	public boolean remove(Long tno);
+	void deleteTboard(Long tno);
 
 	// 게시글 상태를 'ready'로 변경
 	void updateTboardToReady(Long tno);

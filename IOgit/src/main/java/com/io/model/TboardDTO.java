@@ -15,9 +15,10 @@ public class TboardDTO {
 	private Timestamp tmpregdate;
 	
 	private String uemail;
+	private String uname;
 	private String caid;
 	private String code;
-
+	private String category;
 	
 	private List<BoardAttachVO> attachList;
 	

@@ -117,21 +117,20 @@ public class BoardController {
 
 	}
 
+
 	// 이용자 글작성
 	@GetMapping("/post")
 	public void postForm(Model model, HttpSession session) {
-		  String logoutMessage = (String) session.getAttribute("logoutMessage");
-		    if (logoutMessage != null) {
-		        model.addAttribute("logoutMessage", logoutMessage);
-		        session.removeAttribute("logoutMessage");
-		        session.removeAttribute("username");
-		    }
-		    
-		    model.addAttribute("username", session.getAttribute("username"));
-		    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
-		
-		
-		
+		String logoutMessage = (String) session.getAttribute("logoutMessage");
+		if (logoutMessage != null) {
+			model.addAttribute("logoutMessage", logoutMessage);
+			session.removeAttribute("logoutMessage");
+			session.removeAttribute("username");
+		}
+
+		model.addAttribute("username", session.getAttribute("username"));
+		model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
+
 		log.info("기사작성폼실행");
 		model.addAttribute("cateList", bs.selectCateAll());
 		// 게시글 작성 폼
@@ -152,23 +151,21 @@ public class BoardController {
 	 * "redirect:/board/list"; } else { return "redirect:/board/post"; } }
 	 */
 	@PostMapping("/post")
-    public String post(TboardDTO TboardDTO,HttpSession session, RedirectAttributes rttr) {
-	 log.info(" post 접근");
-        // 임시 로그인 상태 설정
+	public String post(TboardDTO TboardDTO, HttpSession session, RedirectAttributes rttr) {
+		log.info(" post 접근");
+		// 임시 로그인 상태 설정
 
-        String uemail = (String) session.getAttribute("userEmail");
-        if (uemail == null) {
-            // 임시로 사용자 이메일 설정 (테스트 용)
-            uemail = "user1@ex.com";
-        }
-        TboardDTO.setUemail(uemail);
-        ts.post(TboardDTO);
-        rttr.addFlashAttribute("result", TboardDTO.getTno()); 
-        return "redirect:/board/list";
-        
-    }
+		String uemail = (String) session.getAttribute("userEmail");
+		if (uemail == null) {
+			// 임시로 사용자 이메일 설정 (테스트 용)
+			uemail = "user1@ex.com";
+		}
+		TboardDTO.setUemail(uemail);
+		ts.post(TboardDTO);
+		rttr.addFlashAttribute("result", TboardDTO.getTno());
+		return "redirect:/board/list";
 
-
+	}
 
 	// 게시글 수정 폼
 	@GetMapping("/edit/{tno}")
@@ -186,62 +183,74 @@ public class BoardController {
 	}
 
 	// 게시글 수정 처리
-		@PostMapping("/edit")
-		public String editTboard(@ModelAttribute TboardDTO tboardDTO,RedirectAttributes rttr) {
-			
-			if(ts.edit(tboardDTO)) {
-				rttr.addFlashAttribute("result", "success");
-				log.info("수정 완료 " + tboardDTO);
-			}
-			
-			return "redirect:/board/list";
-		}
-		// 게시글 삭제
-		@PostMapping("/delete")
-		public String remove(Long tno, RedirectAttributes rttr) {
-			//첨부파일목록
-			List<BoardAttachVO> attachList=ts.getAttachList(tno);		
-					if(ts.remove(tno)) {
-						//첨부파일삭제
-						deleteFiles(attachList);
-						rttr.addFlashAttribute("result", "success");
-						// 성공적으로 삭제된 경우
-						log.info("게시글 삭제 완료: " + tno);
-					}else {
-						
-						log.error("게시글 삭제 실패: " + tno);
-					}
+	@PostMapping("/edit")
+	public String editTboard(@ModelAttribute TboardDTO tboardDTO, RedirectAttributes rttr) {
+		log.info("수정 처리중 " + tboardDTO);
+
 		
-					return "redirect:/board/list";
-			}
-		private void deleteFiles(List<BoardAttachVO> attachList) {
-			//첨부파일이 없으면 중지
-			if(attachList==null || attachList.size()==0) {
-				
-				
-				
-				return;
-			}
-			
-			attachList.forEach(attach->{
-				try {
-					Path file=Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\"+attach.getUuid()+"_"+attach.getFileName());
-					Files.deleteIfExists(file);//원본파일삭제
-					//이미지이면
-					if(Files.probeContentType(file).startsWith("image")) {
-						Path thumbNail=Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\s_"+attach.getUuid()+"_"+attach.getFileName());
-						Files.delete(thumbNail);//썸네일삭제
-					}
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-				
-			});
+		int result= ts.updateTboard(tboardDTO);
+		if(result==1) {
+			rttr.addFlashAttribute("result", "success");
 		}
-		//첨부파일목록
-			@GetMapping(value="/getAttachList",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-			@ResponseBody
-			public ResponseEntity<List<com.io.model.BoardAttachVO>> getAttachList(Long tno){
-				return new ResponseEntity<>(ts.getAttachList(tno),HttpStatus.OK);
+		log.info("수정 완료 " + tboardDTO);
+		return "redirect:/board/list";
+	}
+
+	// 게시글 삭제
+	@PostMapping("/delete")
+    public String deleteTboard(@RequestParam("bno") Long bno, HttpSession session,RedirectAttributes rttr) {
+        log.info("삭제 요청된 게시글 ID: " + bno);
+
+        try {
+            // 게시글 삭제 처리
+            ts.deleteTboard(bno);
+         // 첨부파일목록
+    		List<BoardAttachVO> attachList = ts.getAttachList(bno);
+    		
+    			// 첨부파일삭제
+    			deleteFiles(attachList);
+    			rttr.addFlashAttribute("result", "success");
+            // 성공적으로 삭제된 경우
+            log.info("게시글 삭제 완료: " + bno);
+        } catch (Exception e) {
+            // 삭제 작업 중 오류 발생 시 로깅 및 예외 처리
+            log.error("게시글 삭제 실패: " + bno, e);
+            // 사용자에게 오류 메시지를 전달하거나, 에러 페이지로 리다이렉트할 수 있음
+            return "redirect:/board/error"; // 또는 에러 처리 페이지로 리다이렉트
+        }
+        
+        return "redirect:/board/list";
+    }
+
+	private void deleteFiles(List<BoardAttachVO> attachList) {
+		// 첨부파일이 없으면 중지
+		if (attachList == null || attachList.size() == 0) {
+
+			return;
+		}
+
+		attachList.forEach(attach -> {
+			try {
+				Path file = Paths.get(
+						"C:\\upload\\" + attach.getUploadPath() + "\\" + attach.getUuid() + "_" + attach.getFileName());
+				Files.deleteIfExists(file);// 원본파일삭제
+				// 이미지이면
+				if (Files.probeContentType(file).startsWith("image")) {
+					Path thumbNail = Paths.get("C:\\upload\\" + attach.getUploadPath() + "\\s_" + attach.getUuid() + "_"
+							+ attach.getFileName());
+					Files.delete(thumbNail);// 썸네일삭제
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+
+		});
+	}
+
+	// 첨부파일목록
+	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<com.io.model.BoardAttachVO>> getAttachList(Long tno) {
+		return new ResponseEntity<>(ts.getAttachList(tno), HttpStatus.OK);
+	}
 }
