@@ -6,11 +6,17 @@
 body{
 	min-height: 1000px;
 }
+.container{
+    align-items: center;
+    justify-content: center;
+}
+
 #Logoo {
     font-family: "Sevillana", cursive;
     font-size: 100px;
     font-weight: 400;
     color: #4a90e2;
+    
 }
 
 .vid {
