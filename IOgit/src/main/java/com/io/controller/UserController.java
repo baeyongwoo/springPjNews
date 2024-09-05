@@ -104,7 +104,6 @@ public class UserController {
 
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@GetMapping(value="/findUser")
 	@ResponseBody
 	public String joinForm(String uemail) {
