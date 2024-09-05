@@ -52,6 +52,7 @@
 </style>
 </head>
 <body>
+	<%@ include file="/resources/heater/header.jsp"%>
 	<!-- Video Section -->
 	<figure class="vid">
 		<video loop autoplay muted>
@@ -61,7 +62,6 @@
 
 	<!-- Navigation Bar -->
 	<div class="container-fluid">
-		<%@ include file="/resources/heater/header.jsp"%>
 		<h3>${cate.category}</h3>
 
 		<div class="row">

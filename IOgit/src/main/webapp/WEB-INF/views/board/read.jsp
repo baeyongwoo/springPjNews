@@ -17,7 +17,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 <title>Document</title>
-
+<style type="text/css">
+	li{
+		display:none;
+	}
+</style>
 <script>
 	/* 오류가 날 수 있는 코드 (JS 파일로 이동 후 추가) */
 	var csrfHeaderName = "<c:out value='${_csrf.headerName}'/>";
@@ -25,9 +29,9 @@
 </script>
 </head>
 <body>
+		<%@ include file="/resources/heater/header.jsp" %>
 	<div class="container mt-3" style="text-align: right;">
 
-		<%@ include file="/resources/heater/header.jsp" %>
 
 		<div class="row">
 			<div class="container-fluid">

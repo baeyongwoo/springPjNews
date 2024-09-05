@@ -37,7 +37,7 @@ body {
 	margin: 0;
 	overflow: hidden;
 	background-color: #3a3a3a;
-	color: #000000;
+	color: #ffffff;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -45,31 +45,78 @@ body {
 	font-family: "Nanum Pen Script", cursive;
 }
 
-.vid video {
-    width: 100%;
-}
-
 .shado {
 	padding: 50px;
 	border-radius: 50%;
-	box-shadow: 0px 0px 20px #F5DB38, 0px 20px 20px rgb(255, 0, 0);
-	background-color: #4e4e4e;
+	box-shadow: 0px -5px 20px rgba(47, 0, 255, 0.8), 0px 5px 20px rgba(47, 0, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(10px);
+	z-index: 2;
+	text-align: center;
+	transition: transform 0.3s ease-in-out;
+}
+
+.shado:hover {
+	transform: scale(1.1);
+}
+
+.shado h1 {
+	color: #ffffff;
+	font-size: 3rem;
+	transition: color 0.3s;
+}
+
+.shado:hover h1 {
+	color: #ffcc00;
 }
 
 img {
-	border-radius: 20%;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.7;
+	z-index: 1;
 }
+
+.tracking-in-expand {
+	-webkit-animation: tracking-in-expand 2s ease-out ;
+	        animation: tracking-in-expand 2s ease-out ;
+}
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 </style>
+</head>
 <body>
-	<div class="shado">
-	<figure class="vid">
-		<video loop autoplay muted>
-			<source src="/resources/logo/start.mp4" type="video/mp4">
-		</video>
-	</figure>
+	<img src="/resources/logo/lolo.jpg" alt="Ocean Image">
+	<div class="shado tracking-in-expand">
 		<a type="button">
-			<h1 class="animate__animated animate__flipInX">Information
-				Ocsean</h1>
+			<h1>Information Ocean</h1>
 		</a>
 	</div>
 </body>
