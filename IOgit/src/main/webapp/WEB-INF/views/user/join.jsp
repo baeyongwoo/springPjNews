@@ -24,54 +24,52 @@
 <script src="/resources/js/user/UserJoin.js"></script>
 <title>회원가입</title>
 <script>
-    function validateForm(form) {
-        if (form.uname.value === "") {
-            alert("이름을 입력하세요");
-            form.uname.focus();
-            return false;
-        }
-
-        if (form.upwd.value === "") {
-            alert("비밀번호를 입력하세요");
-            form.upwd.focus();
-            return false;
-        }
-
-        if (!validatePassword(form.upwd.value)) {
-            alert("비밀번호는 8자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 포함해야 합니다.");
-            form.upwd.focus();
-            return false;
-        }
-
-        if (form.upwdch.value === "") {
-            alert("비밀번호 확인을 입력하세요");
-            form.upwdch.focus();
-            return false;
-        }
-
-        if (form.upwdch.value !== form.upwd.value) {
-            alert("비밀번호와 일치하지 않습니다.");
-            form.upwdch.focus();
-            return false;
-        }
-
-        if (form.uemail.value === "") {
-            alert("이메일을 입력하세요");
-            form.uemail.focus();
-            return false;
-        }
-
-        // 최종 확인 메시지
-        alert("회원가입이 완료되었습니다.");
-        return true;
-    }
-
-    function validatePassword(password) {
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-        return passwordRegex.test(password);
-    }
+	$(document).ready(function() {
+		$("#footer").load("footer.html");
+	});
 </script>
+<script type="text/javascript">
+	function validateForm(form) {
+		if (form.uname.value == "") {
+			alert("이름을 입력하세요");
+			form.uname.focus();
+			return false;
+		}
+	}
+	if (form.pswd.value == "") {
+		alert("비밀번호를 입력하세요");
+		form.pswd.focus();
+		return false;
+	}
+	if (!validatePassword(form.pswd.value)) {
+		alert("비밀번호는 8자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 포함해야 합니다.");
+		form.pswd.focus();
+		return false;
+	}
+	if (form.pswdch.value == "") {
+		alert("비밀번호 확인을 입력하세요");
+		form.upwdch.focus();
+		return false;
+	}
+	if (form.pswdch.value !== form.pswd.value) {
+		alert("비밀번호와 일치하지 않습니다.");
+		form.upwdch.focus();
+		form.pswd.focus();
+		return false;
+	}
+	if (form.uemail.value == "") {
+		alert("이메일을 입력하세요");
+		form.uemail.focus();
+		return false;
+	}
+	alert("회원가입이 완료되었습니다.");
+	return true;
 
+	function validatePassword(password) {
+		const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+		return passwordRegex.test(password);
+	}
+</script>
 </head>
 
 <body>
@@ -120,21 +118,24 @@
 					</div>
 
 					<div class="mb-3">
+						<label for="email" class="form-label">권한</label> <input
+							type="radio" name="role" value="ROLE_ADMIN"
+							onclick="toggleDept()">관리자 <input type="radio"
+							name="role" value="ROLE_MEMBER" onclick="toggleDept()">기자
+						<input type="radio" name="role" value="ROLE_USER"
+							onclick="toggleDept()">일반 <input type="hidden"
+							name="${_csrf.parameterName}" value="${_csrf.token}">
+					</div>
+					<div class="mb-3" id="deptDiv">
 						<label for="email" class="form-label">소속:</label> <select
-							name="did">
+							name="did" id="didSelect" onchange="checkDeptSelection()">
+							<option value="">선택하세요</option>
 							<c:forEach var="dept" items="${dept}">
 								<option value="${dept.did}">${dept.dname}</option>
 							</c:forEach>
 						</select>
 					</div>
-					<div class="mb-3">
-						<label for="email" class="form-label">권한</label> <input
-							type="checkbox" name="role" value="ROLE_ADMIN">관리자 <input
-							type="checkbox" name="role" value="ROLE_MEMBER">기자 <input
-							type="checkbox" name="role" value="ROLE_USER">일반 <input
-							type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}">
-					</div>
+					<input type="hidden" name="hiddenDid" id="hiddenDid" value="non">
 
 
 					<button type="submit" class="btn btn-primary">회원가입</button>
