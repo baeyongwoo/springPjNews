@@ -26,6 +26,7 @@ import com.io.model.AuthVO;
 import com.io.model.MypageDTO;
 import com.io.model.UserDTO;
 import com.io.security.SecurityService;
+import com.io.service.BoardService;
 import com.io.service.MyPageService;
 import com.io.service.UserService;
 
@@ -51,6 +52,10 @@ public class UserController {
 	private MyPageService mypageService;
 	
 	
+	@Autowired
+	private BoardService bs;
+	
+	
 	@GetMapping("/mypage")
 	public void myPage(HttpSession session, Model model) {
 		String uemail = (String) session.getAttribute("username");
@@ -71,7 +76,9 @@ public class UserController {
 
 	// 회원가입
 	@GetMapping("/join")
-	public void joinForm() {
+	public void joinForm(Model model) {
+		
+		model.addAttribute("dept", bs.selectDeptLIst());
 
 	}
 

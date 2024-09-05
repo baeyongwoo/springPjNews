@@ -50,7 +50,7 @@
 					<div class="mb-3">
 						<label for="upwdch" class="form-label">비밀번호 확인:</label> <input
 							type="password" class="form-control" id="upwdch"
-							placeholder="비밀번호 확인을 입력하세요" name="upwdch"required>
+							placeholder="비밀번호 확인을 입력하세요" name="upwdch" required>
 					</div>
 					<div class="mb-3">
 						<label for="uemail" class="form-label">이메일:</label> <input
@@ -73,18 +73,20 @@
 					<div class="mb-3">
 						<label for="email" class="form-label">소속:</label> <select
 							name="did">
-							<option value="D01">부서1</option>
-							<option value="D02">부서2</option>
+							<c:forEach var="dept" items="${dept}">
+								<option value="${dept.did}">${dept.dname}</option>
+							</c:forEach>
 						</select>
 					</div>
 					<div class="mb-3">
-						<label for="email" class="form-label">권한</label>
-						<input type="checkbox" name="role" value="ROLE_ADMIN">관리자
-						<input type="checkbox" name="role" value="ROLE_MEMBER">기자
-						<input type="checkbox" name="role" value="ROLE_USER">일반
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+						<label for="email" class="form-label">권한</label> <input
+							type="checkbox" name="role" value="ROLE_ADMIN">관리자 <input
+							type="checkbox" name="role" value="ROLE_MEMBER">기자 <input
+							type="checkbox" name="role" value="ROLE_USER">일반 <input
+							type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}">
 					</div>
-					
+
 
 					<button type="submit" class="btn btn-primary">회원가입</button>
 					<button type="button" class="btn btn-primary"
@@ -93,6 +95,6 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="/resources/heater/footer.jsp" %>
+	<%@ include file="/resources/heater/footer.jsp"%>
 </body>
 </html>
