@@ -127,6 +127,7 @@ public class UserController {
 	    String uemail = (String) session.getAttribute("username");
 
 	    
+	    model.addAttribute("dept", bs.selectDeptLIst());
 	    model.addAttribute("userData",userService.getUserByEmail(uemail));
 	    model.addAttribute("username", uemail);
 	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가

@@ -4,8 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.io.mapper.TboardMapper">
 
-	<update id="updateCode" parameterType="com.io.model.TboardDTO">
-		update tboard set code=#{code} where tno=#{tno}
+	<update id="updateCode" parameterType="com.io.model.TboardDTO"> update tboard set
+		code=#{code} where tno=#{tno}
 
 	</update>
 	<insert id="postTboard">
@@ -13,11 +13,10 @@
 			resultType="long">
 			select tboard_seq.NEXTVAL from dual
 		</selectKey>
-
-		INSERT INTO tboard (tno,tmptitle, tmpcontent, tmpregdate, uemail,caid,code)
+		INSERT INTO tboard (tno,tmptitle, tmpcontent, tmpregdate,
+		uemail,caid,code)
 		VALUES
 		(#{tno},#{tmptitle},#{tmpcontent},CURRENT_TIMESTAMP,#{uemail},#{caid},'ready')
-
 	</insert>
 	<!-- 게시글 수정 쿼리 -->
 	<update id="editTboard" parameterType="com.io.model.TboardDTO">
@@ -50,7 +49,8 @@
 		d.dname
 		FROM
 		tboard t
-		JOIN userinfo u ON t.uemail = u.uemail
+		JOIN userinfo u ON t.uemail =
+		u.uemail
 		JOIN cate c ON t.caid = c.caid
 		JOIN dept d ON u.did = d.did
 		WHERE t.tno = #{tno}
