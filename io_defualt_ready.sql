@@ -36,7 +36,7 @@ CREATE TABLE userinfo (
     uemail   VARCHAR2(50) NOT NULL,
     upwd     VARCHAR2(100) NOT NULL,
     uname    VARCHAR2(20) DEFAULT 'Unknown', -- 기본값 추가
-    did      VARCHAR2(30) NOT NULL,
+    did      VARCHAR2(30) DEFAULT 'non',
     CONSTRAINT userinfo_pk PRIMARY KEY (uemail),
     CONSTRAINT userinfo_dept_fk FOREIGN KEY (did) REFERENCES dept(did)
 );
@@ -120,6 +120,7 @@ INSERT INTO dept (did, dname) VALUES ('S01', 'SBS');
 INSERT INTO dept (did, dname) VALUES ('K01', 'KBS');
 INSERT INTO dept (did, dname) VALUES ('Y01', 'YTN');
 INSERT INTO dept (did, dname) VALUES ('IO', 'Information Oceans');
+INSERT INTO dept (did, dname) VALUES ('non', 'non');
 
 
 commit;
@@ -132,7 +133,4 @@ commit;
 -- SELECT * FROM reply;
 -- SELECT * FROM tfile;
 -- SELECT * FROM bdfile;
-
-
-
 
