@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,7 +64,7 @@ public class BoardController {
 		model.addAttribute("cateList", bs.selectCateAll());
 		return "board/list";
 	}
-
+	
 	@GetMapping("/list/{caid}")
 	public String lists(Model model, @PathVariable String caid, HttpSession session, Criteria criteria) {
 		String logoutMessage = (String) session.getAttribute("logoutMessage");
@@ -115,8 +116,9 @@ public class BoardController {
 		model.addAttribute("board", boardDTO);
 
 	}
-
+	
 	// 이용자 글작성
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@GetMapping("/post")
 	public void postForm(Model model, HttpSession session) {
 		String logoutMessage = (String) session.getAttribute("logoutMessage");
@@ -149,6 +151,7 @@ public class BoardController {
 	 * "redirect:/board/list"; } else { return "redirect:/board/post"; } }
 	 */
 	@PostMapping("/post")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	public String post(TboardDTO TboardDTO, HttpSession session, RedirectAttributes rttr) {
 		log.info(" post 접근");
 		// 임시 로그인 상태 설정
@@ -163,6 +166,7 @@ public class BoardController {
 
 	// 게시글 수정 폼
 	@GetMapping("/edit/{tno}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	public String edit(@PathVariable Long tno, Model model) {
 		log.info("기존 게시글 " + tno + " 수정");
 		TboardDTO tboardDTO = ts.getTboard(tno);
@@ -178,6 +182,7 @@ public class BoardController {
 
 	// 게시글 수정 처리
 	@PostMapping("/edit")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	public String editTboard(@ModelAttribute TboardDTO tboardDTO, RedirectAttributes rttr) {
 		log.info("수정 처리중 " + tboardDTO);
 
@@ -192,6 +197,7 @@ public class BoardController {
 
 	// 게시글 삭제
 	@PostMapping("/delete")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
     public String deleteTboard(@RequestParam("bno") Long bno, HttpSession session,RedirectAttributes rttr) {
         log.info("삭제 요청된 게시글 ID: " + bno);
 
@@ -215,7 +221,7 @@ public class BoardController {
         
         return "redirect:/board/list";
     }
-
+	
 	private void deleteFiles(List<BoardAttachVO> attachList) {
 		// 첨부파일이 없으면 중지
 		if (attachList == null || attachList.size() == 0) {
@@ -242,6 +248,7 @@ public class BoardController {
 	}
 
 	// 첨부파일목록
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<com.io.model.BoardAttachVO>> getAttachList(Long tno) {

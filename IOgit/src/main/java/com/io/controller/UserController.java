@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -55,7 +56,7 @@ public class UserController {
 	@Autowired
 	private BoardService bs;
 	
-	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@GetMapping("/mypage")
 	public void myPage(HttpSession session, Model model) {
 		String uemail = (String) session.getAttribute("username");
@@ -103,7 +104,7 @@ public class UserController {
 
 	}
 
-
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@GetMapping(value="/findUser")
 	@ResponseBody
 	public String joinForm(String uemail) {
@@ -115,7 +116,7 @@ public class UserController {
 
 
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@GetMapping("/modify")
 	public void modifyForm(HttpSession session, Model model) {
 		String logoutMessage = (String) session.getAttribute("logoutMessage");
@@ -132,7 +133,7 @@ public class UserController {
 	    model.addAttribute("username", uemail);
 	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@PostMapping("/update")
 	public String updateuser(@ModelAttribute UserDTO dto, HttpSession session) {
 		
@@ -146,6 +147,7 @@ public class UserController {
 
 	
     // 유저정보 수정
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
     @PutMapping("/update")
     public ResponseEntity<String> updateUser(@PathVariable("uemail") String uemail, @RequestBody UserDTO userDTO) {
     	log.info("test " + userDTO);
