@@ -24,59 +24,62 @@
 <script src="/resources/js/user/UserJoin.js"></script>
 <title>회원가입</title>
 <script>
-        $(document).ready(function(){
-            $("#footer").load("footer.html");
-        });
-    </script>
-    <script type="text/javascript">
-        function validateForm(form){
-            if(form.uname.value==""){
-                alert("이름을 입력하세요");
-                form.uname.focus();
-                return false;
-            }
-            }
-            if(form.pswd.value==""){  
-                alert("비밀번호를 입력하세요");
-                form.pswd.focus();
-                return false;
-            }
-            if(!validatePassword(form.pswd.value)){
-                alert("비밀번호는 8자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 포함해야 합니다.");
-                form.pswd.focus();
-                return false;
-            }
-            if(form.pswdch.value==""){  
-                alert("비밀번호 확인을 입력하세요");
-                form.upwdch.focus();
-                return false;
-            }
-            if(form.pswdch.value!==form.pswd.value){
-                alert("비밀번호와 일치하지 않습니다.");
-                form.upwdch.focus();
-                form.pswd.focus();
-                return false;
-            }
-            if(form.uemail.value==""){
-                alert("이메일을 입력하세요");
-                form.uemail.focus();
-                return false;
-            }
-            alert("회원가입이 완료되었습니다.");
-            return true;
-            
-        function validatePassword(password) {
-            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-            return passwordRegex.test(password);
+    function validateForm(form) {
+        if (form.uname.value === "") {
+            alert("이름을 입력하세요");
+            form.uname.focus();
+            return false;
         }
-    </script>
+
+        if (form.upwd.value === "") {
+            alert("비밀번호를 입력하세요");
+            form.upwd.focus();
+            return false;
+        }
+
+        if (!validatePassword(form.upwd.value)) {
+            alert("비밀번호는 8자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 포함해야 합니다.");
+            form.upwd.focus();
+            return false;
+        }
+
+        if (form.upwdch.value === "") {
+            alert("비밀번호 확인을 입력하세요");
+            form.upwdch.focus();
+            return false;
+        }
+
+        if (form.upwdch.value !== form.upwd.value) {
+            alert("비밀번호와 일치하지 않습니다.");
+            form.upwdch.focus();
+            return false;
+        }
+
+        if (form.uemail.value === "") {
+            alert("이메일을 입력하세요");
+            form.uemail.focus();
+            return false;
+        }
+
+        // 최종 확인 메시지
+        alert("회원가입이 완료되었습니다.");
+        return true;
+    }
+
+    function validatePassword(password) {
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        return passwordRegex.test(password);
+    }
+</script>
+
 </head>
 
 <body>
 	<div class="container" style="text-align: center; margin-top: 90px;">
-		<a class="navbar-brand" href="/board/list">
-            <img src="/resources/logo/IOLogo.png" alt="Logo" style="width: 100px; border-radius: 20%; margin-bottom: 100px;">
-        </a>
+		<a class="navbar-brand" href="/board/list"> <img
+			src="/resources/logo/IOLogo.png" alt="Logo"
+			style="width: 100px; border-radius: 20%; margin-bottom: 100px;">
+		</a>
 
 		<div class="container d-flex justify-content-center">
 			<div>
