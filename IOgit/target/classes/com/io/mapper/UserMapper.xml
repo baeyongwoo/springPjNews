@@ -20,7 +20,6 @@
 		#{upwd},
 		uname = #{uname},
 		did = #{did}
-
 		WHERE uemail = #{uemail}
 	</update>
 

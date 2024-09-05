@@ -63,11 +63,11 @@
 				        </select>
 				    </div>
 				    <div class="d-flex justify-content-between">
-				        <input type="submit" value="수정" class="btn btn-primary">
+				        <input type="submit" value="수정" class="btn btn-primary" onsubmit="return confirm('정말 수정하시겠습니까?');">
 				        <input type="button" value="취소" class="btn btn-secondary" onclick="location.href='/board/list'">
 				    </div>
 				</form>
-				<form method="get" action="/user/delete" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+				<form style="width:100%;" method="post" action="/user/delete" onsubmit="return confirm('정말 삭제하시겠습니까?');">
                     <input type="hidden" name="uemail" value="${userData.uemail}">
                     <input type="submit" value="삭제" class="btn btn-danger mt-3">
                 </form>

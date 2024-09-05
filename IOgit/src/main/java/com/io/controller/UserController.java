@@ -150,8 +150,7 @@ public class UserController {
         }
     }
     //유저 삭제
-    @GetMapping(value="/delete")
-    @ResponseBody
+    @PostMapping(value="/delete")
 	public String deleteUser(@RequestParam("uemail") String uemail, HttpSession session) {
 		userService.remove(uemail);
 		session.removeAttribute("username");
