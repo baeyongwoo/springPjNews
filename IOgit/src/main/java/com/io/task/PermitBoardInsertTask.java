@@ -22,7 +22,7 @@ public class PermitBoardInsertTask {
 	
 	
 	//정해진 시간에 boardtable에 올리는 스케줄링
-	@Scheduled(cron = "00 30 * * * *")
+	@Scheduled(cron = "30 * * * * *")
 	public void permitCheckInsert() {
 		log.info("스케줄실행");
 		TboardDTO dto = new TboardDTO();
@@ -37,7 +37,7 @@ public class PermitBoardInsertTask {
 	}
 	
 	//나중에 새볔시간에 변경하도록 위 스케줄링 보다 늦어야함
-	@Scheduled(cron = "00 59 * * * *")
+	@Scheduled(cron = "50 * * * * *")
 	public void permitCodeToComplete() {
 		log.info("완료로 스케줄링");
 		try {
