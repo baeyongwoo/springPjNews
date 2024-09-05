@@ -114,9 +114,10 @@ NOCACHE
 NOCYCLE;
 
 -- 데이터 삽입
-INSERT INTO dept (did, dname) VALUES ('D01', '부서1');
-INSERT INTO dept (did, dname) VALUES ('D02', '부서2');
-INSERT INTO dept (did, dname) VALUES ('D00', 'Information Oceans');
+INSERT INTO dept (did, dname) VALUES ('S01', 'SBS');
+INSERT INTO dept (did, dname) VALUES ('K01', 'KBS');
+INSERT INTO dept (did, dname) VALUES ('Y01', 'YTN');
+INSERT INTO dept (did, dname) VALUES ('IO', 'Information Oceans');
 
 
 
