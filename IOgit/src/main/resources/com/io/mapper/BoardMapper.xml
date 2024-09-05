@@ -99,26 +99,27 @@
 
 
 
-	<insert id="insertBoards" parameterType="java.util.List">
-		INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno)
-		SELECT board_seq.nextval, A.title, TO_CLOB(A.tmpcontent), A.uemail,
-		A.systimestamp,
-		A.caid, A.tno
-		FROM (
-		<foreach collection="list" item="item" separator=" UNION ALL ">
-			SELECT
-			#{item.tmptitle} as title,
-			#{item.tmpcontent,
-			typeHandler=utils.ClobTypeHandler} as tmpcontent,
-			#{item.uemail} as
-			uemail,
-			current_timestamp as systimestamp,
-			#{item.caid} as caid,
-			#{item.tno} as tno
-			FROM DUAL
-		</foreach>
-		) A
-	</insert>
+<insert id="insertBoards" parameterType="java.util.List">
+    INSERT INTO board (bno, title, bcontent, uemail, regdate, caid, tno)
+    SELECT board_seq.nextval, A.title, TO_CLOB(A.tmpcontent), A.uemail,
+    A.systimestamp,
+    A.caid, A.tno
+    FROM (
+    <foreach collection="list" item="item" separator=" UNION ALL ">
+        SELECT
+        #{item.tmptitle} as title,
+        #{item.tmpcontent,
+        jdbcType=CLOB} as tmpcontent,
+        #{item.uemail} as
+        uemail,
+        current_timestamp as systimestamp,
+        #{item.caid} as caid,
+        #{item.tno} as tno
+        FROM DUAL
+    </foreach>
+    ) A
+</insert>
+
 
 
 
