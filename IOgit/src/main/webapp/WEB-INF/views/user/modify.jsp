@@ -56,11 +56,12 @@
 				    
 				    </div>
 				    <div class="mb-3">
-				        <label for="did" class="form-label">소속:</label>
-				        <select name="did" class="form-select" required>
-				            <option value="D01" ${userData.did == 'D01' ? 'selected' : ''}>부서1</option>
-				            <option value="D02" ${userData.did == 'D02' ? 'selected' : ''}>부서2</option>
-				        </select>
+				        <label for="email" class="form-label">소속:</label> <select
+							name="did">
+							<c:forEach var="dept" items="${dept}">
+								<option value="${dept.did}">${dept.dname}</option>
+							</c:forEach>
+						</select>
 				    </div>
 				    <div class="d-flex justify-content-between">
 				        <input type="submit" value="수정" class="btn btn-primary" onsubmit="return confirm('정말 수정하시겠습니까?');">

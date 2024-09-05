@@ -58,6 +58,6 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="/resources/heater/footer.jsp" %>
+	<%@ include file="/resources/heater/footer.jsp"%>
 </body>
 </html>
