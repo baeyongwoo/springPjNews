@@ -12,7 +12,25 @@
 <link href="/resources/css/style.css" rel="stylesheet">
 <title>Document</title>
 <!--첨부파일 스타일  -->
-
+<script>	
+	function validateForm(form) {
+		if (form.tmptitle.value == "") {
+			alert("제목을 입력하세요");
+			form.tmptitle.focus();
+			return false;
+		}
+		if (form.caid.value == "null") {
+			alert("카테고리를 선택하세요");
+			form.caid.focus();
+			return false;
+		}
+		if (form.tmpcontent.value == "") {
+			alert("내용을 입력하세요");
+			form.tmpcontent.focus();
+			return false;
+		}
+	}
+</script>
 <style>
 			.uploadResult {
 				width: 100%;

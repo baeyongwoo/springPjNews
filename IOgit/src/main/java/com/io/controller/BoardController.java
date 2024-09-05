@@ -154,10 +154,10 @@ public class BoardController {
 		// 임시 로그인 상태 설정
 
 		String uemail = (String) session.getAttribute("userEmail");
-		if (uemail == null) {
-			// 임시로 사용자 이메일 설정 (테스트 용)
-			uemail = "user1@ex.com";
-		}
+//		if (uemail == null) {
+//			// 임시로 사용자 이메일 설정 (테스트 용)
+//			uemail = "user1@ex.com";
+//		}
 		TboardDTO.setUemail(uemail);
 		ts.post(TboardDTO);
 		rttr.addFlashAttribute("result", TboardDTO.getTno());
