@@ -36,9 +36,7 @@ public class ToardServiceImpl implements TboardService {
 
 		}
 
-	}
-
-	@Transactional
+	}@Transactional
 	@Override
 	public void post(TboardDTO tboardDTO) {
 		log.info("post transactional" + tboardDTO);
@@ -62,7 +60,7 @@ public class ToardServiceImpl implements TboardService {
 	@Transactional
 	@Override
 	public int updateTboard(TboardDTO tboardDTO) {
-		int upadteResult = tm.editTboard(tboardDTO);
+		int upadteResult=tm.editTboard(tboardDTO);
 
 		log.info("수정");
 
@@ -76,7 +74,7 @@ public class ToardServiceImpl implements TboardService {
 				attachMapper.insert(attach);
 			});
 		}
-
+		
 		return upadteResult;
 
 	}
@@ -102,5 +100,6 @@ public class ToardServiceImpl implements TboardService {
 	public List<BoardAttachVO> getAttachList(Long tno) {
 		return attachMapper.findByTno(tno);
 	}
+
 
 }

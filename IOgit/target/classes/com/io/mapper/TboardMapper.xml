@@ -21,19 +21,16 @@
 	<!-- 게시글 수정 쿼리 -->
 	<update id="editTboard" parameterType="com.io.model.TboardDTO">
 		UPDATE tboard
-		SET tmptitle
-		= #{tmptitle},
+		SET tmptitle = #{tmptitle},
 		tmpcontent = #{tmpcontent},
 		code = 'ready'
-		WHERE tno =
-		#{tno}
+		WHERE tno = #{tno}
 	</update>
 
 	<!-- 게시글 삭제 쿼리 -->
 	<delete id="deleteTboard" parameterType="long">
 		DELETE FROM tboard
-		WHERE
-		tno = #{tno}
+		WHERE tno = #{tno}
 	</delete>
 
 	<!-- 게시글 조회 쿼리 -->
