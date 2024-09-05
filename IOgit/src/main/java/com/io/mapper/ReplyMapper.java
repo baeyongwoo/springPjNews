@@ -8,16 +8,16 @@ import com.io.model.Criteria;
 import com.io.model.ReplyVO;
 
 public interface ReplyMapper {
-	//댓글등록
-    public int insert(ReplyVO vo);
-    //댓글목록
-    public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("bno") Long bno);
-    //댓글갯수
-    public int getCountByBno(Long bno);
-    //댓글상세
-    public ReplyVO read(Long rno);
-    //댓글수정
-    public int update(ReplyVO vo);
-    //댓글삭제
-    public int delete(@Param("rno") Long rno, @Param("rpwd") String rpwd);
+	//등록
+	public int insert(ReplyVO vo);
+	//댓글목록 with paging. paramter가 2개이상일 경우 @Param 사용.
+	public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("bno") Long bno);
+	//댓글갯수
+	public int getCountByBno(Long bno);
+	//댓글상세보기
+	public ReplyVO read(Long rno);
+	//수정
+	public int update(ReplyVO reply);
+	//삭제
+	public int delete(Long rno);
 }
