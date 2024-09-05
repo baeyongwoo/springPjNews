@@ -40,11 +40,11 @@
                 <form method="post" action="/user/update" id="operForm" class="was-validated">
 				    <div class="mb-3 mt-3">
 				        <label for="uname" class="form-label">이름:</label>
-				        <input type="text" class="form-control" id="uname" name="uname" value="${userData.uname}" readonly>
+				        <input type="text" class="form-control" id="uname" name="uname" value="${dept.uname}" readonly>
 				    </div>
 				    <div class="mb-3">
 				        <label for="email" class="form-label">이메일:</label>
-				        <input type="email" class="form-control" id="email" name="uemail" value="${userData.uemail}" readonly>
+				        <input type="email" class="form-control" id="email" name="uemail" value="${dept.uemail}" readonly>
 				    </div>
 				    <div class="mb-3">
 				        <label for="pwd" class="form-label">비밀번호:</label>
@@ -56,11 +56,12 @@
 				    
 				    </div>
 				    <div class="mb-3">
-				        <label for="did" class="form-label">소속:</label>
-				        <select name="did" class="form-select" required>
-				            <option value="D01" ${userData.did == 'D01' ? 'selected' : ''}>부서1</option>
-				            <option value="D02" ${userData.did == 'D02' ? 'selected' : ''}>부서2</option>
-				        </select>
+				        <label for="email" class="form-label">소속:</label> <select
+							name="did">
+							<c:forEach var="dept" items="${dept}">
+								<option value="${dept.did}">${dept.dname}</option>
+							</c:forEach>
+						</select>
 				    </div>
 				    <div class="d-flex justify-content-between">
 				        <input type="submit" value="수정" class="btn btn-primary" onsubmit="return confirm('정말 수정하시겠습니까?');">

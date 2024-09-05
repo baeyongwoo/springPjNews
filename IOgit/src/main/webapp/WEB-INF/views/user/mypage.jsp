@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-    <title>My Page</title>
-    <script
+<title>My Page</title>
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -26,31 +26,30 @@
 <link href="/resources/css/logo" rel="stylesheet">
 </head>
 <body>
- 
-<nav class="navbar navbar-expand-sm">
-			<div class="container">
-				<a class="navbar-brand" href="/board/list"> <img
-					src="/resources/logo/IOLogo.png" alt="Logo" id="logo">
-				</a>
-				<div class="navbar-nav">
-					<p id="Logoo">IO</p>
-				</div>
-				<div class="navbar-nav right">
-					<ul class="navbar-nav">
-						<c:choose>
-							<c:when test="${loggedIn}">
-								<li class="nav-item"><a class="nav-link"
-									href="/user/logout">로그아웃</a></li>
-							<li class="nav-item"><a class="nav-link" href="/user/mypage">마이페이지</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
-								<li class="nav-item"><a class="nav-link" href="/user/join">회원가입</a></li>
-							</c:otherwise>
-						</c:choose>
-					</ul>
-				</div>
+
+	<nav class="navbar navbar-expand-sm">
+		<div class="container">
+			<a class="navbar-brand" href="/board/list"> <img
+				src="/resources/logo/IOLogo.png" alt="Logo" id="logo">
+			</a>
+			<div class="navbar-nav">
+				<p id="Logoo">IO</p>
 			</div>
+			<div class="navbar-nav right">
+				<ul class="navbar-nav">
+					<c:choose>
+						<c:when test="${loggedIn}">
+							<li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
+							<li class="nav-item"><a class="nav-link" href="/user/mypage">마이페이지</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
+							<li class="nav-item"><a class="nav-link" href="/user/join">회원가입</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+		</div>
 		<aside class="side-bar">
 			<ul class="nav nav-tabs" role="tablist">
 				<i class="fi fi-rr-list"></i>
@@ -58,40 +57,38 @@
 						class="fi fi-rr-home"> </i>홈</a></li>
 				<li><a class="nav-link" href="/board/list/all"><i
 						class="fi fi-rr-home"> </i>전체보기</a></li>
-				<li>
-					<a class="nav-link" href="/user/modify">회원정보 수정/삭제</a>				
-				</li>
+				<li><a class="nav-link" href="/user/modify">회원정보 수정/삭제</a></li>
 
 
 			</ul>
 		</aside>
-		</nav>
-		
-    <h1>내 게시글</h1>
-    <table class="table table-dark table-hover text-center">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Content</th>
-                <th>Category</th>
-                <th>Department</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="post" items="${myPosts}">
-                <tr>
-                    <td>${post.tno}</td>
-                    <td><a href='/board/read?=<c:out value="${post.tno}"/>'></a>${post.tmptitle}</td>
-                    <td>${post.tmpregdate}</td>
-                    <td>${post.tmpcontent}</td>
-                    <td>${post.category}</td>
-                    <td>${post.dname}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    <%@ include file="/resources/heater/footer.jsp" %>
+	</nav>
+
+	<h1>내 게시글</h1>
+	<table class="table table-dark table-hover text-center">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>Title</th>
+				<th>Date</th>
+				<th>Content</th>
+				<th>Category</th>
+				<th>Department</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="post" items="${myPosts}">
+				<tr>
+					<td>${post.tno}</td>
+					<td><a href='/board/read?=<c:out value="${post.tno}"/>'></a>${post.tmptitle}</td>
+					<td>${post.tmpregdate}</td>
+					<td>${post.tmpcontent}</td>
+					<td>${post.category}</td>
+					<td>${post.dname}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<%@ include file="/resources/heater/footer.jsp"%>
 </body>
 </html>
