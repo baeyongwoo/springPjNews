@@ -56,7 +56,7 @@ public class UserController {
 	@Autowired
 	private BoardService bs;
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER', 'ROLE_USER')")
 	@GetMapping("/mypage")
 	public void myPage(HttpSession session, Model model) {
 		String uemail = (String) session.getAttribute("username");
