@@ -2,6 +2,8 @@ package com.io.model;
 
 import java.sql.Clob;
 import java.sql.Timestamp;
+import java.util.List;
+
 
 import lombok.Data;
 
@@ -15,15 +17,8 @@ public class TboardDTO {
 	private String uemail;
 	private String caid;
 	private String code;
-	private String uname;
+
 	
-	/* tempFile */
-	
-	private String tuuid;
-	private String tuploadpth;
-	private String tfilename;
-	private String tfiletype;
-	
-	private String category;
+	private List<BoardAttachVO> attachList;
 	
 }
