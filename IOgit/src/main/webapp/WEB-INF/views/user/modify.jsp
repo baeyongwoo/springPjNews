@@ -40,11 +40,11 @@
                 <form method="post" action="/user/update" id="operForm" class="was-validated">
 				    <div class="mb-3 mt-3">
 				        <label for="uname" class="form-label">이름:</label>
-				        <input type="text" class="form-control" id="uname" name="uname" value="${dept.uname}" readonly>
+				        <input type="text" class="form-control" id="uname" name="uname" value="${userData.uname}" readonly>
 				    </div>
 				    <div class="mb-3">
 				        <label for="email" class="form-label">이메일:</label>
-				        <input type="email" class="form-control" id="email" name="uemail" value="${dept.uemail}" readonly>
+				        <input type="email" class="form-control" id="email" name="uemail" value="${userData.uemail}" readonly>
 				    </div>
 				    <div class="mb-3">
 				        <label for="pwd" class="form-label">비밀번호:</label>
