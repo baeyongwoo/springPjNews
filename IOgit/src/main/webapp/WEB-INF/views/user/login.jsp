@@ -54,8 +54,7 @@
 					<a href="/user/join" class="btn btn-primary" role="button">회원가입</a>
 
 					<button type="submit" data-oper="login" class="btn btn-primary">로그인</button>
-					<button type="reset" data-oper="cancle" class="btn btn-primary">취소</button>
-					<button type="button" class="btn btn-primary">메인페이지</button>
+					<a href="/board/list" class="btn btn-primary" role="button">메인페이지</a>
 				</form>
 			</div>
 		</div>
