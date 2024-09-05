@@ -63,56 +63,53 @@
 	</nav>
 
 	<h1>내 게시글</h1>
-    <table class="table table-dark table-hover text-center">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Content</th>
-                <th>Category</th>
-                <th>Department</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="post" items="${myPosts}">
-                <tr>
-                    <td>${post.tno}</td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${fn:length(post.tmptitle) > 30}">
+	<table class="table table-dark table-hover text-center">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>제목</th>
+				<th>날짜</th>
+				<th>내용</th>
+				<th>카테고리</th>
+				<th>소속사</th>
+				<th>Edit</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="post" items="${myPosts}">
+				<tr>
+					<td>${post.tno}</td>
+					<td><c:choose>
+							<c:when test="${fn:length(post.tmptitle) > 30}">
                                 ${fn:substring(post.tmptitle, 0, 30)}...
                             </c:when>
-                            <c:otherwise>
+							<c:otherwise>
                                 ${post.tmptitle}
                             </c:otherwise>
-                        </c:choose>
-                    </td>
-                    <td>${post.tmpregdate}</td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${fn:length(post.tmpcontent) > 50}">
+						</c:choose></td>
+					<td>${post.tmpregdate}</td>
+					<td><c:choose>
+							<c:when test="${fn:length(post.tmpcontent) > 50}">
                                 ${fn:substring(post.tmpcontent, 0, 50)}...
                             </c:when>
-                            <c:otherwise>
+							<c:otherwise>
                                 ${post.tmpcontent}
                             </c:otherwise>
-                        </c:choose>
-                    </td>
-                    <td>${post.category}</td>
-                    <td>${post.dname}</td>
-                    <!-- 수정 페이지로 이동하는 폼 -->
-                    <td>
-                        <form action="/board/modify" method="get">
-                            <input type="hidden" name="postId" value="${post.tno}">
-                            <button type="submit" class="btn btn-primary">수정</button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+						</c:choose></td>
+					<td>${post.category}</td>
+					<td>${post.dname}</td>
+					<!-- 수정 페이지로 이동하는 폼 -->
+					<td>
+						<form
+							action="${pageContext.request.contextPath}/board/edit/${tboard.tno}"
+							method="get" style="display: inline;">
+							<button type="submit" class="btn btn-primary">수정</button>
+						</form>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 	<%@ include file="/resources/heater/footer.jsp"%>
 </body>
 </html>
