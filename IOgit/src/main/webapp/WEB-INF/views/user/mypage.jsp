@@ -83,7 +83,7 @@
             <c:forEach var="post" items="${myPosts}">
                 <tr>
                     <td>${post.tno}</td>
-                    <td>${post.tmptitle}</td>
+                    <td><a href='/board/read?=<c:out value="${post.tno}"/>'></a>${post.tmptitle}</td>
                     <td>${post.tmpregdate}</td>
                     <td>${post.tmpcontent}</td>
                     <td>${post.category}</td>
