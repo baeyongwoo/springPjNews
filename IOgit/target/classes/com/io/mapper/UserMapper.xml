@@ -12,11 +12,11 @@
 	</insert>
 	<!--회원정보수정  -->
 	<update id="updateUser" parameterType="com.io.model.UserDTO">
-	    UPDATE users
+	    UPDATE userinfo
 	    SET upwd = #{upwd},
 	        uname = #{uname},
-	        did = #{did},
-	        dname = #{dname}
+	        did = #{did}
+	      
 	    WHERE uemail = #{uemail}
 	</update>
 

@@ -48,12 +48,12 @@
 				    </div>
 				    <div class="mb-3">
 				        <label for="pwd" class="form-label">비밀번호:</label>
-				        <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력하세요" name="upwd" value="${userData.upwd}" required>
+				        <input type="password" class="form-control" id="pwd"  name="upwd"  required>
 				    </div>
 				    <div class="mb-3">
 				        <label for="pswdch" class="form-label">비밀번호 확인:</label>
-				        <input type="password" class="form-control" id="pswdch" placeholder="비밀번호 확인을 입력하세요" name="pwdch" value="${userData.upwdch}" required>
-				    	<input type="hidden" name="dname" value="${userData.dname}">
+				        <input type="password" class="form-control" id="pswdch" placeholder="비밀번호 확인을 입력하세요" name="pwdch"  required>
+				    
 				    </div>
 				    <div class="mb-3">
 				        <label for="did" class="form-label">소속:</label>

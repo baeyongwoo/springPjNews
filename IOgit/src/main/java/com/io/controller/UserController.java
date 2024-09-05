@@ -118,28 +118,19 @@ public class UserController {
 	        session.removeAttribute("username");
 	    }
 	    String uemail = (String) session.getAttribute("username");
-	    
-	    
-	    ;
+
 	    
 	    model.addAttribute("userData",userService.getUserByEmail(uemail));
 	    model.addAttribute("username", uemail);
 	    model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
 	}
 	
-	@PostMapping("/modify")
-	public String updateUser(@ModelAttribute UserDTO dto) {
-	    // DTO 값 로그로 출력 (디버깅용)
-	    log.info("수정 요청 받은 UserDTO: " + dto);
+	@PostMapping("/update")
+	public String updateuser(@ModelAttribute UserDTO dto, HttpSession session) {
+		
+		
+		dto.setUpwd(pwen.encode(dto.getUpwd()));
 
-	    if (!dto.getUpwd().equals(dto.getPwdch())) {
-	        return "redirect:/user/modify?error=passwordMismatch";
-	    }
-
-	    // 비밀번호 암호화
-	    dto.setUpwd(pwen.encode(dto.getUpwd()));
-
-	    // 업데이트 서비스 호출
 	    userService.updateUser(dto);
 
 	    return "redirect:/user/login";
@@ -149,6 +140,7 @@ public class UserController {
     // 유저정보 수정
     @PutMapping("/update")
     public ResponseEntity<String> updateUser(@PathVariable("uemail") String uemail, @RequestBody UserDTO userDTO) {
+    	log.info("test " + userDTO);
         userDTO.setUemail(uemail);
         int result = userService.updateUser(userDTO);
         if (result > 0) {
@@ -158,7 +150,8 @@ public class UserController {
         }
     }
     //유저 삭제
-    @GetMapping("/delete")
+    @GetMapping(value="/delete")
+    @ResponseBody
 	public String deleteUser(@RequestParam("uemail") String uemail, HttpSession session) {
 		userService.remove(uemail);
 		session.removeAttribute("username");

@@ -13,6 +13,4 @@ public class UserDTO {
 	private String did;
 	private String dname;
 	private List<AuthVO> authList;
-	
-	private String pwdch; 
 }
