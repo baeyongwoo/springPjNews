@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.io.model.BoardDTO;
 import com.io.model.Criteria;
+import com.io.model.DeptDTO;
 import com.io.model.TboardDTO;
 
 public interface BoardService {
@@ -38,4 +39,6 @@ public interface BoardService {
 	public List<BoardDTO> selectAllBoardOfCaid(BoardDTO dto);
 	
 	public void putCategory(BoardDTO dto);
+	
+	public List<DeptDTO> selectDeptLIst();
 }

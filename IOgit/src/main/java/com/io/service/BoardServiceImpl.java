@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.io.mapper.BoardMapper;
 import com.io.model.BoardDTO;
 import com.io.model.Criteria;
+import com.io.model.DeptDTO;
 import com.io.model.TboardDTO;
 
 import lombok.AllArgsConstructor;
@@ -141,6 +142,13 @@ public class BoardServiceImpl implements BoardService{
 		 
 		 log.info("paing value + " + bm.selectAllBoardOfPaging(dto, cri));
 		    return bm.selectAllBoardOfPaging(dto, cri);
+	}
+
+
+
+	@Override
+	public List<DeptDTO> selectDeptLIst() {
+		return bm.selectDept();
 	}
 
 	

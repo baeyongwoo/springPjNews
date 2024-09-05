@@ -228,6 +228,11 @@
 	INSERT INTO cate (caid, category) values(#{caid}, #{category})
 </insert>
 
+<select id="selectDept" resultType="com.io.model.DeptDTO">
+
+	SELECT * FROM dept
+</select>
+
 
 
 </mapper>

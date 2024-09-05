@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.io.model.BoardDTO;
 import com.io.model.Criteria;
+import com.io.model.DeptDTO;
 import com.io.model.TboardDTO;
 
 public interface BoardMapper {
@@ -42,4 +43,6 @@ public interface BoardMapper {
 	public List<BoardDTO> selectAllBoardOfCaid(BoardDTO dto);
 	
 	public void insertCategory(BoardDTO dto);
+	
+	public List<DeptDTO> selectDept();
 }
