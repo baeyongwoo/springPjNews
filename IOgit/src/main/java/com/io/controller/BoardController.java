@@ -167,7 +167,17 @@ public class BoardController {
 	// 게시글 수정 폼
 	@GetMapping("/edit/{tno}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
-	public String edit(@PathVariable Long tno, Model model) {
+	public String edit(@PathVariable Long tno, Model model, HttpSession session) {
+		String logoutMessage = (String) session.getAttribute("logoutMessage");
+		if (logoutMessage != null) {
+			model.addAttribute("logoutMessage", logoutMessage);
+			session.removeAttribute("logoutMessage");
+			session.removeAttribute("username");
+		}
+
+		model.addAttribute("username", session.getAttribute("username"));
+		model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
+
 		log.info("기존 게시글 " + tno + " 수정");
 		TboardDTO tboardDTO = ts.getTboard(tno);
 
