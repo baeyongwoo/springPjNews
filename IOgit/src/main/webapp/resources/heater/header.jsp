@@ -13,7 +13,7 @@
 	<header>
 		<nav class="navbar navbar-expand-sm">
 			<div class="container">
-				<a class="navbar-brand" href="/board/list"> <img
+				<a  style="z-index:30" class="navbar-brand" href="/board/list"> <img
 					src="/resources/logo/IOLogo.png" alt="Logo" id="logo">
 				</a>
 				<div class="navbar-nav">
@@ -39,8 +39,8 @@
 									href="/user/mypage">마이페이지</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
-								<li class="nav-item"><a class="nav-link" href="/user/join">회원가입</a></li>
+								<li style="z-index:30" class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
+								<li style="z-index:30" class="nav-item"><a class="nav-link" href="/user/join">회원가입</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
