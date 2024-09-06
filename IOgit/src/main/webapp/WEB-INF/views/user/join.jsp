@@ -29,6 +29,7 @@
 	});
 </script>
 <script type="text/javascript">
+
 	function validateForm(form) {
 		if (form.uname.value == "") {
 			alert("이름을 입력하세요");
@@ -46,7 +47,7 @@
 		form.pswd.focus();
 		return false;
 	}
-	if (form.pswdch.value == "") {
+	if (form.upwdch.value == "") {
 		alert("비밀번호 확인을 입력하세요");
 		form.upwdch.focus();
 		return false;
@@ -97,8 +98,9 @@
 					<div class="mb-3">
 						<label for="upwdch" class="form-label">비밀번호 확인:</label> <input
 							type="password" class="form-control" id="upwdch"
-							placeholder="비밀번호 확인을 입력하세요" name="upwdch" required>
+							placeholder="비밀번호 확인을 입력하세요" name="upwdch" onchange="checkpwd();" required>
 					</div>
+					<button style="margin-bottom:10px" onclick="checkpwd()">비밀번호 확인</button>
 					<div class="mb-3">
 						<label for="uemail" class="form-label">이메일:</label> <input
 							type="email" class="form-control" id="uemail" name="uemail"
@@ -146,5 +148,19 @@
 		</div>
 	</div>
 	<%@ include file="/resources/heater/footer.jsp"%>
+	
+	<script type="text/javascript">
+	function checkpwd() {
+	    let upwd = document.getElementById('upwd').value;
+	    let upwdch = document.getElementById('upwdch').value;
+	    if (upwd !== upwdch) {
+	        alert("비밀번호가 일치하지 않습니다.");
+	        return false;
+	    }else{
+	    	alert("비밀번호가 확인되었니다.");
+	    }
+	}
+
+	</script>
 </body>
 </html>

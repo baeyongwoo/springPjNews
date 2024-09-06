@@ -213,11 +213,15 @@ header {
 
 button {
     margin-top: 10px;
-    border: 0.5px solid #1e3a56;
+    border: 0.5px solid #4A90E2;
     border-radius: 5%;
     padding-left: 10px;
     padding-right: 10px;
-    text-align: right;
+    text-align: center;
+}
+
+list-group>button{
+	    width: 10%
 }
 
 .was-validated {

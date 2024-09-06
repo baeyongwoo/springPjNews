@@ -48,7 +48,7 @@
 				    </div>
 				    <div class="mb-3">
 				        <label for="pwd" class="form-label">비밀번호:</label>
-				        <input type="password" class="form-control" id="pwd"  name="upwd"  required>
+				        <input type="password" class="form-control" id="pwd"  name="upwd" placeholder="비밀번호를 입력하세요" required>
 				    </div>
 				    <div class="mb-3">
 				        <label for="pswdch" class="form-label">비밀번호 확인:</label>
@@ -68,9 +68,9 @@
 				        <input type="button" value="취소" class="btn btn-secondary" onclick="location.href='/board/list'">
 				    </div>
 				</form>
-				<form style="width:100%;" method="post" action="/user/delete" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                    <input type="hidden" name="uemail" value="${userData.uemail}">
-                    <input type="submit" value="삭제" class="btn btn-danger mt-3">
+				<form style="width:100%; margin-top:10px;" method="post" action="/user/delete" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                    <input type="hidden" name="uemail" value="${userData.uemail}" style="width:100%;">
+                    <input type="submit" value="삭제" class="btn btn-danger" style="width:100%;">
                 </form>
             </div>
         </div>

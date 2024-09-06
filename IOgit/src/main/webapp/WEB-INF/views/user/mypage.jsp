@@ -106,10 +106,9 @@
 						<td>${post.dname}</td>
 						<!-- 수정 페이지로 이동하는 폼 -->
 						<td>
-							<form action="/board/modify" method="get">
-								<input type="hidden" name="postId" value="${post.tno}">
-								<button type="submit" class="btn btn-primary">수정</button>
-							</form>
+						
+						<a class="btn btn-primary" href="/board/edit/${post.tno}">수정하기</a>
+							
 						</td>
 					</tr>
 				</c:forEach>

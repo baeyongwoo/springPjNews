@@ -70,9 +70,9 @@ $(document).ready(function(){
 				str+="	<div>";
 				str+="		<div class='header'>";
 				str+=" 			<strong class='primary-font'>"+data.list[i].replyer+"</strong>";
+				str+="			<p>"+data.list[i].reply+"</p>";
 //				str+="			<small class='pull-right text-muted'>"+displayTime(data.list[i].replyDate)+"</small>";
 				str+="		</div>";
-				str+="		<p>"+data.list[i].reply+"</p>";
 				str+="	</div>";
 				str+="</li>";
 			}
