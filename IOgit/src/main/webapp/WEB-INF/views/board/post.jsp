@@ -82,7 +82,7 @@
 	<div class="container mt-3" style="text-align: center;">
 		<div class="row">
 			<div class="container-fluid">
-				<form role="form" action="/board/post" method="post" id="postForm" enctype="multipart/form-data">
+				<form role="form" action="/board/post" method="post" id="postForm" enctype="multipart/form-data"onsubmit="return validateForm(this);">
 					
 					<h3>기사작성</h3>
 					
