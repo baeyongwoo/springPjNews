@@ -3,7 +3,6 @@ package com.io.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.io.mapper.BoardMapper;
 import com.io.mapper.ReplyMapper;
 import com.io.model.Criteria;
 import com.io.model.ReplyPageDTO;
@@ -19,13 +18,13 @@ public class ReplyServiceImpl implements ReplyService{
 	
 	private ReplyMapper mapper; //자동주입. 생성자의존성주입
 	
-	private BoardMapper boardMapper; //자동주입. 생성자의존성주입
+//	private BoardMapper boardMapper; //자동주입. 생성자의존성주입
 
 	@Transactional  // Transaction처리
 	@Override
 	public int register(ReplyVO vo) {
-		//댓글갯수 1증가
-		boardMapper.updateReplyCnt(vo.getBno(), 1);
+//		//댓글갯수 1증가
+//		boardMapper.updateReplyCnt(vo.getBno(), 1);
 		
 		return mapper.insert(vo);
 	}
@@ -54,8 +53,8 @@ public class ReplyServiceImpl implements ReplyService{
 		
 		ReplyVO vo=mapper.read(rno); // 부모글번호 bno가 필요해서 실행
 		
-		//댓글갯수를 1감소
-		boardMapper.updateReplyCnt(vo.getBno(), -1);
+//		//댓글갯수를 1감소
+//		boardMapper.updateReplyCnt(vo.getBno(), -1);
 		
 		return mapper.delete(rno);
 	}

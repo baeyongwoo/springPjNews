@@ -35,7 +35,7 @@
 			.uploadResult {
 				width: 100%;
 				height:150px;
-				background-color: gray;
+				background-color: #4A90E2;
 			}
 			
 			.uploadResult ul {
@@ -78,8 +78,8 @@
 <!--첨부파일 스타일  -->
 </head>
 <body>
-	<div class="container mt-3" style="text-align: center;">
 		<%@ include file="/resources/heater/header.jsp" %>
+	<div class="container mt-3" style="text-align: center;">
 		<div class="row">
 			<div class="container-fluid">
 				<form role="form" action="/board/post" method="post" id="postForm" enctype="multipart/form-data"onsubmit="return validateForm(this);">

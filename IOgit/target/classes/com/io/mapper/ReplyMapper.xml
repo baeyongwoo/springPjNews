@@ -4,8 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.io.mapper.ReplyMapper">
 	<insert id="insert">
-		INSERT INTO reply (bno, replyer, reply, replyDate, updateDate)
-    	VALUES (#{bno}, #{replyer}, #{reply}, #{replyDate}, #{updateDate})
+		INSERT INTO reply (rno, bno, replyer, reply, replyDate, updateDate)
+    	VALUES (reply_seq.nextval, #{bno}, #{replyer}, #{reply}, SYSDATE, SYSDATE)
 	</insert>
 	
 	<select id="getListWithPaging" resultType="com.io.model.ReplyVO">
@@ -13,13 +13,13 @@
 		select rno,bno,reply,replyer,replydate,updatedate
 		from(
 			select /*+INDEX(reply idex_reply)*/
-				rownum rno, bno, reply, replyer, replydate, updatedate
+				rownum rn, rno, bno, reply, replyer, replydate, updatedate
 			from reply
 			where bno=#{bno}
 			and rno>0
 			and rownum<=#{cri.pageNum}*#{cri.amount}			
 		)
-		where rno>(#{cri.pageNum}-1)*#{cri.amount}
+		where rn>(#{cri.pageNum}-1)*#{cri.amount}
 	]]>
 	</select>
 	

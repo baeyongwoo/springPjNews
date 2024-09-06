@@ -4,11 +4,43 @@
     box-sizing: border-box;
 }
 
+.modal-header{
+	background: linear-gradient(135deg, #1b2a41, #1e3a56);
+}
+
+.modal-body{
+	background-color: #1D334C;
+}
+
+.modal-body > .form-group{
+	text-align:left ;
+}
+
+.modal-body > .form-group> a{
+	border: solid #3b5998 1px;
+	border-radius: 20%;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 10px;
+	background-color: white;
+	color: rgb(74, 144, 226);
+}
+
+.modal-footer{
+	background-color: #1B2A41;
+}
+
+.container{
+    align-items: center;
+    justify-content: center;
+}
+
 #Logoo {
     font-family: "Sevillana", cursive;
     font-size: 100px;
     font-weight: 400;
     color: #4a90e2;
+    
 }
 
 .vid {
@@ -18,7 +50,7 @@
     top: -60px;
     left: 0px;
     opacity: 0.9;
-    z-index: 0;
+    z-index: -1;
 }
 
 .vid video {
@@ -34,7 +66,7 @@ h3 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     font-size: 24px;
     font-weight: bold;
-    z-index: 1;
+    z-index: 10;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
@@ -49,6 +81,7 @@ body {
     color: #d1e8ff;
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #1e3a56, #1b2a41);
+    
 }
 
 .fi-rr-list {
@@ -77,6 +110,7 @@ body {
     background: linear-gradient(135deg, #1b2a41, #1e3a56);
     border: 1px solid #122b45;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    z-index: 1;
 }
 
 #logo {
@@ -95,11 +129,18 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+    bottom:0px;
+    margin-top: 800px;
 }
 
 footer a {
     color: white;
     margin-right: 10px;
+}
+
+header {
+    z-index: 10;
 }
 
 .box {
@@ -114,6 +155,7 @@ footer a {
     border-radius: 10px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 5;
 }
 
 .box:hover {
@@ -218,18 +260,14 @@ input:focus, textarea:focus, .form-select:focus {
 }
 
 .side-bar:hover {
-
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
 }
 
 .side-bar ul > li > a {
-
     color: #d1e8ff;
     font-size: 20px;
     font-weight: bold;
-
     background-color: #466fac;
-
 }
 
 .side-bar ul > li:hover > a {
@@ -238,8 +276,6 @@ input:focus, textarea:focus, .form-select:focus {
 }
 
 .side-bar ul > li:hover > ul {
-
     background-color: #3b5998;
-
     text-align: center;
 }

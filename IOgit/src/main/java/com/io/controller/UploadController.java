@@ -36,10 +36,12 @@ import net.coobird.thumbnailator.Thumbnailator;
 
 public class UploadController {
 	//테스트용 업로드폼
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@GetMapping("/uploadForm")
 	public void uploadForm() {}	
 	
 	//파일업로드처리
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile,Model mode) {
 		//업로드폴더
@@ -62,6 +64,7 @@ public class UploadController {
 	
 	//Ajax 파일업로드 테스트 화면
 	@GetMapping("/uploadAjax")
+	
 	public void uploadAjax() {}
 	
 	//오늘 날짜 년월일 형식(2024\08\14)을 구하는 함수. 이함수는 Service에 작성하거나 common 패키지에 클래스를 만들어서 사용 권장
@@ -86,6 +89,7 @@ public class UploadController {
 		
 	//Ajax 파일업로드 처리
 //	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
 	@PostMapping(value="/uploadAjaxAction",produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 		//첨부파일목록
@@ -146,6 +150,7 @@ public class UploadController {
 	//이미지 출력
 	@GetMapping("/display")
 	@ResponseBody // view로 forwarding되지 않음.리턴값이 json or xml or text 등등.
+	
 	public ResponseEntity<byte[]> getFiles(String fileName){
 		File file=new File("c:\\upload\\"+fileName);
 		ResponseEntity<byte[]> result=null;

@@ -58,37 +58,65 @@
 				<li><a class="nav-link" href="/board/list/all"><i
 						class="fi fi-rr-home"> </i>전체보기</a></li>
 				<li><a class="nav-link" href="/user/modify">회원정보 수정/삭제</a></li>
-
-
 			</ul>
 		</aside>
 	</nav>
 
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib uri="http://www.springframework.org/security/tags"
+		prefix="sec"%>
+
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	<h1>내 게시글</h1>
-	<table class="table table-dark table-hover text-center">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>Title</th>
-				<th>Date</th>
-				<th>Content</th>
-				<th>Category</th>
-				<th>Department</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="post" items="${myPosts}">
+		<table class="table table-dark table-hover text-center">
+			<thead>
 				<tr>
-					<td>${post.tno}</td>
-					<td><a href='/board/read?=<c:out value="${post.tno}"/>'></a>${post.tmptitle}</td>
-					<td>${post.tmpregdate}</td>
-					<td>${post.tmpcontent}</td>
-					<td>${post.category}</td>
-					<td>${post.dname}</td>
+					<th>No</th>
+					<th>Title</th>
+					<th>Date</th>
+					<th>Content</th>
+					<th>Category</th>
+					<th>Department</th>
+					<th>Edit</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+
+			<tbody>
+				<c:forEach var="post" items="${myPosts}">
+					<tr>
+						<td>${post.tno}</td>
+						<td><c:choose>
+								<c:when test="${fn:length(post.tmptitle) > 30}">
+                                ${fn:substring(post.tmptitle, 0, 30)}...
+                            </c:when>
+								<c:otherwise>
+                                ${post.tmptitle}
+                            </c:otherwise>
+							</c:choose></td>
+						<td>${post.tmpregdate}</td>
+						<td><c:choose>
+								<c:when test="${fn:length(post.tmpcontent) > 50}">
+                                ${fn:substring(post.tmpcontent, 0, 50)}...
+                            </c:when>
+								<c:otherwise>
+                                ${post.tmpcontent}
+                            </c:otherwise>
+							</c:choose></td>
+						<td>${post.category}</td>
+						<td>${post.dname}</td>
+						<!-- 수정 페이지로 이동하는 폼 -->
+						<td>
+							<form action="/board/modify" method="get">
+								<input type="hidden" name="postId" value="${post.tno}">
+								<button type="submit" class="btn btn-primary">수정</button>
+							</form>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</sec:authorize>
+
 	<%@ include file="/resources/heater/footer.jsp"%>
 </body>
 </html>

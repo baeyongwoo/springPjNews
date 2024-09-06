@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +27,9 @@
 </head>
 <body>
 	<div class="container" style="text-align: center; margin-top: 90px;">
-		<a class="navbar-brand" href="/index.html"> <img
-			src="/resouces/logo/IOLogo.png" alt="Logo"
-			style="width: 100px; border-radius: 20%; margin-bottom: 100px;">
-		</a>
+		<a class="navbar-brand" href="/board/list">
+            <img src="/resources/logo/IOLogo.png" alt="Logo" style="width: 100px; border-radius: 20%; margin-bottom: 100px;">
+        </a>
 
 		<div class="container d-flex justify-content-center">
 			<div>
@@ -52,8 +54,7 @@
 					<a href="/user/join" class="btn btn-primary" role="button">회원가입</a>
 
 					<button type="submit" data-oper="login" class="btn btn-primary">로그인</button>
-					<button type="reset" data-oper="cancle" class="btn btn-primary">취소</button>
-					<button type="button" class="btn btn-primary">메인페이지</button>
+					<a href="/board/list" class="btn btn-primary" role="button">메인페이지</a>
 				</form>
 			</div>
 		</div>

@@ -127,3 +127,25 @@ function removeECheck() {
     $('#emailAuth').hide();
     $('#checkBtn').hide();
 }
+
+function toggleDept() {
+    var deptDiv = document.getElementById("deptDiv");
+    var roleUser = document.querySelector('input[name="role"][value="ROLE_USER"]');
+    
+    if (roleUser.checked) {
+        deptDiv.style.display = "none";
+    } else {
+        deptDiv.style.display = "block";
+    }
+}
+
+function checkDeptSelection() {
+    var didSelect = document.getElementById("didSelect");
+    var hiddenDid = document.getElementById("hiddenDid");
+
+    if (didSelect.value === "") {
+        hiddenDid.value = "non";
+    } else {
+        hiddenDid.value = didSelect.value;
+    }
+}

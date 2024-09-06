@@ -1,6 +1,5 @@
 --io최종에 가가우 file
 --한번만 하기
-DROP TABLE tfile CASCADE CONSTRAINTS;
 DROP TABLE bdfile CASCADE CONSTRAINTS;
 
 -- 기존 테이블 삭제 (제약 조건과 시퀀스 포함)
@@ -12,6 +11,7 @@ DROP TABLE cate CASCADE CONSTRAINTS;
 DROP TABLE dept CASCADE CONSTRAINTS;
 DROP TABLE userinfo CASCADE CONSTRAINTS;
 DROP TABLE auth CASCADE CONSTRAINTS;
+DROP TABLE iofile CASCADE CONSTRAINTS;
 
 
 -- 시퀀스 삭제
@@ -36,7 +36,7 @@ CREATE TABLE userinfo (
     uemail   VARCHAR2(50) NOT NULL,
     upwd     VARCHAR2(100) NOT NULL,
     uname    VARCHAR2(20) DEFAULT 'Unknown', -- 기본값 추가
-    did      VARCHAR2(30) NOT NULL,
+    did      VARCHAR2(30) DEFAULT 'non',
     CONSTRAINT userinfo_pk PRIMARY KEY (uemail),
     CONSTRAINT userinfo_dept_fk FOREIGN KEY (did) REFERENCES dept(did)
 );
@@ -79,13 +79,15 @@ CREATE TABLE board (
 
 CREATE TABLE reply (
     rno     NUMBER NOT NULL,
-    rname   VARCHAR2(20) DEFAULT 'Anonymous', -- 기본값 추가
-    rpwd    VARCHAR2(30) NOT NULL,
-    rcon    VARCHAR2(1000) NOT NULL,
     bno     NUMBER NOT NULL,
+    reply     VARCHAR2(1000) NOT NULL,
+    replyer   VARCHAR2(100) DEFAULT 'Anonymous', -- 기본값 추가
+    replydate DATE,
+    updatedate DATE,
     CONSTRAINT reply_pk PRIMARY KEY (rno),
     CONSTRAINT reply_board_fk FOREIGN KEY (bno) REFERENCES board(bno) on DELETE CASCADE
 );
+
 CREATE TABLE iofile (
     uuid      VARCHAR2(100 BYTE) PRIMARY KEY, 
     tno        NUMBER NOT NULL,
@@ -118,6 +120,7 @@ INSERT INTO dept (did, dname) VALUES ('S01', 'SBS');
 INSERT INTO dept (did, dname) VALUES ('K01', 'KBS');
 INSERT INTO dept (did, dname) VALUES ('Y01', 'YTN');
 INSERT INTO dept (did, dname) VALUES ('IO', 'Information Oceans');
+INSERT INTO dept (did, dname) VALUES ('non', 'non');
 
 
 commit;
@@ -130,3 +133,4 @@ commit;
 -- SELECT * FROM reply;
 -- SELECT * FROM tfile;
 -- SELECT * FROM bdfile;
+
