@@ -3,9 +3,33 @@
     padding: 0;
     box-sizing: border-box;
 }
-body{
-	min-height: 1000px;
+
+.modal-header{
+	background: linear-gradient(135deg, #1b2a41, #1e3a56);
 }
+
+.modal-body{
+	background-color: #1D334C;
+}
+
+.modal-body > .form-group{
+	text-align:left ;
+}
+
+.modal-body > .form-group> a{
+	border: solid #3b5998 1px;
+	border-radius: 20%;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 10px;
+	background-color: white;
+	color: rgb(74, 144, 226);
+}
+
+.modal-footer{
+	background-color: #1B2A41;
+}
+
 .container{
     align-items: center;
     justify-content: center;
@@ -57,6 +81,7 @@ body {
     color: #d1e8ff;
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #1e3a56, #1b2a41);
+    
 }
 
 .fi-rr-list {
@@ -105,8 +130,8 @@ footer {
     align-items: center;
     justify-content: center;
     z-index: 10;
-    position: absolute;
     bottom:0px;
+    margin-top: 800px;
 }
 
 footer a {

@@ -48,7 +48,7 @@ body {
 .shado {
 	padding: 50px;
 	border-radius: 50%;
-	box-shadow: 0px -5px 20px rgba(47, 0, 255, 0.8), 0px 5px 20px rgba(47, 0, 255, 0.8);
+	box-shadow: 0px -5px 20px rgba(47, 0, 255, 0.6), 0px 5px 20px rgba(47, 0, 255, 0.6);
 	background-color: rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(10px);
 	z-index: 2;

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +34,6 @@ public class ReplyController {
 	private ReplyService service; //자동주입.생성자의존성주입
 	
 	//등록
-	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value="/new",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> create(@RequestBody ReplyVO vo){
 		log.info("555555555555555555555555555555555555555555555555555555");
@@ -47,7 +45,6 @@ public class ReplyController {
 							  : new ResponseEntity<>("fail",HttpStatus.INTERNAL_SERVER_ERROR);	
 	}
 	//목록 with paging
-	@PreAuthorize("isAuthenticated()")
 	@GetMapping(value="/pages/{bno}/{page}",produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno){
 		log.info("7777777777777777777777777777777777777777777");
@@ -57,7 +54,6 @@ public class ReplyController {
 		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	//상세보기
-	@PreAuthorize("isAuthenticated()")
 	@GetMapping(value="/{rno}",produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<ReplyVO> get(@PathVariable("rno") Long rno){
 		log.info("11111111111111111111111111111111111111111111");
@@ -65,7 +61,6 @@ public class ReplyController {
 		return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
 	}
 	//수정. put, patch 방식 모두 처리
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(method= {RequestMethod.PUT,RequestMethod.PATCH},
 			value="/{rno}",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> update(@RequestBody ReplyVO vo,@PathVariable("rno") Long rno){
@@ -76,7 +71,6 @@ public class ReplyController {
 										new ResponseEntity<>("fail",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	//삭제. delete방식
-	@PreAuthorize("isAuthenticated()")
 	@DeleteMapping(value="/{rno}",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> delete(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno){
 		log.info("9999999999999999999999999999999999999999999999999999999999999");
@@ -86,7 +80,6 @@ public class ReplyController {
 	}
 	
 	//js파일 로딩
-	@PreAuthorize("isAuthenticated()")
 		@GetMapping(value="/js",produces= {MediaType.TEXT_PLAIN_VALUE})
 		public String getJS(Long bno,HttpServletRequest request){
 			BufferedReader reader = null;
