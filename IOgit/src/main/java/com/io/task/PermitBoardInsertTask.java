@@ -44,7 +44,6 @@ public class PermitBoardInsertTask {
 	        // bs.permitCodeToComplete(); // 예시로 추가
 
 	    } catch (Exception e) {
-	    	e.printStackTrace();
 	        log.info("스케줄할 대상이 없음");
 	    }
 	}
