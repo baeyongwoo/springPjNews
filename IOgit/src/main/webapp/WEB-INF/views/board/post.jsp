@@ -100,8 +100,10 @@
 						</select>
 					</div>
 					<input type="text" name="uemail" value="${username}" style="width: 100%; height: 40px;">
+					<span>글자 수: <span
+							id="charCount">0</span>
 					<div class="list-group-item" style="height: 600px;">
-						<textarea name="tmpcontent" style="width: 100%;" rows="20" placeholder="내용"></textarea>
+						<textarea name="tmpcontent" style="width: 100%;" rows="20" placeholder="내용" id="content"></textarea>
 						
 					</div>
 			<!-- 첨부파일 ------------------------------------------------------------------------->
@@ -134,6 +136,32 @@
 	</div>
 	<!--script-------------------------------------------------  -->
 	<script>
+	 $(document).ready(function() {
+         updateCharCount();
+         
+
+         $('#content').on('input', function() {
+             updateCharCount();
+             checkCharLimit()
+         });
+
+         function updateCharCount() {
+             var content = $('#content').val(); 
+             var charCount = content.length; 
+             $('#charCount').text(charCount); 
+         }
+         function checkCharLimit() {
+             var content = $('#content').val(); 
+             var charCount = content.length; 
+             if (charCount > 1300) {
+                 alert("내용이 1,500자를 초과하였습니다.");
+                 $('#content').val(content.substring(0, 1300)); // 내용 잘라내기
+                 updateCharCount();
+             }
+         }
+     })
+	
+	
 		/* 파일크기.파일확장자 체크 ****************************************************************************/
 		 function checkExtension(fileName, fileSize){	
 			 var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");

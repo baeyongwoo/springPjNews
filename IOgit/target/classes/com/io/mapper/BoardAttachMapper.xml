@@ -13,7 +13,12 @@
   <select id="findByTno" resultType="com.io.model.BoardAttachVO">
   	select * from iofile where tno=#{tno}
   </select>
-  
+   <select id="findByBno" resultType="com.io.model.BoardAttachVO">
+  SELECT iofile.*
+  FROM iofile
+  INNER JOIN board ON iofile.tno = board.tno
+  WHERE iofile.tno = #{tno}
+</select>
   <delete id="deleteAll">
   	delete from iofile where tno=#{tno}
   </delete>

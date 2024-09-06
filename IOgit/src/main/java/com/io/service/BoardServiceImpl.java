@@ -9,13 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.io.mapper.BoardAttachMapper;
 import com.io.mapper.BoardMapper;
+import com.io.model.BoardAttachVO;
 import com.io.model.BoardDTO;
 import com.io.model.Criteria;
 import com.io.model.DeptDTO;
 import com.io.model.TboardDTO;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 /*이 컨트롤러는 실제 유저한테 보여주는 컨트롤러입니다*/
@@ -27,7 +30,8 @@ public class BoardServiceImpl implements BoardService{
 
 	@Autowired
 	BoardMapper bm;
-	
+	@Setter(onMethod_ = @Autowired)
+	private BoardAttachMapper attachMapper;
 
 	@Override
 	public Map<String, List<BoardDTO>> listGetBoard() {
@@ -151,6 +155,10 @@ public class BoardServiceImpl implements BoardService{
 		return bm.selectDept();
 	}
 
-	
+	@Override
+	public List<BoardAttachVO> getAttachList(Long tno) {
+		
+		return attachMapper.findByTno(tno);
+	}
 
 }

@@ -24,6 +24,7 @@ public interface TboardMapper {
 	// 게시글 상태를 'ready'로 변경
 	void updateTboardToReady(Long tno);
 
+
 	// 게시글 조회
 	public TboardDTO selectTboardById(Long tno);
 }

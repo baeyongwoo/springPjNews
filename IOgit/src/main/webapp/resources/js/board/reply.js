@@ -40,6 +40,42 @@
 }
 
 $(document).ready(function(){
+/* 첨부파일목록 *********************************************************************************/    
+   console.log(tno+"첨부파일");
+   
+    $.getJSON("/board/getAttachList", {tno: tno}, function(arr){  
+       
+       var str = "";
+       
+       //첨부파일목록 하나씩 처리
+       $(arr).each(function(i, attach){       
+         //이미지이면
+         if(attach.fileType){
+           //썸네일경로	
+           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/"+attach.uuid +"_"+attach.fileName);
+           
+           //str+="<li style='cursor:pointer;' data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'>";
+          // str+="	<div>";
+           str+="		<img src='/display?fileName="+fileCallPath+"'>";
+           //str+="	</div>";
+           //str+="</li>";
+                      
+         }else{ //일반파일이면    
+                  
+           str+="<li style='cursor:pointer;' data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
+           str+="	<div>";
+           str+="		<span> "+ attach.fileName+"</span><br/>";
+           str+="		<img src='/resources/logo/Noimg.png'>";
+           str+="	</div>";
+           str+="</li>";
+         }
+       });
+       
+       //ul태그에 출력
+       $(".uploadResult").html(str);
+       
+       
+     });
 	/* 댓글목록 *************************************************************************/            	
 	var bnoValue=param.bno;//부모글번호
 	var replyUL=$(".chat"); // 댓글목록 출력되는 ul태그 찾아놓기
@@ -70,9 +106,9 @@ $(document).ready(function(){
 				str+="	<div>";
 				str+="		<div class='header'>";
 				str+=" 			<strong class='primary-font'>"+data.list[i].replyer+"</strong>";
-				str+="			<p>"+data.list[i].reply+"</p>";
 //				str+="			<small class='pull-right text-muted'>"+displayTime(data.list[i].replyDate)+"</small>";
 				str+="		</div>";
+				str+="		<p>"+data.list[i].reply+"</p>";
 				str+="	</div>";
 				str+="</li>";
 			}

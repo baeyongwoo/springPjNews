@@ -17,7 +17,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 <title>Document</title>
-
+<style type="text/css">
+	li{
+		display:none;
+	}
+	img{
+			  display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+			}
+</style>
 <script>
 	/* 오류가 날 수 있는 코드 (JS 파일로 이동 후 추가) */
 	var csrfHeaderName = "<c:out value='${_csrf.headerName}'/>";
@@ -25,9 +35,9 @@
 </script>
 </head>
 <body>
+		<%@ include file="/resources/heater/header.jsp" %>
 	<div class="container mt-3" style="text-align: right;">
 
-		<%@ include file="/resources/heater/header.jsp" %>
 
 		<div class="row">
 			<div class="container-fluid">
@@ -51,10 +61,30 @@
 							style="color: #6c757d; font-style: italic;"><fmt:formatDate
 								value="${board.regdate}" pattern="yyyy-MM-dd HH:mm:ss" /></li>
 						<li class="list-group-item" style="min-height: 200px;">
+
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-default">
+
+										<div class="panel-heading"></div>
+										<!-- /.panel-heading -->
+										<div class="panel-body">
+
+											<div class='uploadResult'>
+												
+											</div>
+										</div>
+										<!--  end panel-body -->
+									</div>
+									<!--  end panel-body -->
+								</div>
+								<!-- end panel -->
+							</div> <!-- /.row -->
 							<h4 style="margin: 50px;">
 								<c:out value="${board.bcontent}" />
 							</h4>
 						</li>
+
 
 
 					</ol>
@@ -90,7 +120,7 @@
 					</div>
 					<div class="panel-body">
 						<!-- 댓글목록 출력 UL태그 ---------------------------->
-						<ul class="chat" style="text-align:left; boarder: solid 1px white">
+						<ul class="chat">
         				
 						</ul>
 					</div>
@@ -144,8 +174,12 @@
          <sec:authentication property="principal" var="pinfo" />
          const replyerid= "${pinfo.username}";
       </sec:authorize>
- 		
+      /*tno  */
+ 		var tno =${board.tno};
    </script>
+
+<script src="/resources/js/board/reply.js?bno=<c:out value='${board.bno}'/>"></script> 
+
 
 
 	<script src="/resources/js/board/vanillaEmojiPicker.js"></script>
@@ -164,7 +198,7 @@
     </script>
 
 
-<script src="/resources/js/board/reply.js?bno=<c:out value='${board.bno}'/>"></script>  
+ 
 	<%@ include file="/resources/heater/footer.jsp" %>
 </body>
 </html>
