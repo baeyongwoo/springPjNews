@@ -8,7 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.navbar-nav right{
+style="z-index:30"
+}
+</style>
 </head>
+
 <body>
 	<header>
 		<nav class="navbar navbar-expand-sm">
@@ -39,7 +45,7 @@
 									href="/user/mypage">마이페이지</a></li>
 							</c:when>
 							<c:otherwise>
-								<li style="z-index:30" class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
+								<li  class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
 								<li style="z-index:30" class="nav-item"><a class="nav-link" href="/user/join">회원가입</a></li>
 							</c:otherwise>
 						</c:choose>
