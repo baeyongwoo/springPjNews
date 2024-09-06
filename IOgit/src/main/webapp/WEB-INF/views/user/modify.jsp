@@ -52,7 +52,7 @@
 				    </div>
 				    <div class="mb-3">
 				        <label for="pswdch" class="form-label">비밀번호 확인:</label>
-				        <input type="password" class="form-control" id="pswdch" placeholder="비밀번호 확인을 입력하세요" name="pwdch"  required>
+				        <input type="password" class="form-control" id="upwdch" placeholder="비밀번호 확인을 입력하세요" name="pwdch"  required>
 				    
 				    </div>
 				    <div class="mb-3">
@@ -68,13 +68,26 @@
 				        <input type="button" value="취소" class="btn btn-secondary" onclick="location.href='/board/list'">
 				    </div>
 				</form>
-				<form style="width:100%; margin-top:10px;" method="post" action="/user/delete" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+				<form style="width:100%; margin-top:10px;  background-color:red;" method="post" action="/user/delete" onsubmit="return confirm('정말 삭제하시겠습니까?');">
                     <input type="hidden" name="uemail" value="${userData.uemail}" style="width:100%;">
-                    <input type="submit" value="삭제" class="btn btn-danger" style="width:100%;">
+                    <input type="submit" value="삭제" class="btn btn-danger" style="width:100%; background-color:red;">
                 </form>
             </div>
         </div>
     </div>
     <%@ include file="/resources/heater/footer.jsp" %>
+    <script type="text/javascript">
+	function checkpwd() {
+	    let upwd = document.getElementById('upwd').value;
+	    let upwdch = document.getElementById('upwdch').value;
+	    if (upwd !== upwdch) {
+	        alert("비밀번호가 일치하지 않습니다.");
+	        return false;
+	    }else{
+	    	alert("비밀번호가 확인되었니다.");
+	    }
+	}
+
+	</script>
 </body>
 </html>

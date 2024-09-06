@@ -72,12 +72,12 @@
 			<thead>
 				<tr>
 					<th>No</th>
-					<th>Title</th>
-					<th>Date</th>
-					<th>Content</th>
-					<th>Category</th>
-					<th>Department</th>
-					<th>Edit</th>
+					<th>제목</th>
+					<th>작성날짜</th>
+					<th>내용</th>
+					<th>카테고리</th>
+					<th>소속사</th>
+					<th>수정</th>
 				</tr>
 			</thead>
 

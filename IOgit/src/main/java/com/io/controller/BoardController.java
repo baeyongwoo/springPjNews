@@ -109,11 +109,20 @@ public class BoardController {
 	}
 
 	@GetMapping("/read")
-	public void readBoard(@RequestParam("bno") long bno, Model model) {
+	public void readBoard(@RequestParam("bno") long bno, Model model, HttpSession session) {
 		// 게시글 정보를 조회
 		BoardDTO boardDTO = bs.readBoard(bno);
 		log.info("기사정보조회");
 		model.addAttribute("board", boardDTO);
+		String logoutMessage = (String) session.getAttribute("logoutMessage");
+		if (logoutMessage != null) {
+			model.addAttribute("logoutMessage", logoutMessage);
+			session.removeAttribute("logoutMessage");
+			session.removeAttribute("username");
+		}
+
+		model.addAttribute("username", session.getAttribute("username"));
+		model.addAttribute("loggedIn", session.getAttribute("username") != null); // 세션 상태 추가
 
 	}
 	

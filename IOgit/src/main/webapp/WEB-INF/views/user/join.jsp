@@ -100,7 +100,6 @@
 							type="password" class="form-control" id="upwdch"
 							placeholder="비밀번호 확인을 입력하세요" name="upwdch" onchange="checkpwd();" required>
 					</div>
-					<button style="margin-bottom:10px" onclick="checkpwd()">비밀번호 확인</button>
 					<div class="mb-3">
 						<label for="uemail" class="form-label">이메일:</label> <input
 							type="email" class="form-control" id="uemail" name="uemail"
