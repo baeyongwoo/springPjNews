@@ -267,10 +267,10 @@ public class BoardController {
 	}
 
 	// 첨부파일목록
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')")
-	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<List<com.io.model.BoardAttachVO>> getAttachList(Long tno) {
-		return new ResponseEntity<>(ts.getAttachList(tno), HttpStatus.OK);
-	}
+	
+		@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		@ResponseBody
+		public ResponseEntity<List<com.io.model.BoardAttachVO>> getAttachList(Long tno) {
+			return new ResponseEntity<>(bs.getAttachList(tno), HttpStatus.OK);
+		}
 }

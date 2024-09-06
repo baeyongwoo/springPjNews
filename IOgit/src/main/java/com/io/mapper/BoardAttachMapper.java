@@ -16,4 +16,6 @@ public interface BoardAttachMapper {
 
 	// 어제날짜 첨부파일목록
 	public List<BoardAttachVO> getOldFiles();
+
+	
 }

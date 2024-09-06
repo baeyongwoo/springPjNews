@@ -32,7 +32,7 @@
             WHERE b.caid = #{caid}
         </when>
         <otherwise>
-            -- 아무 조건도 추가하지 않음
+            
         </otherwise>
     </choose>
 </select>
@@ -119,6 +119,8 @@
     </foreach>
     ) A
 </insert>
+
+
 
 
 
@@ -210,7 +212,7 @@
 
 <!--기사 읽기/상세페이지 -->
     <select id="readBoard" parameterType="long" resultType="com.io.model.BoardDTO">
-        SELECT a.bno, a.title, a.regdate, a.bcontent, b.uname, b.uemail, c.category, d.dname
+        SELECT a.bno,a.tno, a.title, a.regdate, a.bcontent, b.uname, b.uemail, c.category, d.dname
         FROM board a
         JOIN userinfo b ON a.uemail = b.uemail
         JOIN cate c ON a.caid = c.caid

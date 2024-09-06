@@ -99,6 +99,8 @@
 							</div>
 
 							<div class="mb-3">
+							<span>글자 수: <span
+							id="charCount">0</span>
 								<label for="content" class="form-label">내용</label>
 								<textarea name="tmpcontent" id="content" class="form-control"
 									rows="10" required>${tboard.tmpcontent}</textarea>
@@ -204,7 +206,28 @@
 			/* csrf토큰 처리 *****************************************************************/
 //			var csrfHeaderName ="${_csrf.headerName}"; 
 //		    var csrfTokenValue="${_csrf.token}";
-			
+			   updateCharCount();
+	         
+
+	         $('#content').on('input', function() {
+	             updateCharCount();
+	             checkCharLimit()
+	         });
+
+	         function updateCharCount() {
+	             var content = $('#content').val(); 
+	             var charCount = content.length; 
+	             $('#charCount').text(charCount); 
+	         }
+	         function checkCharLimit() {
+	             var content = $('#content').val(); 
+	             var charCount = content.length; 
+	             if (charCount > 1300) {
+	                 alert("내용이 1,500자를 초과하였습니다.");
+	                 $('#content').val(content.substring(0, 1300)); // 내용 잘라내기
+	                 updateCharCount();
+	             }
+	         }
 			/* 첨부파일을 선택했을 때 이벤트 처리 ******************************************************************/
 			$("input[type='file']").change(function(e){
 				//form태그 역할하는 객체

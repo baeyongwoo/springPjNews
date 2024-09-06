@@ -3,6 +3,7 @@ package com.io.service;
 import java.util.List;
 import java.util.Map;
 
+import com.io.model.BoardAttachVO;
 import com.io.model.BoardDTO;
 import com.io.model.Criteria;
 import com.io.model.DeptDTO;
@@ -41,4 +42,6 @@ public interface BoardService {
 	public void putCategory(BoardDTO dto);
 	
 	public List<DeptDTO> selectDeptLIst();
-}
+	
+	// 첨부파일목록
+		public List<BoardAttachVO> getAttachList(Long tno);}
